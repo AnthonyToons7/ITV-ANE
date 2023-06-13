@@ -13,7 +13,7 @@ function addMenuStage(clickedBtn) {
                 document.querySelector("main div.main-container.area-2").classList.add("zoomIn");
                 area1.style.display="none";
                 document.querySelector("main div.main-container.area-2").classList.remove("hidden");
-            }, 100);
+            }, 500);
         break;
         case "story":
             
@@ -35,7 +35,7 @@ function addMenuStage(clickedBtn) {
                     prev.classList.remove("zoomOut");
                     prev.classList.add("zoomBack");
                 }, 100);
-            }, 200);
+            }, 400);
         break;
     }
 }
