@@ -3,6 +3,8 @@ window.addEventListener("DOMContentLoaded",()=>{
     let containerWidth = container.clientWidth;
     let containerHeight = container.clientHeight;
     let numDivs = 36;
+    var width = $(window).width();
+
     for (let i = 0; i < numDivs; i++) {
         let glitchParticle = document.createElement('div');
         glitchParticle.className = 'glitchParticle';
@@ -14,9 +16,16 @@ window.addEventListener("DOMContentLoaded",()=>{
 
     setInterval(()=>{
         let glitchEffect = document.getElementsByClassName('glitchParticle'); 
-        for(let i = 0; i < glitchEffect.length; i++ ){
-            glitchEffect[i].style.width = Math.floor(Math.random() * (100 - 90) + 90) + 'px'; 
-            glitchEffect[i].style.height = Math.floor(Math.random() *(50 - 45) +45) + 'px'; 
+        if (width >=1440){
+            for(let i = 0; i < glitchEffect.length; i++ ){
+                glitchEffect[i].style.width = Math.floor(Math.random() * (150 - 125) + 125) + 'px'; 
+                glitchEffect[i].style.height = Math.floor(Math.random() *(60 - 55) +55) + 'px'; 
+            }
+        }else {
+            for(let i = 0; i < glitchEffect.length; i++ ){
+                glitchEffect[i].style.width = Math.floor(Math.random() * (100 - 90) + 90) + 'px'; 
+                glitchEffect[i].style.height = Math.floor(Math.random() *(50 - 45) +45) + 'px'; 
+            }
         }
     },120);
 })

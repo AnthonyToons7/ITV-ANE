@@ -58,11 +58,13 @@ div.button.menu-button{
     transition: all .5s
 }
 div.button.menu-button:hover,
-div.button.menu-button:focus {
+div.button.menu-button:focus,
+label.checked div.button.menu-button  {
     color: #fff;
     transition: all .5s;
     transform: scale(1.04)
 }
+label.checked div.button.menu-button#insanity,
 #insanity:hover,
 #insanity:focus{
     animation: shake .1s infinite linear;
@@ -130,6 +132,7 @@ main div.main-container{
     width: 100%;
     background-color: black;
     height: 8%;
+    max-height: 35px;
 }
 .top-bar svg {
     width: 30px;
@@ -142,6 +145,9 @@ main div.main-container{
 }
 .content h1 {
     margin-bottom: 20px;
+}
+input[type="radio"] {
+    display: none;
 }
 .show {
     display: flex;
@@ -167,4 +173,93 @@ main div.main-container{
 }
 .third-place{
     background-color: rgb(115, 80, 37);
+}
+
+div.setting{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+.vol-slider {
+    -webkit-appearance: none;
+    appearance: none; 
+    width: 30%;
+    max-height: 5px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 16px;
+}
+.vol-slider.empty + svg path  {
+    fill: red !important;
+    stroke: red !important;
+} 
+.vol-slider::-webkit-slider-runnable-track {
+    height: 15px;
+    background: #505050;
+    border-radius: 16px;
+}
+  
+.vol-slider::-moz-range-track {
+    height: 15px;
+    background: #4b4b4b;
+    border-radius: 16px;
+}
+  
+.vol-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; 
+    height: 15px;
+    background: #b9b9b9;
+    width: 15px;
+    box-shadow: -407px 0 0 400px #c2c2c2;
+}
+  
+.vol-slider::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1px solid #c2c2c2;
+}
+.settings-container {
+    padding: 20px;
+}
+.settings-container label {
+    width: 70px;
+}
+  
+@media screen and (min-width: 1024px) {
+    div.background-menu{
+        height: 45vh;
+        width: 57vw;
+        background-size: 105%;
+        background-position: -15px -1px;
+    }
+}
+@media screen and (min-width: 1440px){
+    div.background-menu {
+        height: 52vh;
+        width: 60vw;
+        background-size: 95%;
+        background-position: -5px -1px;
+    }
+    canvas#title {
+        height: 90px;
+        width: 540px;
+    }
+    canvas {
+        height: 110px;
+        width: 270px;
+    }
+    div.button.menu-button{
+        font-size: 15px;
+    }
+    .content {
+        max-height: 95%;
+    }
 }

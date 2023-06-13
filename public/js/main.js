@@ -2,12 +2,23 @@ const menu_btns = document.querySelectorAll("div.button.menu-button");
 const crosses = document.querySelectorAll("div.top-bar svg");
 const area1 = document.querySelector("main div.main-container.area-1");
 const area2 = document.querySelector("main div.main-container.area-2");
+const volSlider = document.querySelectorAll('.vol-slider');
 menu_btns.forEach(button =>{
     button.addEventListener("click", ()=>addMenuStage(button));
 });
 crosses.forEach(cross=>{
     cross.addEventListener("click", ()=>cross.parentNode.parentNode.classList.remove("show"));
 });
+volSlider.forEach(slider=>{
+    slider.addEventListener("input", ()=>{
+        if (slider.value === "0") {
+            slider.classList.add('empty');
+        } else {
+            slider.classList.remove('empty');
+        }
+    });
+});
+
 function addMenuStage(clickedBtn) {
     switch (clickedBtn.id) {
         case "start":
@@ -49,3 +60,12 @@ function addMenuStage(clickedBtn) {
         break;
     }
 }
+$(document).ready(function() {
+    $('input[type="radio"]').change(function() {
+      if ($(this).is(':checked')) {
+        $('label').removeClass('checked');
+        $(`label[for="${$(this).attr('id')}"]`).addClass('checked');
+      }
+    });
+  });
+  
