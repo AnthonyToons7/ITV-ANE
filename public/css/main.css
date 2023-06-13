@@ -62,7 +62,8 @@ div.button.menu-button:focus,
 label.checked div.button.menu-button  {
     color: #fff;
     transition: all .5s;
-    transform: scale(1.04)
+    transform: scale(1.04);
+    cursor: pointer;
 }
 label.checked div.button.menu-button#insanity,
 #insanity:hover,
@@ -232,6 +233,10 @@ div.setting{
 .settings-container label {
     width: 70px;
 }
+div.story-box .content {
+    padding: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
   
 @media screen and (min-width: 1024px) {
     div.background-menu{
@@ -261,5 +266,12 @@ div.setting{
     }
     .content {
         max-height: 95%;
+    }
+}
+@media screen and (min-width: 1500px) {
+    div.background-menu{
+        margin-top: -100px;
+        background-size: 90%;
+        background-position: -35px 0px;
     }
 }

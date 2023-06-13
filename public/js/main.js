@@ -3,6 +3,7 @@ const crosses = document.querySelectorAll("div.top-bar svg");
 const area1 = document.querySelector("main div.main-container.area-1");
 const area2 = document.querySelector("main div.main-container.area-2");
 const volSlider = document.querySelectorAll('.vol-slider');
+const continueButton = document.querySelector("div.button.continue");
 menu_btns.forEach(button =>{
     button.addEventListener("click", ()=>addMenuStage(button));
 });
@@ -18,7 +19,20 @@ volSlider.forEach(slider=>{
         }
     });
 });
-
+continueButton.addEventListener("click", ()=>{
+    var ele = document.querySelectorAll('input[name="difficulty-selection"]');
+    for (i = 0; i < ele.length; i++) {
+        if (ele[i].checked)
+            switch (ele[i].value) {
+                case 'hard':
+                    console.log('1');
+                    break;
+                case 'insanity':
+                    console.log('2');
+                    break;
+            }
+        }
+});
 function addMenuStage(clickedBtn) {
     switch (clickedBtn.id) {
         case "start":

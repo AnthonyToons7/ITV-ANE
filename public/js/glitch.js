@@ -21,6 +21,12 @@ window.addEventListener("DOMContentLoaded",()=>{
                 glitchEffect[i].style.width = Math.floor(Math.random() * (150 - 125) + 125) + 'px'; 
                 glitchEffect[i].style.height = Math.floor(Math.random() *(60 - 55) +55) + 'px'; 
             }
+        }
+        else if (width >=1520){
+            for(let i = 0; i < glitchEffect.length; i++ ){
+                glitchEffect[i].style.width = Math.floor(Math.random() * (155 - 130) + 130) + 'px'; 
+                glitchEffect[i].style.height = Math.floor(Math.random() *(65 - 60) +60) + 'px'; 
+            }
         }else {
             for(let i = 0; i < glitchEffect.length; i++ ){
                 glitchEffect[i].style.width = Math.floor(Math.random() * (100 - 90) + 90) + 'px'; 
