@@ -108,7 +108,10 @@ main div.main-container{
     color: #fff;
 }
 
-.story-box {
+.story-box,
+.leaderboard-box,
+.history-box,
+.settings-box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -142,4 +145,26 @@ main div.main-container{
 }
 .show {
     display: flex;
+}
+.leaderboard-place {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #828282;
+    background-color: #1d222b;
+}
+.leaderboard-box {
+    height: fit-content;
+}
+.first-place{
+    background-color: #8b7a17;
+}
+.second-place{
+    background-color: #959595;
+}
+.third-place{
+    background-color: rgb(115, 80, 37);
 }

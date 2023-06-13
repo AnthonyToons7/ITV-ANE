@@ -22,8 +22,14 @@ function addMenuStage(clickedBtn) {
         case "story":
             document.querySelector(".story-box").classList.add("show");
         break;
+        case "leaderboard":
+            document.querySelector(".leaderboard-box").classList.add("show");
+        break;
+        case "history":
+            document.querySelector(".history-box").classList.add("show");
+        break;
         case "settings":
-            
+            document.querySelector(".settings-box").classList.add("show");
         break;
         case "back":
             const index = clickedBtn.parentElement.dataset.id;
