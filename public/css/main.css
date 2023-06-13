@@ -107,3 +107,39 @@ main div.main-container{
     opacity: .8;
     color: #fff;
 }
+
+.story-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #292929;
+    border: 2px solid #000000;
+    display: none;
+    flex-direction: column;
+    height: 90%;
+    width: 50%;
+    z-index: 99;
+}
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: black;
+    height: 8%;
+}
+.top-bar svg {
+    width: 30px;
+    height: 30px;
+}
+.content {
+    overflow: scroll;
+    max-height: 90%;
+    padding: 10px;
+}
+.content h1 {
+    margin-bottom: 20px;
+}
+.show {
+    display: flex;
+}
