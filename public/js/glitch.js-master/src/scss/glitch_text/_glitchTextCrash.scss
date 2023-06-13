@@ -1,0 +1,118 @@
+@import '../assets/constant';
+@import '../assets/keyframes';
+
+
+.glitch.text.crash-effect {
+
+      position: relative;
+  font-size: 120px;
+  text-transform: uppercase;
+	margin: 0;
+	color: #fff;
+
+
+	&:before, &:after {
+		display: block;
+		content: attr( data-text);
+		text-transform: uppercase;
+    opacity: 0.8;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	} &:after {
+		color: #f0f;
+		z-index: -2;
+	} &:before {
+		color: #0ff;
+		z-index: -1;
+	}
+
+  &:not(.hover) {
+
+    &.few{
+      &:before {
+        animation: glitchTextCrash_few .4s cubic-bezier(.25, .46, .45, .94) infinite
+      }
+      &:after {
+        animation: glitchTextCrash_few .4s cubic-bezier(.25, .46, .45, .94) reverse infinite
+      }
+    }
+    &.medium{
+      &:before {
+        animation: glitchTextCrash_medium .4s cubic-bezier(.25, .46, .45, .94) infinite
+      }
+      &:after {
+        animation: glitchTextCrash_medium .4s cubic-bezier(.25, .46, .45, .94) reverse infinite
+      }
+    }
+    &.hard{
+      &:before {
+        animation: glitchTextCrash_hard .3s cubic-bezier(.25, .46, .45, .94) infinite
+      }
+      &:after {
+        animation: glitchTextCrash_hard .3s cubic-bezier(.25, .46, .45, .94) reverse infinite
+      }
+    }
+
+  }
+  &.hover{
+    &:not(.infinite) {
+      &:hover {
+        &.few{
+          &:before {
+            animation: glitchTextCrash_few .4s cubic-bezier(.25, .46, .45, .94) both 5
+          }
+          &:after {
+            animation: glitchTextCrash_few .4s cubic-bezier(.25, .46, .45, .94) reverse both 5
+          }
+        }
+        &.medium{
+          &:before {
+            animation: glitchTextCrash_medium .4s cubic-bezier(.25, .46, .45, .94) both 5
+          }
+          &:after {
+            animation: glitchTextCrash_medium .4s cubic-bezier(.25, .46, .45, .94) reverse both 5
+          }
+        }
+        &.hard{
+          &:before {
+            animation: glitchTextCrash_hard .3s cubic-bezier(.25, .46, .45, .94) both 5
+          }
+          &:after {
+            animation: glitchTextCrash_hard .3s cubic-bezier(.25, .46, .45, .94) reverse both 5
+          }
+        }
+      }
+    }
+    &.infinite{
+      &:hover {
+        &.few{
+          &:before {
+            animation: glitchTextCrash_few .4s cubic-bezier(.25, .46, .45, .94) infinite
+          }
+          &:after {
+            animation: glitchTextCrash_few .4s cubic-bezier(.25, .46, .45, .94) reverse infinite
+          }
+        }
+        &.medium{
+          &:before {
+            animation: glitchTextCrash_medium .4s cubic-bezier(.25, .46, .45, .94) infinite
+          }
+          &:after {
+            animation: glitchTextCrash_medium .4s cubic-bezier(.25, .46, .45, .94) reverse infinite
+          }
+        }
+        &.hard{
+          &:before {
+            animation: glitchTextCrash_hard .3s cubic-bezier(.25, .46, .45, .94) infinite
+          }
+          &:after {
+            animation: glitchTextCrash_hard .3s cubic-bezier(.25, .46, .45, .94) reverse infinite
+          }
+        }
+      }
+    }
+  }
+}

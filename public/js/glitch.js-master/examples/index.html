@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>glitch.js - glitch-art for you website</title>
+
+    <link rel="stylesheet" href="../dist/css/styles.css">
+
+    <script type="text/javascript" src="../dist/js/styles.min.js"></script>
+ </head>
+ <body>
+
+
+ vhs-effect
+twitch-effect
+crash-effect
+
+
+
+
+   <p>Глитч эффект текста для любого фона (hover/ не hover) (few medium hard)</p>
+<pre>
+* glitch инициализирующий класс  ОБЯЗАТЕЛЬНЫЙ
+* text/back/img определяющий класс ОБЯЗАТЕЛЬНЫЙ
+* twitch-text класс глитч-стилей ОБЯЗАТЕЛЬНЫЙ ВЫБОРОЧНЫЙ
+* (hover/ не hover) работает всегда или только при наведении НЕОБЯЗАТЕЛЬНЫЙ
+* few medium hard степень глитч эффекта ОБЯЗАТЕЛЬНЫЙ
+</pre>
+
+
+
+  <div class="glitch text vhs-effect hover hard" data-text="Hello world">Hello world</div>
+
+
+   <p>Глитч эффект текста для одного фона  (hover/ не hover) (few medium hard)</p>
+
+   <pre>
+   * glitch инициализирующий класс  ОБЯЗАТЕЛЬНЫЙ
+   * text/back/img определяющий класс ОБЯЗАТЕЛЬНЫЙ
+   * twitch-text класс глитч-стилей ОБЯЗАТЕЛЬНЫЙ ВЫБОРОЧНЫЙ
+   * (hover/ не hover) работает всегда или только при наведении НЕОБЯЗАТЕЛЬНЫЙ
+   * few medium hard степень глитч эффекта ОБЯЗАТЕЛЬНЫЙ
+   </pre>
+
+ <div class="glitch text twitch-effect hover hard" data-text="Hello world">Hello world</div>
+
+
+<p>Глитч эффект текста (hover/ не hover) (few medium hard) (infinite)</p>
+
+<pre>
+* glitch инициализирующий класс  ОБЯЗАТЕЛЬНЫЙ
+* text/back/img определяющий класс ОБЯЗАТЕЛЬНЫЙ
+* twitch-text класс глитч-стилей ОБЯЗАТЕЛЬНЫЙ ВЫБОРОЧНЫЙ
+* (hover/ не hover) работает всегда или только при наведении НЕОБЯЗАТЕЛЬНЫЙ
+* (few medium hard) степень глитч эффекта ОБЯЗАТЕЛЬНЫЙ
+* (infinite) бесконечный или нет, работает только в паре с проставленным классом hover, по умолчанию эффект бесконечный
+</pre>
+
+
+<div class="glitch text crash-effect hover few infinite" data-text="Hello world">Hello world</div>
+
+
+<p>Глитч эффект текста (hover/ не hover) (few medium hard) (infinite)</p>
+
+<pre>
+* glitch инициализирующий класс  ОБЯЗАТЕЛЬНЫЙ
+* text/back/img определяющий класс ОБЯЗАТЕЛЬНЫЙ
+* split-effect класс глитч-стилей ОБЯЗАТЕЛЬНЫЙ ВЫБОРОЧНЫЙ
+
+
+</pre>
+
+
+<canvas class="glitch text split-effect hover few"
+data-text="hello world hello world hello world"
+data-font="120px"
+data-color="#ff0000"
+width="900px"
+height="300px"
+> </canvas>
+
+
+<canvas class="glitch text split-effect hover few"
+data-text="hello world"
+data-font="100px"
+data-color="#fff"
+width="600px"
+height="400px"
+> </canvas>
+
+
+<style>
+
+/* @media screen and (max-width: 900px) {
+  .glitch.text.split-effect {
+    width: 300px;
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  .glitch.text.split-effect {
+    width: 300px;
+  }
+} */
+</style>
+
+
+<p>Глитч эффект шума для фона</p>
+   <div  class="glitch back noise"> </div>
+
+
+
+ </body>
+</html>

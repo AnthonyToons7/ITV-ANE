@@ -1,0 +1,88 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+@font-face {
+    font-family: danger;
+    src: url(../fonts/another_danger/Another\ Danger\ -\ Demo.otf);
+}
+a {
+    text-decoration: none;
+    color: #fff;
+}
+body {
+    background-color: rgb(34, 34, 34) !important;
+    color: #fff;
+    box-shadow: inset 20px 0 200px rgb(0, 0, 0), inset -20px 0 120px rgb(40, 40, 40);
+    height: 100vh;
+    /* overflow: hidden; */
+}
+main {
+    overflow:hidden;
+}
+div.background-menu {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    opacity: .5;
+    bottom: 0;
+    right: 0;
+    height: 75vh;
+    width: 69vw;
+    background: url(../img/assets/fallenvoid.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+.glitchParticle{
+    z-index: 99;   
+    background-image: url(../img/assets/fallenvoid.png);
+    background-repeat: no-repeat;
+    background-size: 620%;
+    background-position:70%;
+}
+canvas {
+    margin: unset !important;
+    font-family: danger !important;
+    font: 40px danger !important;
+}
+div.button.menu-button{
+    color: #a39999;
+    display: inline-block;
+    padding: 10px 0 0 25px;
+    font-family: danger;
+    letter-spacing: 8px;
+    font-weight: 100;
+    font-size: 14px;
+    transition: all .5s
+}
+div.button.menu-button:hover,
+div.button.menu-button:focus {
+    color: #fff;
+    transition: all .5s;
+    transform: scale(1.04)
+}
+main div.main-container{
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+main div.main-container{
+    transition: all 1s;
+}
+.hidden {
+    transform: scale(0);
+}
+.zoomOut {
+    transform: scale(10);
+}
+.zoomIn {
+    transform: scale(1);
+}
+.zoomback {
+    transform: scale(0);
+}

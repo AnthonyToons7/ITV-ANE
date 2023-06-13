@@ -4,8 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body>
-    
+    <main>
+        <div class="main-container area-1" data-id="1">
+            <canvas class="glitch text split-effect hover few"
+            data-text="Into the Void: A new end"
+            data-font="40px danger"
+            data-color="#ff0000"
+            width="410px"
+            height="70px"
+            style="padding-left: 10px;"
+            ></canvas>
+            <div class="button menu-button" id="start"><h1>Start</h1></div>
+            <div class="button menu-button" id="story"><h1>Story</h1></div>
+            <div class="button menu-button" id="settings"><h1>Settings</h1></div>
+            <a href="https://anthonytoons.nl"><div class="button menu-button"><h1>Back to main site</h1></div></a>
+        </div>
+        
+        <div class="main-container area-2 hidden" data-id="2">
+            <canvas class="glitch text split-effect hover few"
+            data-text="Difficulty"
+            data-font="40px danger"
+            data-color="#ff0000"
+            width="180px"
+            height="70px"
+            style="padding-left: 10px;"
+            ></canvas>
+            <div class="button menu-button" id="hard"><h1>Hard</h1></div>
+            <div class="button menu-button" id="insanity"><h1>Insanity</h1></div>
+            <div class="button menu-button" id="back"><h1>Back</h1></div>
+        </div>
+    </main>
+    <div class="background-menu"></div>
+    <script src="public/js/glitch.js"></script>
+    <script src="public/js/main.js" defer></script>
+    <!-- GLITCH TEXT MASTER -->
+    <!-- LINK: https://www.cssscript.com/interactive-glitch-noise-effects/ -->
+    <link rel="stylesheet" href="public/js/glitch.js-master/dist/css/styles.css" />
+    <script src="public/js/glitch.js-master/dist/js/styles.min.js"></script>
 </body>
 </html>
