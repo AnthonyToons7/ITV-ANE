@@ -102,15 +102,9 @@ $(document).ready(function() {
         $(`label[for="${$(this).attr('id')}"]`).addClass('checked');
       }
     });
-    console.dir(localStorage);
 });
 document.addEventListener('click', function() {
     bgm.play()
-      .catch(function(error) {
-        console.log('Playback failed:', error);
-      });
-
-    // Remove the event listener after the first click
     document.removeEventListener('click', arguments.callee);
 });
   
