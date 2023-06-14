@@ -140,12 +140,22 @@ main div.main-container{
     height: 30px;
 }
 .content {
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     max-height: 90%;
     padding: 10px;
 }
 .content h1 {
     margin-bottom: 20px;
+}
+button.save-settings{
+    background-color: #484848;
+    padding: 10px 20px;
+    border: 2px solid gray;
+    color: #cccccc;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
 }
 input[type="radio"] {
     display: none;
@@ -177,7 +187,7 @@ input[type="radio"] {
 }
 
 div.setting{
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -231,11 +241,39 @@ div.setting{
     padding: 20px;
 }
 .settings-container label {
-    width: 70px;
+    width: 120px;
 }
 div.story-box .content {
     padding: 30px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* CUSTOM CHECKBOX */
+.checkbox {
+    appearance: none;
+    background-color: #4b4b4b;
+	border: 1px solid #8a8a8a;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	display: inline-block;
+	position: relative;
+}
+.checkbox:active, .checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.checkbox:checked {
+	background-color: #818181;
+	border: 1px solid #cbcbcb;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #a7a7a7;
+}
+.checkbox:checked:after {
+	content: '\2714';
+	font-size: 20px;
+	position: absolute;
+	top: -6px;
+	left: 3px;
+	color: #ffffff;
 }
   
 @media screen and (min-width: 1024px) {
@@ -244,6 +282,9 @@ div.story-box .content {
         width: 57vw;
         background-size: 105%;
         background-position: -15px -1px;
+    }
+    .version {
+        font-size: 20px;
     }
 }
 @media screen and (min-width: 1440px){
@@ -270,7 +311,7 @@ div.story-box .content {
 }
 @media screen and (min-width: 1500px) {
     div.background-menu{
-        margin-top: -100px;
+        margin-top: -200px;
         background-size: 90%;
         background-position: -35px 0px;
     }

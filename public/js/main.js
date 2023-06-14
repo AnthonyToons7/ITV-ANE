@@ -4,6 +4,21 @@ const area1 = document.querySelector("main div.main-container.area-1");
 const area2 = document.querySelector("main div.main-container.area-2");
 const volSlider = document.querySelectorAll('.vol-slider');
 const continueButton = document.querySelector("div.button.continue");
+const volSliderM = document.getElementById("vol-slider-music");
+const volSliderS = document.getElementById("vol-slider-SFX");
+const saveSettingsBtn = document.querySelector(".save-settings");
+const skipDialogue = document.getElementById("skip-dialogue");
+let bgm;
+
+window.addEventListener("DOMContentLoaded",()=>{
+    bgm = new Audio('../public/audio/menu-ambience.mp3');
+    bgm.volume = .5;
+    volSliderM.value = localStorage.getItem("Backgroundvolume");
+    volSliderS.value = localStorage.getItem("SFXvolume");
+    localStorage.getItem("SkipDialogue") == "true" ? skipDialogue.checked = true : skipDialogue.checked = false;
+    bgm.volume = volSliderM.value;
+});
+
 menu_btns.forEach(button =>{
     button.addEventListener("click", ()=>addMenuStage(button));
 });
@@ -18,6 +33,12 @@ volSlider.forEach(slider=>{
             slider.classList.remove('empty');
         }
     });
+});
+volSliderM.addEventListener("input", ()=>bgm.volume = volSliderM.value / 100);
+saveSettingsBtn.addEventListener("click",()=>{
+    localStorage.setItem("Backgroundvolume", volSliderM.value);
+    localStorage.setItem("SFXvolume", volSliderS.value);
+    localStorage.setItem("SkipDialogue", skipDialogue.checked);
 });
 continueButton.addEventListener("click", ()=>{
     var ele = document.querySelectorAll('input[name="difficulty-selection"]');
@@ -81,5 +102,15 @@ $(document).ready(function() {
         $(`label[for="${$(this).attr('id')}"]`).addClass('checked');
       }
     });
-  });
+    console.dir(localStorage);
+});
+document.addEventListener('click', function() {
+    bgm.play()
+      .catch(function(error) {
+        console.log('Playback failed:', error);
+      });
+
+    // Remove the event listener after the first click
+    document.removeEventListener('click', arguments.callee);
+});
   
