@@ -11,6 +11,9 @@ a {
     text-decoration: none;
     color: #fff;
 }
+a, p, h1, h2, h3, h4, h5 {
+    user-select: none;
+}
 body {
     background-color: rgb(34, 34, 34) !important;
     color: #fff;
@@ -18,6 +21,24 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+body.damage {
+    animation: horizontal-shaking .2s linear 5, glow 1s ease-in-out;
+    opacity: .8;
+}
+@keyframes glow {
+    0%{box-shadow: inset 150px 0 150px rgb(255, 0, 0), inset -150px 0 150px rgb(255, 0, 0);}
+    25%{box-shadow: inset 150px 0 1150px rgb(255, 0, 0), inset -150px 0 1150px rgb(255, 0, 0);}
+    50%{box-shadow: inset 150px 0 3150px rgb(255, 0, 0), inset -150px 0 3150px rgb(255, 0, 0);}
+    75%{box-shadow: inset 150px 0 1150px rgb(255, 0, 0), inset -150px 0 1150px rgb(255, 0, 0);}
+    100%{box-shadow: inset 80px 0 80px rgb(255, 0, 0), inset -80px 0 80px rgb(255, 0, 0);}
+}
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
 main {
     overflow:hidden;
 }
@@ -148,7 +169,8 @@ main div.main-container{
 .content h1 {
     margin-bottom: 20px;
 }
-button.save-settings{
+button.save-settings,
+div.saved{
     background-color: #484848;
     padding: 10px 20px;
     border: 2px solid gray;
@@ -156,6 +178,16 @@ button.save-settings{
     position: absolute;
     bottom: 30px;
     right: 30px;
+    transition: all .3s;
+} button.save-settings:hover {
+    background-color: #383838;
+    cursor: pointer;
+}
+div.saved {
+    display: none;
+    left: 30px;
+    width: fit-content;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 input[type="radio"] {
     display: none;
@@ -210,18 +242,20 @@ div.setting{
     fill: red !important;
     stroke: red !important;
 } 
+svg:hover,
+.checkbox:hover {
+    cursor: pointer;
+}
 .vol-slider::-webkit-slider-runnable-track {
     height: 15px;
     background: #505050;
     border-radius: 16px;
 }
-  
 .vol-slider::-moz-range-track {
     height: 15px;
     background: #4b4b4b;
     border-radius: 16px;
 }
-  
 .vol-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none; 
@@ -230,7 +264,6 @@ div.setting{
     width: 15px;
     box-shadow: -407px 0 0 400px #c2c2c2;
 }
-  
 .vol-slider::-moz-range-thumb {
     height: 15px;
     width: 15px;
@@ -245,7 +278,7 @@ div.setting{
 }
 div.story-box .content {
     padding: 30px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: sans-serif;
 }
 
 /* CUSTOM CHECKBOX */
@@ -275,7 +308,20 @@ div.story-box .content {
 	left: 3px;
 	color: #ffffff;
 }
-  
+.show ~ main {
+    pointer-events: none;
+}
+.overlay-box-overlay.show {
+    content:"";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+}
 @media screen and (min-width: 1024px) {
     div.background-menu{
         height: 45vh;
@@ -289,7 +335,7 @@ div.story-box .content {
 }
 @media screen and (min-width: 1440px){
     div.background-menu {
-        height: 52vh;
+        height: 48vh;
         width: 60vw;
         background-size: 95%;
         background-position: -5px -1px;
@@ -311,8 +357,6 @@ div.story-box .content {
 }
 @media screen and (min-width: 1500px) {
     div.background-menu{
-        margin-top: -200px;
-        background-size: 90%;
-        background-position: -35px 0px;
+        max-width: 855px;
     }
 }

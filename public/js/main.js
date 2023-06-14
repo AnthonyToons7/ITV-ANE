@@ -8,22 +8,35 @@ const volSliderM = document.getElementById("vol-slider-music");
 const volSliderS = document.getElementById("vol-slider-SFX");
 const saveSettingsBtn = document.querySelector(".save-settings");
 const skipDialogue = document.getElementById("skip-dialogue");
+const volumeButtonM = document.getElementById("volume-btn");
+const overlay = document.querySelector(".overlay-box-overlay");
 let bgm;
+let sfx;
 
 window.addEventListener("DOMContentLoaded",()=>{
     bgm = new Audio('../public/audio/menu-ambience.mp3');
     bgm.volume = .5;
-    volSliderM.value = localStorage.getItem("Backgroundvolume");
-    volSliderS.value = localStorage.getItem("SFXvolume");
-    localStorage.getItem("SkipDialogue") == "true" ? skipDialogue.checked = true : skipDialogue.checked = false;
-    bgm.volume = volSliderM.value;
+    sfx = new Audio('../public/audio/menu-ambience.mp3');
+    sfx.volume = .5;
+    bgm.volume = volSliderM.value / 100;
+    sfx.volume = volSliderS.value / 100;
+    volSliderM.value = localStorage.getItem("backgroundvolume");
+    volSliderS.value = localStorage.getItem("sfxvolume");
+    localStorage.getItem("skipDialogue") == "true" ? skipDialogue.checked = true : skipDialogue.checked = false;
+    if (localStorage.getItem("backgroundvolume-muted") == "true" || localStorage.getItem("backgroundvolume") == 0) {
+        volSliderM.classList.add("empty");
+        bgm.muted = true;
+    }
 });
 
 menu_btns.forEach(button =>{
     button.addEventListener("click", ()=>addMenuStage(button));
 });
 crosses.forEach(cross=>{
-    cross.addEventListener("click", ()=>cross.parentNode.parentNode.classList.remove("show"));
+    cross.addEventListener("click", ()=>{
+        cross.parentNode.parentNode.classList.remove("show");
+        overlay.classList.remove("show");
+    });
 });
 volSlider.forEach(slider=>{
     slider.addEventListener("input", ()=>{
@@ -35,10 +48,25 @@ volSlider.forEach(slider=>{
     });
 });
 volSliderM.addEventListener("input", ()=>bgm.volume = volSliderM.value / 100);
+volSliderS.addEventListener("input", ()=>sfx.volume = volSliderS.value / 100);
 saveSettingsBtn.addEventListener("click",()=>{
-    localStorage.setItem("Backgroundvolume", volSliderM.value);
-    localStorage.setItem("SFXvolume", volSliderS.value);
-    localStorage.setItem("SkipDialogue", skipDialogue.checked);
+    localStorage.setItem("backgroundvolume", volSliderM.value);
+    localStorage.setItem("sfxvolume", volSliderS.value);
+    localStorage.setItem("skipDialogue", skipDialogue.checked);
+    localStorage.setItem("backgroundvolume-muted", bgm.muted);
+    document.querySelector("div.saved").style.display="block";
+});
+
+let isMuted = false;
+volumeButtonM.addEventListener("click", () => {
+    isMuted = !isMuted; // Toggle the value of isMuted
+  
+    bgm.muted = isMuted;
+    if (isMuted) {
+        volSliderM.classList.add("empty");
+      } else {
+        volSliderM.classList.remove("empty");
+      }
 });
 continueButton.addEventListener("click", ()=>{
     var ele = document.querySelectorAll('input[name="difficulty-selection"]');
@@ -46,10 +74,13 @@ continueButton.addEventListener("click", ()=>{
         if (ele[i].checked)
             switch (ele[i].value) {
                 case 'hard':
-                    console.log('1');
+                    window.location.href = "../../private/gear?difficulty=hard";
                     break;
                 case 'insanity':
-                    console.log('2');
+                    document.body.classList.add("damage");
+                    setTimeout(() => {
+                        document.body.classList.remove("damage");
+                    }, 1000);
                     break;
             }
         }
@@ -67,15 +98,19 @@ function addMenuStage(clickedBtn) {
         break;
         case "story":
             document.querySelector(".story-box").classList.add("show");
+            overlay.classList.add("show");
         break;
         case "leaderboard":
             document.querySelector(".leaderboard-box").classList.add("show");
+            overlay.classList.add("show");
         break;
         case "history":
             document.querySelector(".history-box").classList.add("show");
+            overlay.classList.add("show");
         break;
         case "settings":
             document.querySelector(".settings-box").classList.add("show");
+            overlay.classList.add("show");
         break;
         case "back":
             const index = clickedBtn.parentElement.dataset.id;
