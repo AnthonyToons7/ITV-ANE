@@ -1,0 +1,7 @@
+class Character {
+    __construct(
+
+    ){
+        
+    }
+}
