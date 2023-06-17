@@ -18,9 +18,9 @@
         <div class="main-container area-1" data-id="1">
             <canvas class="glitch text split-effect hover few"
             data-text="Into the Void: A new end"
-            data-font="40px danger"
+            data-font="30px danger"
             data-color="#ff0000"
-            width="410px"
+            width="380px"
             height="70px"
             style="padding-left: 10px; font-family: danger;"
              id="title"></canvas>
