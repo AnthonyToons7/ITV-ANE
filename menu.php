@@ -94,7 +94,7 @@
                     <path stroke="#ffffff" d="M30 34h1M64 34h1M28 35h4M63 35h3M28 36h5M62 36h5M29 37h5M61 37h5M30 38h5M60 38h5M31 39h5M59 39h5M32 40h5M58 40h5M33 41h5M57 41h5M34 42h5M56 42h5M35 43h5M55 43h5M36 44h5M54 44h5M37 45h5M53 45h5M38 46h5M52 46h5M39 47h5M51 47h5M40 48h5M50 48h5M41 49h5M49 49h5M42 50h5M48 50h5M43 51h9M44 52h7M45 53h5M44 54h7M43 55h9M42 56h5M48 56h5M41 57h5M49 57h5M40 58h5M50 58h5M39 59h5M51 59h5M38 60h5M52 60h5M37 61h5M53 61h5M36 62h5M54 62h5M35 63h5M55 63h5M34 64h5M56 64h5M33 65h5M57 65h5M32 66h5M58 66h5M31 67h5M59 67h5M30 68h5M60 68h5M29 69h5M61 69h5M30 70h3M62 70h3M31 71h1M63 71h1" />
                 </svg>
             </div>
-            <div class="content">
+            <div class="content" style="overflow:hidden;">
                 <h1 style="font-family: danger; letter-spacing: 10px;padding-left: 30px;">No updates yet...</h1>
             </div>
         </div>

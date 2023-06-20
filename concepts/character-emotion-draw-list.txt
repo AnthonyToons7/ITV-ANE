@@ -1,0 +1,58 @@
+EVA EMOTIONS
+
+- Smiling
+- Worried
+- Suprised
+- Shocked
+- Awkward
+- Relieved
+- Wounded
+
+
+PLAYER EMOTIONS
+
+- Shocked
+- Confused
+- Scared
+- Relieved
+- Angry
+- Pissed
+- Tear
+- Calm
+- Crying
+- Smile-cry
+
+
+VOID EMOTIONS
+- Wounded
+- Confused
+- Panicked
+- Scared
+- Emotionless
+
+VOID - AFTERMATH EMOTIONS
+- Shocked-smoking
+- Calm-smoking
+- Sad-smoking
+- Closed-smoking
+- Coughing
+- Smile-smoking
+- Knife
+- Knife-crying
+- Slashing
+- Sad-shocked
+- Blush
+
+VOID - CRAZED EMOTIONS
+- Sword up - smiling
+- Grinning
+- Pissed
+- Maniac
+- Defeated
+- Deforming
+
+
+VOID - FULL CORRUPT EMOTIONS
+- Pissed-full
+- Maniac-full
+- Attacking

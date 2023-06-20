@@ -133,32 +133,32 @@
 
     {
       "name": "Eva",
-      "expression": "gasps",
+      "expression": "shocked",
       "text": "T-That's him!"
     },
     {
-      "name": "Eva",
-      "expression": null,
+      "name": "Player",
+      "expression": "confused",
       "text": "He… doesn't look that threatening"
     },
     {
       "name": "Void",
-      "expression": "smile-closed",
+      "expression": "sword-up-smile",
       "text": "..."
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "scared",
       "text": "I… take back what I said."
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "shocked",
       "text": "Be careful! He's very strong!"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "grinning",
       "text": "Kill…"
     },
 
@@ -170,22 +170,22 @@
 
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "relieved",
       "text": "Phew…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "relieved",
       "text": "That wasn't easy…"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "pissed",
       "text": "Will get.. you next time…"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "worried",
       "text": "He'll come back, make sure to find him again!"
     },
 
@@ -197,57 +197,57 @@
 
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "shocked",
       "text": "!"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "shocked",
       "text": "!"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "shocked",
       "text": "What happened to him?!"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "shocked",
       "text": "I don't know! Get ready."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "pissed",
       "text": "How dare you oppose me…"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "smiling",
       "text": "You know what to do [Player]!"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "pissed",
       "text": "Eva… I WILL CRUSH YOU!"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "shocked",
       "text": "!"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "angry",
       "text": "Get back you beast!"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "maniac",
       "text": "I'm no beast, I'm a GOD! CAN'T YOU SEE?!"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "worried",
       "text": "He's corrupted with power! [Player], get ready! I'll assist you!"
     },
 
@@ -264,107 +264,107 @@
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "defeated",
       "text": "Grr…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "relieved",
       "text": "That was close…"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "worried",
       "text": "He should be weaker, but not weak enough… [Player]! We can finish him next time. Here, take t-"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "shocked",
       "text": "E-Eva!"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "wounded",
       "text": "[player…] please… Go on w-without me…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "tear",
       "text": "No no! I can't continue without you! You've taught me everything!"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "wounded",
       "text": "Please.. save my kind… take this last spell… and finish him with it… the curse of this world is like a parasite… it's bound to him somewhere… I will also upgrade your power spell… please… hurry…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "tear",
       "text": "Eva!!"
     },
     {
       "name": "Eva",
-      "expression": null,
+      "expression": "wounded",
       "text": "…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "tear",
       "text": "…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "tear",
       "text": "S-She's… gone. I'm on my own."
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "tear",
       "text": "I can do it. For her, for everyone."
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "pissed",
       "text": "..."
     },
     {
       "name": "Void",
-      "expression": "spacing out",
+      "expression": "deforming",
       "text": "…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "scared",
       "text": "*gulp*"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "maniac-full",
       "text": "..."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "pissed-full",
       "text": "You…"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "pissed-full",
       "text": "Bow to me… and I will spare you…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "pissed",
       "text": "Fuck you."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "pissed-full",
       "text": "What? You wish to fight me?"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "pissed",
       "text": "I will end you. For her."
     },
 
@@ -376,28 +376,63 @@
 
     {
       "name": "Void",
-      "expression": "Ow",
-      "text": "…"
+      "expression": "wounded",
+      "text": "Ow..."
     },
     {
       "name": "Void",
-      "expression": "Eh",
-      "text": "…"
+      "expression": "confused",
+      "text": "Eh?"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "confused",
       "text": "What… happened?"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "pissed",
       "text": "…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "pissed",
       "text": "Perish, scum"
+    },
+    {
+      "name": "Void",
+      "expression": "panicked",
+      "text": "!"
+    },
+    {
+      "name": "Void",
+      "expression": "panicked",
+      "text": "W-Whaaa?!"
+    },
+    {
+      "name": "Void",
+      "expression": "panicked",
+      "text": "H-Hold on… W-What's going on?"
+    },
+    {
+      "name": "Player",
+      "expression": "pissed",
+      "text": "..."
+    },
+    {
+      "name": "Player",
+      "expression": "angry",
+      "text": "You don't remember?"
+    },
+    {
+      "name": "Void",
+      "expression": "panicked",
+      "text": "I don't remember anything. The last thing I remember is… that I was here… before passing out…"
+    },
+    {
+      "name": "Player",
+      "expression": "pissed",
+      "text": "Quit your bullshit!"
     },
     {
       "name": "Void",
@@ -406,102 +441,67 @@
     },
     {
       "name": "Void",
-      "expression": null,
-      "text": "W-Whaaa?!"
-    },
-    {
-      "name": "Void",
-      "expression": null,
-      "text": "H-Hold on… W-What's going on?"
+      "expression": "panicked",
+      "text": "I-I… I-I'm speaking the truth! P-Please… tell me everything!"
     },
     {
       "name": "Player",
-      "expression": null,
-      "text": "..."
+      "expression": "calm",
+      "text": "Very well.."
     },
     {
       "name": "Player",
-      "expression": null,
-      "text": "You don't remember?"
-    },
-    {
-      "name": "Void",
-      "expression": null,
-      "text": "I don't remember anything. The last thing I remember is… that I was here… before passing out…"
-    },
-    {
-      "name": "Player",
-      "expression": null,
-      "text": "Quit your bullshit!"
-    },
-    {
-      "name": "Void",
-      "expression": "afraid",
-      "text": "…"
-    },
-    {
-      "name": "Void",
-      "expression": null,
-      "text": "I-I… I-I'm speaking the truth! P-Please… tell me everything."
-    },
-    {
-      "name": "Player",
-      "expression": "sigh",
-      "text": "very well.."
-    },
-    {
-      "name": "Player",
-      "expression": null,
+      "expression": "calm",
       "text": "You have been corrupted by the dangers of this world little fella."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "scared",
       "text": "I-I don't understand…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "calm",
       "text": "I'll keep it short. You murdered my companion and mass murdered half of this world and my city."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "scared",
       "text": "I… I-I did…?"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "calm",
       "text": "Affirmative."
     },
     {
       "name": "Void",
-      "expression": null,
-      "text": "I-I'm… I'm a murderer… I'm so sorry…"
+      "expression": "emotionless",
+      "text": "I-I'm… I'm a murderer… I'm so sorry…I-I..."
     },
     {
       "name": "Player",
-      "expression": "sad sigh",
+      "expression": "calm",
       "text": "…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "angry",
       "text": "Where do you think you're going?!"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "emotionless",
       "text": "I-I think it's better if I… disappear…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "angry",
       "text": "Hey! Wait up y-"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "angry",
       "text": "He's gone…"
     },
 
@@ -513,97 +513,97 @@
 
     {
       "name": "Player",
-      "expression": null,
+      "expression": "shocked-smoking",
       "text": "!"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "calm-smoking",
       "text": "Oh… it's you…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "shocked",
       "text": "You look absolutely horrible."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "sad-smoking",
       "text": "I'm feeling quite fine."
     },
     {
       "name": "Void",
-      "expression": "inhales the cigarette",
+      "expression": "closed-smoking",
       "text": "…"
     },
     {
       "name": "Void",
-      "expression": "",
+      "expression": "coughing",
       "text": "*coughing*"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "calm",
       "text": "Yeah… right."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "sad-smoking",
       "text": "*sighs*"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "sad-smoking",
       "text": "Why did you spare me."
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "calm",
       "text": "You came back to your senses, it only felt right."
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "smile-smoking",
       "text": "I can still see that undeniable anger in you."
     },
     {
       "name": "Void",
-      "expression": null,
-      "text": "If you want to kill me, it's fine. I have nothing to love for anyways."
+      "expression": "sad-smoking",
+      "text": "If you want to kill me, it's fine. I have nothing to live for anyways."
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "scared",
       "text": "I…. I can't…"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "smile-smoking",
       "text": " I would be happier if you did."
     },
     {
       "name": "Player",
-      "expression": "saddened",
+      "expression": "scared",
       "text": "I can't. I don't want to…"
     },
     {
       "name": "Player",
-      "expression": "saddened",
+      "expression": "tear",
       "text": "It doesn't feel right to kill you, you're in such a horrible condition already, only hurting yourself more by… abusing these substances…"
     },
     {
       "name": "Void",
-      "expression": null,
+      "expression": "smile-smoking",
       "text": "I have no other place to go, besides, I'm dead in the papers, might as well just wait the actual event out."
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "tear",
       "text": "Don't say such things…"
     },
     {
       "name": "Player",
-      "expression": null,
+      "expression": "closed-smoking",
       "text": "…"
     },
     {
@@ -613,7 +613,7 @@
     },
     {
         "name": "Player",
-        "expression": null,
+        "expression": "shocked",
         "text": "…"
     },
     {
@@ -638,12 +638,12 @@
     },
     {
         "name": "Player",
-        "expression": "saddened",
+        "expression": "tear",
         "text": "Please, don't"
     },
     {
-        "name": "",
-        "expression": "",
+        "name": " ",
+        "expression": " ",
         "text": "*he makes a slashing motion towards his neck*"
     },
     {
@@ -663,7 +663,7 @@
     },
     {
         "name": "Void",
-        "expression": "saddened",
+        "expression": "sad-smoking",
         "text": "..."
     },
     {
@@ -673,7 +673,7 @@
     },
     {
         "name": "Void",
-        "expression": "saddened",
+        "expression": "sad-smoking",
         "text": "But… I… kil-"
     },
     {
@@ -688,17 +688,17 @@
     },
     {
         "name": "Player",
-        "expression": "smiling",
+        "expression": "smile-cry",
         "text": "Please, take my hand you cutie, I'll try my best."
     },
     {
         "name": "Void",
-        "expression": "red",
+        "expression": "blush",
         "text": "..."
     },
     {
         "name": "Void",
-        "expression": "red",
+        "expression": "blush",
         "text": "O-okay..."
     }
   ]
