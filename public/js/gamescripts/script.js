@@ -3,8 +3,8 @@ var dialogIndex = 0;
 function createDiag(dialog) {
   $('#dialog-box').text('');
   if (dialog.name === "BREAKPOINT") {
-    $('#dialog-box-container').hide();
-    return;
+    // $('#dialog-box-container').hide();
+    // return;
   }
   var individual = dialog.text.split('');
 

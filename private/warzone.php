@@ -16,6 +16,11 @@
 <body>
     <main>
         <div id="dialog-box-container">
+            <div id="dialog-box-characters">
+                <div id="dialog-void"></div>
+                <div id="dialog-eva"></div>
+                <div id="dialog-player"></div>
+            </div>
             <div id="dialog-box-name" class="dialog-box"></div>
             <div id="dialog-box" class="dialog-box"></div>
         </div>
