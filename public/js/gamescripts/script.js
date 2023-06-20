@@ -14,6 +14,9 @@ class Game {
   }
 
   processTurn() {
+
+    // If a enemy dies, remove them from the character pool
+
     this.turnCount++;
 
     // Check if it's the third turn and spawn a new enemy if needed
@@ -21,7 +24,7 @@ class Game {
       this.spawnEnemy();
     }
 
-    // Perform otherlogic like calling the enemy's algorithm
+    // Perform other logic like calling the enemy's algorithm
     // ...
   }
 }
