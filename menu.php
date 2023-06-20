@@ -18,14 +18,14 @@
         <div class="main-container area-1" data-id="1">
             <canvas class="glitch text split-effect hover few"
             data-text="Into the Void: A new end"
-            data-font="30px danger"
+            data-font="35px danger"
             data-color="#ff0000"
             width="380px"
             height="70px"
             style="padding-left: 10px; font-family: danger;"
              id="title"></canvas>
             <div class="button menu-button" id="start"><h1>Start</h1></div>
-            <div class="button menu-button" id="story"><h1>Story</h1></div>
+            <div class="button menu-button" id="story-mode"><h1>Story</h1></div>
             <div class="button menu-button" id="leaderboard"><h1>Leaderboard</h1></div>
             <div class="button menu-button" id="history"><h1>History</h1></div>
             <div class="button menu-button" id="settings"><h1>Settings</h1></div>
@@ -41,12 +41,16 @@
             height="70px"
             style="padding-left: 10px;"
             ></canvas>
+            <label for="difficulty-story">
+                <div class="button menu-button" id="story"><h1>Story mode</h1></div>
+            </label>
             <label for="difficulty-hard">
                 <div class="button menu-button" id="hard"><h1>Hard</h1></div>
             </label>
             <label for="difficulty-insanity">
                 <div class="button menu-button" id="insanity"><h1>Insanity</h1></div>
             </label>
+            <input type="radio" class="difficulty" name="difficulty-selection" id="difficulty-story" value="story">
             <input type="radio" class="difficulty" name="difficulty-selection" id="difficulty-hard" value="hard">
             <input type="radio" class="difficulty" name="difficulty-selection" id="difficulty-insanity" value="insanity">
             <br>
@@ -121,9 +125,18 @@
                         <path d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6" style="fill:none;stroke:#676767;stroke-width:5;stroke-linecap:round"/>
                     </svg>
                 </div>
-                <div class="dialogue-settings setting">
-                    <label for="skip-dialogue">Skip dialogue</label>
-                    <input type="checkbox" name="skip-dialogue" id="skip-dialogue" class="checkbox"> 
+                <div class="disclaimer-settings setting">
+                    <button class="button disclaimer">Disclaimer</button>
+                    <div class="disclaimer-text">
+                        <p>The game has:</p>
+                        <ul>
+                            <li>Mentions of violence</li>
+                            <li>Mentions of suicide</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="account-settings setting">
+                    <a href="../private/account.php">Account settings</a>
                 </div>
                 <div class="account-settings"></div>
                 <div class="saved">Saved!</div>

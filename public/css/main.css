@@ -169,6 +169,8 @@ main div.main-container{
 .content h1 {
     margin-bottom: 20px;
 }
+button.disclaimer,
+.account-settings a,
 button.save-settings,
 div.saved{
     background-color: #484848;
@@ -179,7 +181,16 @@ div.saved{
     bottom: 30px;
     right: 30px;
     transition: all .3s;
-} button.save-settings:hover {
+} 
+button.disclaimer,
+.account-settings a{
+    position: unset;
+}
+.disclaimer-text {
+    display: none;
+}
+button.save-settings:hover,
+.button.disclaimer:hover {
     background-color: #383838;
     cursor: pointer;
 }

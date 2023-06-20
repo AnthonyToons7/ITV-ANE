@@ -10,8 +10,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../public/css/warzone.css">
+    <script src="../public/js/jquery-3.6.1.js"></script>
 </head>
 <body>
-    
+    <main>
+        <div id="dialog-box-container">
+            <div id="dialog-box-name" class="dialog-box"></div>
+            <div id="dialog-box" class="dialog-box"></div>
+        </div>
+    </main>
+<script src="../public/js/gamescripts/script.js"></script>
 </body>
 </html>

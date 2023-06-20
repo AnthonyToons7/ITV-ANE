@@ -1,0 +1,705 @@
+[
+    {
+      "name": "Eva",
+      "expression": "smiling",
+      "text": "Greetings, traveler"
+    },
+    {
+      "name": "Player",
+      "expression": "shocked",
+      "text": "W-Woah! Who are you? And an even better question, WHAT are you?"
+    },
+    {
+        "name": "Eva",
+        "expression": "smiling",
+        "text": "My name is Eva, I am the princess of the mirror world."
+    },
+    {
+        "name": "Player",
+        "expression": "confused",
+        "text": "Mirror... world?"
+    },
+    {
+        "name": "Eva",
+        "expression": "smiling",
+        "text": "I see you are not aware of the mirror world. Allow me to inform you."
+    },
+    {
+        "name": "Eva",
+        "expression": "smiling",
+        "text": "The mirror world is… a replica of your world, except everyone is the opposite of their world counterpart. Good becomes evil, and evil becomes good."
+    },
+    {
+        "name": "Player",
+        "expression": "confused",
+        "text": "Alright... why are you telling me this?"
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "I have a request to make..."
+    },
+    {
+        "name": "Player",
+        "expression": "confused",
+        "text": "..."
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "The mirror world and your world are in… great danger…"
+    },
+    {
+        "name": "Player",
+        "expression": "confused",
+        "text": "Danger?"
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "A threat that our kind is not strong enough for…"
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "It's a boy, named Void… He has killed many of our kind, but also yours…"
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "He was part of an organization known as the Resistance (MWR), a powerful group known for having many wars with our kind. Void was the strongest soldier out of all of them..."
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "We managed to capture him and well... it worked, but... the powerful effects of our world were a little strong..."
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "He became a psychotic beast, not only killing many of my kind, but also yours."
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "We're theorizing that if someone defeats him, or beats the darkness out of him, he may return to normal, so both worlds can hopefully live in harmony."
+    },
+    {
+        "name": "Player",
+        "expression": "worried",
+        "text": "Y-You want me to...?"
+    },
+    {
+        "name": "Player",
+        "expression": "worried",
+        "text": "How can I even do that on my own."
+    },
+    {
+        "name": "Eva",
+        "expression": "worried",
+        "text": "I will assist you in combat. I will put all my faith into you."
+    },
+    {
+        "name": "Eva",
+        "expression": "surprised",
+        "text": "!"
+    },
+    {
+        "name": "Slime",
+        "expression": "default",
+        "text": "..."
+    },
+    {
+        "name": "Eva",
+        "expression": "surprised",
+        "text": "There's your very first enemy you can train on!"
+    },
+    {
+        "name": "Eva",
+        "expression": "surprised",
+        "text": "Take it down, and continue your journey!"
+    },
+    {
+        "name": "Eva",
+        "expression": "awkward",
+        "text": "I-I'll just be safe in your shadow"
+    },
+    
+    {
+        "name": "BREAKPOINT",
+        "expression": "BREAKPOINT",
+        "text": "BREAKPOINT"
+    },
+
+    {
+      "name": "Eva",
+      "expression": "gasps",
+      "text": "T-That's him!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "He… doesn't look that threatening"
+    },
+    {
+      "name": "Void",
+      "expression": "smile-closed",
+      "text": "..."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "I… take back what I said."
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "Be careful! He's very strong!"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Kill…"
+    },
+
+    {
+        "name": "BREAKPOINT",
+        "expression": "BREAKPOINT",
+        "text": "BREAKPOINT"
+    },
+
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "Phew…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "That wasn't easy…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Will get.. you next time…"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "He'll come back, make sure to find him again!"
+    },
+
+    {
+        "name": "BREAKPOINT",
+        "expression": "BREAKPOINT",
+        "text": "BREAKPOINT"
+    },
+
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "!"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "!"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "What happened to him?!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "I don't know! Get ready."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "How dare you oppose me…"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "You know what to do [Player]!"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Eva… I WILL CRUSH YOU!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "!"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Get back you beast!"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I'm no beast, I'm a GOD! CAN'T YOU SEE?!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "He's corrupted with power! [Player], get ready! I'll assist you!"
+    },
+
+    {
+        "name": "BREAKPOINT",
+        "expression": "BREAKPOINT",
+        "text": "BREAKPOINT"
+    },
+
+    {
+      "name": "Eva",
+      "expression": "relieved",
+      "text": "phew"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Grr…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "That was close…"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "He should be weaker, but not weak enough… [Player]! We can finish him next time. Here, take t-"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "E-Eva!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "[player…] please… Go on w-without me…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "No no! I can't continue without you! You've taught me everything!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "Please.. save my kind… take this last spell… and finish him with it… the curse of this world is like a parasite… it's bound to him somewhere… I will also upgrade your power spell… please… hurry…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Eva!!"
+    },
+    {
+      "name": "Eva",
+      "expression": null,
+      "text": "…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "S-She's… gone. I'm on my own."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "I can do it. For her, for everyone."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "..."
+    },
+    {
+      "name": "Void",
+      "expression": "spacing out",
+      "text": "…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "*gulp*"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "..."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "You…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Bow to me… and I will spare you…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Fuck you."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "What? You wish to fight me?"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "I will end you. For her."
+    },
+
+    {
+        "name": "BREAKPOINT",
+        "expression": "BREAKPOINT",
+        "text": "BREAKPOINT"
+    },
+
+    {
+      "name": "Void",
+      "expression": "Ow",
+      "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": "Eh",
+      "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "What… happened?"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Perish, scum"
+    },
+    {
+      "name": "Void",
+      "expression": "panicked",
+      "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "W-Whaaa?!"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "H-Hold on… W-What's going on?"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "..."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "You don't remember?"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I don't remember anything. The last thing I remember is… that I was here… before passing out…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Quit your bullshit!"
+    },
+    {
+      "name": "Void",
+      "expression": "afraid",
+      "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I-I… I-I'm speaking the truth! P-Please… tell me everything."
+    },
+    {
+      "name": "Player",
+      "expression": "sigh",
+      "text": "very well.."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "You have been corrupted by the dangers of this world little fella."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I-I don't understand…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "I'll keep it short. You murdered my companion and mass murdered half of this world and my city."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I… I-I did…?"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Affirmative."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I-I'm… I'm a murderer… I'm so sorry…"
+    },
+    {
+      "name": "Player",
+      "expression": "sad sigh",
+      "text": "…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Where do you think you're going?!"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I-I think it's better if I… disappear…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Hey! Wait up y-"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "He's gone…"
+    },
+
+    {
+        "name": "BREAKPOINT",
+        "expression": "BREAKPOINT",
+        "text": "BREAKPOINT"
+    },
+
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "!"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Oh… it's you…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "You look absolutely horrible."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I'm feeling quite fine."
+    },
+    {
+      "name": "Void",
+      "expression": "inhales the cigarette",
+      "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": "",
+      "text": "*coughing*"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Yeah… right."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "*sighs*"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "Why did you spare me."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "You came back to your senses, it only felt right."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I can still see that undeniable anger in you."
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "If you want to kill me, it's fine. I have nothing to love for anyways."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "I…. I can't…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": " I would be happier if you did."
+    },
+    {
+      "name": "Player",
+      "expression": "saddened",
+      "text": "I can't. I don't want to…"
+    },
+    {
+      "name": "Player",
+      "expression": "saddened",
+      "text": "It doesn't feel right to kill you, you're in such a horrible condition already, only hurting yourself more by… abusing these substances…"
+    },
+    {
+      "name": "Void",
+      "expression": null,
+      "text": "I have no other place to go, besides, I'm dead in the papers, might as well just wait the actual event out."
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "Don't say such things…"
+    },
+    {
+      "name": "Player",
+      "expression": null,
+      "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": "knife",
+      "text": "What else is there to life?"
+    },
+    {
+        "name": "Player",
+        "expression": null,
+        "text": "…"
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "I'm worth absolutely nothing."
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "*chuckles*"
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "It was nice having you around for these couple minutes."
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "Though I really have to go now, if you know what I mean."
+    },
+    {
+        "name": "Player",
+        "expression": "saddened",
+        "text": "Please, don't"
+    },
+    {
+        "name": "",
+        "expression": "",
+        "text": "*he makes a slashing motion towards his neck*"
+    },
+    {
+        "name": "Void",
+        "expression": "sad-shocked",
+        "text": "..."
+    },
+    {
+        "name": "Player",
+        "expression": "crying",
+        "text": "WHY DID YOU DO THAT?!"
+    },
+    {
+        "name": "Player",
+        "expression": "crying",
+        "text": "DON'T YOU VALUE ANYTHING IN YOUR LIFE?"
+    },
+    {
+        "name": "Void",
+        "expression": "saddened",
+        "text": "..."
+    },
+    {
+        "name": "Player",
+        "expression": "crying",
+        "text": "Please… stay with me… it's okay… I will take care of you, I promise. No one will hurt nor leave you ever again…"
+    },
+    {
+        "name": "Void",
+        "expression": "saddened",
+        "text": "But… I… kil-"
+    },
+    {
+        "name": "Player",
+        "expression": "crying",
+        "text": "I don't care. You're safe now. That's what matters."
+    },
+    {
+        "name": "Player",
+        "expression": "crying",
+        "text": "I don't want to feel the guilt of leaving you behind."
+    },
+    {
+        "name": "Player",
+        "expression": "smiling",
+        "text": "Please, take my hand you cutie, I'll try my best."
+    },
+    {
+        "name": "Void",
+        "expression": "red",
+        "text": "..."
+    },
+    {
+        "name": "Void",
+        "expression": "red",
+        "text": "O-okay..."
+    }
+  ]
+  

@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+@keyframes arrow_animation {
+    from { bottom: 20px; }
+    to { bottom: 10px; }
+}
+body {
+    background-color: #1c1c1c;
+}
+main {
+    height: 100vh;
+    width: 100vw;
+} 
+#arrow {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgb(255, 255, 255);
+    height: 0; 
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 0; 
+    animation: arrow_animation 1s steps(2) infinite;
+}
+#dialog-box-container {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    height: 25vh;
+    width: 100vw;
+    padding: 20px;
+}
+.dialog-box {
+    background: #1c1c1c;
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #000000;
+    color: #ffffff;
+    border-radius: 5px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#dialog-box-name {
+    width: 100px;
+    height: 50px;
+    padding: 12px;
+}
+#dialog-box {
+    padding: 20px;
+    position: relative;
+    word-spacing: 3px;
+    border-top-left-radius: 0;
+    height: 100%;
+    width: 100%;
+}

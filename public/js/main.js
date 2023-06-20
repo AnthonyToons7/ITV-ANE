@@ -7,9 +7,9 @@ const continueButton = document.querySelector("div.button.continue");
 const volSliderM = document.getElementById("vol-slider-music");
 const volSliderS = document.getElementById("vol-slider-SFX");
 const saveSettingsBtn = document.querySelector(".save-settings");
-const skipDialogue = document.getElementById("skip-dialogue");
 const volumeButtonM = document.getElementById("volume-btn");
 const overlay = document.querySelector(".overlay-box-overlay");
+const disclaimer = document.querySelector(".disclaimer");
 let bgm;
 let sfx;
 
@@ -22,7 +22,6 @@ window.addEventListener("DOMContentLoaded",()=>{
     sfx.volume = volSliderS.value / 100;
     volSliderM.value = localStorage.getItem("backgroundvolume");
     volSliderS.value = localStorage.getItem("sfxvolume");
-    localStorage.getItem("skipDialogue") == "true" ? skipDialogue.checked = true : skipDialogue.checked = false;
     if (localStorage.getItem("backgroundvolume-muted") == "true" || localStorage.getItem("backgroundvolume") == 0) {
         volSliderM.classList.add("empty");
         bgm.muted = true;
@@ -49,10 +48,12 @@ volSlider.forEach(slider=>{
 });
 volSliderM.addEventListener("input", ()=>bgm.volume = volSliderM.value / 100);
 volSliderS.addEventListener("input", ()=>sfx.volume = volSliderS.value / 100);
+disclaimer.addEventListener("click",()=>{
+    document.querySelector(".disclaimer-text").style.display="block";
+});
 saveSettingsBtn.addEventListener("click",()=>{
     localStorage.setItem("backgroundvolume", volSliderM.value);
     localStorage.setItem("sfxvolume", volSliderS.value);
-    localStorage.setItem("skipDialogue", skipDialogue.checked);
     localStorage.setItem("backgroundvolume-muted", bgm.muted);
     document.querySelector("div.saved").style.display="block";
 });
@@ -72,18 +73,24 @@ continueButton.addEventListener("click", ()=>{
     var ele = document.querySelectorAll('input[name="difficulty-selection"]');
     for (i = 0; i < ele.length; i++) {
         if (ele[i].checked)
-            switch (ele[i].value) {
-                case 'hard':
-                    window.location.href = "../../private/gear?difficulty=hard";
-                    break;
-                case 'insanity':
-                    document.body.classList.add("damage");
-                    setTimeout(() => {
-                        document.body.classList.remove("damage");
-                    }, 1000);
-                    break;
+        switch (ele[i].value) {
+            case 'story':
+                localStorage.setItem("difficulty", "story");
+                break;
+            case 'hard':
+                localStorage.setItem("difficulty", "hard");
+                break;
+            case 'insanity':
+                localStorage.setItem("difficulty", "insanity");
+                document.body.classList.add("damage");
+                setTimeout(() => {
+                    document.body.classList.remove("damage");
+                }, 1000);
+                return;
+                break;
             }
-        }
+     }
+     window.location.href = `../../private/gear?difficulty=${localStorage.getItem("difficulty")}`;
 });
 function addMenuStage(clickedBtn) {
     switch (clickedBtn.id) {
@@ -96,7 +103,7 @@ function addMenuStage(clickedBtn) {
                 document.querySelector("main div.main-container.area-2").classList.remove("hidden");
             }, 500);
         break;
-        case "story":
+        case "story-mode":
             document.querySelector(".story-box").classList.add("show");
             overlay.classList.add("show");
         break;
