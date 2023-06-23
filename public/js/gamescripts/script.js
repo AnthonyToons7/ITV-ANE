@@ -15,7 +15,12 @@ class Game {
 
   processTurn() {
 
-    // If a enemy dies, remove them from the character pool
+    // If an enemy dies, remove them from the character pool
+    super(hp);
+
+    if (this.enemyPool[0].hp<=0){
+      this.enemyPool[0].remove();
+    }
 
     this.turnCount++;
 
@@ -62,10 +67,11 @@ class Character {
 }
 
 class Player extends Character {
-  constructor(name, hp, atk, def, spd, mana) {
+  constructor(name, hp, atk, def, spd, mana, multiplier) {
     // 'super' is a keyword used to yank other properties from other classes
     super(name, hp, atk, def, spd);
     this.mana = mana;
+    this.multiplier = multiplier || 1;
   }
 }
 
@@ -92,8 +98,8 @@ var dialogIndex = 0;
 function createDiag(dialog) {
   $('#dialog-box').text('');
   if (dialog.name === "BREAKPOINT") {
-    // $('#dialog-box-container').hide();
-    // return;
+    $('#dialog-box-container').hide();
+    return;
   }
   var individual = dialog.text.split('');
   for (var i = 0; i < individual.length; i++) {
