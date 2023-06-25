@@ -16,12 +16,13 @@
 //   processTurn() {
 
 //     // If an enemy dies, remove them from the character pool
-//     super(hp);
-
-//     if (this.enemyPool[0].hp<=0){
-//       this.enemyPool[0].remove();
+//     for (let i=0;i<this.enemyPool.length;i++) {
+//       const enemy = this.enemyPool[i];
+//       if (enemy.hp <= 0) {
+//         this.enemyPool.splice(i,1)
+//         i--;
+//       }
 //     }
-
 //     this.turnCount++;
 
 //     // Check if it's the third turn and spawn a new enemy if needed
