@@ -31,17 +31,17 @@ VOID EMOTIONS
 - Emotionless
 
 VOID - AFTERMATH EMOTIONS
-- Shocked-smoking
-- Calm-smoking
-- Sad-smoking2
+- Shocked-smoking ✔
+- Calm-smoking ✔
+- Sad-smoking2 ✔
 - Closed-smoking
 - Coughing
-- Smile-smoking
-- Knife
-- Knife-crying
+- Smile-smoking  ✔
+- Knife ✔
+- Knife-crying ✔
 - Slashing
 - Sad-shocked
-- Blush
+- Blush ✔
 
 VOID - CRAZED EMOTIONS
 - Sword up - smiling

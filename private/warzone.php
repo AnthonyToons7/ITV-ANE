@@ -17,9 +17,9 @@
     <main>
         <div id="dialog-box-container">
             <div id="dialog-box-characters">
-                <div id="dialog-void"></div>
-                <div id="dialog-eva"></div>
-                <div id="dialog-player"></div>
+                <div id="dialog-Void" class="dialog-character"></div>
+                <div id="dialog-Eva" class="dialog-character"></div>
+                <div id="dialog-Player" class="dialog-character"></div>
             </div>
             <div id="dialog-box-name" class="dialog-box"></div>
             <div id="dialog-box" class="dialog-box"></div>

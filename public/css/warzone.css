@@ -32,9 +32,9 @@ main {
 }
 #dialog-box-container {
     position: absolute;
-    bottom: 50px;
+    bottom: 40vh;
     left: 0;
-    height: 25vh;
+    height: 33vh;
     width: 100vw;
     padding: 20px;
 }
@@ -61,6 +61,14 @@ main {
     border-top-left-radius: 0;
     height: 100%;
     width: 100%;
+}
+#dialog-box-characters{
+    position: relative;
+    display: flex;
+}
+.dialog-character {
+    height: 300px;
+    width: 300px;
 }
 @media screen and (max-width: 996px) {
     #dialog-box-container {
