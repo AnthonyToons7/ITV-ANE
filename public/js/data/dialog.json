@@ -518,7 +518,7 @@
     },
     {
       "name": "Void",
-      "expression": "smile-smoking",
+      "expression": "shocked-smoking",
       "text": "Oh… it's you…"
     },
     {
@@ -528,7 +528,7 @@
     },
     {
       "name": "Void",
-      "expression": "sad-smoking",
+      "expression": "closed-smoking",
       "text": "I'm feeling quite fine."
     },
     {
