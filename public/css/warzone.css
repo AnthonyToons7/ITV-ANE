@@ -32,7 +32,6 @@ main {
 }
 #dialog-box-container {
     position: absolute;
-    bottom: 40vh;
     left: 0;
     height: 33vh;
     width: 100vw;
@@ -65,14 +64,26 @@ main {
 #dialog-box-characters{
     position: relative;
     display: flex;
+    justify-content: space-between;
+    transform: translateY(50px);
 }
 .dialog-character {
-    height: 300px;
-    width: 300px;
+    height: 0;
+    width: 0;
+    padding: 13%;
     background-size: contain !important;
+    background-repeat: no-repeat;
 }
 @media screen and (max-width: 996px) {
     #dialog-box-container {
         height: 40vh;
+    }
+    .dialog-box {
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 996px) {
+    #dialog-box-container {
+        bottom: 50vh;
     }
 }
