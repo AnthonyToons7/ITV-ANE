@@ -519,6 +519,11 @@
     {
       "name": "Void",
       "expression": "shocked-smoking",
+      "text": "!"
+    },
+    {
+      "name": "Void",
+      "expression": "shocked-smoking",
       "text": "Oh… it's you…"
     },
     {
