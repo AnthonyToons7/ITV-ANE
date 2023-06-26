@@ -18,7 +18,7 @@ PLAYER EMOTIONS
 - Angry
 - Pissed
 - Tear
-- Calm
+- Calm ✔
 - Crying
 - Smile-cry
 
@@ -34,8 +34,8 @@ VOID - AFTERMATH EMOTIONS
 - Shocked-smoking ✔
 - Calm-smoking ✔
 - Sad-smoking2 ✔
-- Closed-smoking
-- Coughing
+- Closed-smoking ✔
+- Coughing ✔
 - Smile-smoking  ✔
 - Knife ✔
 - Knife-crying ✔

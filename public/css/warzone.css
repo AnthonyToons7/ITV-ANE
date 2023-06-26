@@ -69,6 +69,7 @@ main {
 .dialog-character {
     height: 300px;
     width: 300px;
+    background-size: contain !important;
 }
 @media screen and (max-width: 996px) {
     #dialog-box-container {
