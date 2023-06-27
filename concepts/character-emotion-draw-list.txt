@@ -15,8 +15,8 @@ PLAYER EMOTIONS
 - Confused
 - Scared
 - Relieved
-- Angry
-- Pissed
+- Angry ✔
+- Pissed ✔
 - Tear
 - Calm ✔
 - Crying
@@ -40,7 +40,7 @@ VOID - AFTERMATH EMOTIONS
 - Knife ✔
 - Knife-crying ✔
 - Slashing
-- Sad-shocked
+- Sad-shocked ✔
 - Blush ✔
 
 VOID - CRAZED EMOTIONS

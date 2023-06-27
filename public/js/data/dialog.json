@@ -243,12 +243,17 @@
     {
       "name": "Void",
       "expression": "maniac",
-      "text": "I'm no beast, I'm a GOD! CAN'T YOU SEE?!"
+      "text": "I'm no beast, I'm an angel! CAN'T YOU SEE?!"
+    },
+    {
+      "name": "Void",
+      "expression": "maniac",
+      "text": "I'm the ultimate angel of DEATH!"
     },
     {
       "name": "Eva",
       "expression": "worried",
-      "text": "He's corrupted with power! [Player], get ready! I'll assist you!"
+      "text": "He's corrupted! [Player], get ready! I'll assist you!"
     },
 
     {
@@ -295,7 +300,22 @@
     {
       "name": "Eva",
       "expression": "wounded",
-      "text": "Please.. save my kind… take this last spell… and finish him with it… the curse of this world is like a parasite… it's bound to him somewhere… I will also upgrade your power spell… please… hurry…"
+      "text": "Please... Make sure to knock whatever is in him out... Something inside him has grown stronger because of this world, that is why he is hostile."
+    },
+    {
+      "name": "Eva",
+      "expression": "wounded",
+      "text": "All I ask of y-you... is to contain... your anger... and keep him alive... he can be of great value..."
+    },
+    {
+      "name": "Player",
+      "expression": "tear",
+      "text": "B-but..."
+    },
+    {
+      "name": "Eva",
+      "expression": "wounded",
+      "text": "…"
     },
     {
       "name": "Player",
@@ -315,12 +335,7 @@
     {
       "name": "Player",
       "expression": "tear",
-      "text": "S-She's… gone. I'm on my own."
-    },
-    {
-      "name": "Player",
-      "expression": "tear",
-      "text": "I can do it. For her, for everyone."
+      "text": "S-She's… gone..."
     },
     {
       "name": "Player",
@@ -350,7 +365,7 @@
     {
       "name": "Void",
       "expression": "pissed-full",
-      "text": "Bow to me… and I will spare you…"
+      "text": "Sad because of your little compion?!"
     },
     {
       "name": "Player",
@@ -360,7 +375,7 @@
     {
       "name": "Void",
       "expression": "pissed-full",
-      "text": "What? You wish to fight me?"
+      "text": "That won't bring her back."
     },
     {
       "name": "Player",
@@ -378,11 +393,6 @@
       "name": "Void",
       "expression": "wounded",
       "text": "Ow..."
-    },
-    {
-      "name": "Void",
-      "expression": "confused",
-      "text": "Eh?"
     },
     {
       "name": "Void",
@@ -407,12 +417,7 @@
     {
       "name": "Void",
       "expression": "panicked",
-      "text": "W-Whaaa?!"
-    },
-    {
-      "name": "Void",
-      "expression": "panicked",
-      "text": "H-Hold on… W-What's going on?"
+      "text": "H-Hold on… e-explain yourself..."
     },
     {
       "name": "Player",
@@ -430,9 +435,9 @@
       "text": "I don't remember anything. The last thing I remember is… that I was here… before passing out…"
     },
     {
-      "name": "Player",
-      "expression": "pissed",
-      "text": "Quit your bullshit!"
+      "name": "Void",
+      "expression": "panicked",
+      "text": "I could see a dark figure... it was talking to me, but I did not understand what it said..."
     },
     {
       "name": "Void",
@@ -440,34 +445,29 @@
       "text": "…"
     },
     {
-      "name": "Void",
-      "expression": "panicked",
-      "text": "I-I… I-I'm speaking the truth! P-Please… tell me everything!"
+      "name": "Player",
+      "expression": "calm",
+      "text": "Hm..."
     },
     {
       "name": "Player",
       "expression": "calm",
-      "text": "Very well.."
-    },
-    {
-      "name": "Player",
-      "expression": "calm",
-      "text": "You have been corrupted by the dangers of this world little fella."
+      "text": "You have been corrupted by the dangers of this world. You have KILLED my FUCKING companion."
     },
     {
       "name": "Void",
       "expression": "scared",
-      "text": "I-I don't understand…"
+      "text": "I-I don't understand… Why don't I remember any of this..?"
     },
     {
       "name": "Player",
       "expression": "calm",
-      "text": "I'll keep it short. You murdered my companion and mass murdered half of this world and my city."
+      "text": "Eva told me. Something within this world has triggered some being inside of you."
     },
     {
       "name": "Void",
       "expression": "scared",
-      "text": "I… I-I did…?"
+      "text": "M-My other... half..."
     },
     {
       "name": "Player",
@@ -477,12 +477,12 @@
     {
       "name": "Void",
       "expression": "emotionless",
-      "text": "I-I'm… I'm a murderer… I'm so sorry…I-I..."
+      "text": "..."
     },
     {
       "name": "Player",
       "expression": "calm",
-      "text": "…"
+      "text": "..."
     },
     {
       "name": "Player",
@@ -553,12 +553,12 @@
     },
     {
       "name": "Void",
-      "expression": "sad-smoking",
+      "expression": "sad",
       "text": "*sighs*"
     },
     {
       "name": "Void",
-      "expression": "sad-smoking",
+      "expression": "sad",
       "text": "Why did you spare me."
     },
     {
@@ -573,7 +573,7 @@
     },
     {
       "name": "Void",
-      "expression": "sad-smoking",
+      "expression": "sad",
       "text": "If you want to kill me, it's fine. I have nothing to live for anyways."
     },
     {
@@ -593,6 +593,11 @@
     },
     {
       "name": "Player",
+      "expression": "scared",
+      "text": "I'm not someone who kills... I know you have murdered Eva but that was something that was out of your control, so revenge isn't.. really an option."
+    },
+    {
+      "name": "Player",
       "expression": "tear",
       "text": "It doesn't feel right to kill you, you're in such a horrible condition already, only hurting yourself more by… abusing these substances…"
     },
@@ -607,9 +612,14 @@
       "text": "Don't say such things…"
     },
     {
-      "name": "Player",
+      "name": "Void",
       "expression": "closed-smoking",
       "text": "…"
+    },
+    {
+      "name": "Void",
+      "expression": "closed-smoking",
+      "text": "You know,"
     },
     {
       "name": "Void",
@@ -624,7 +634,17 @@
     {
         "name": "Void",
         "expression": "knife-crying",
-        "text": "I'm worth absolutely nothing."
+        "text": "I'm worth absolutely nothing. I have lived as an outcast my entire life."
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "Do you know what it feels like to be judged on what species you are? Do you know the pain of having to know you're different?"
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "DO YOU KNOW HOW IT FEELS TO FIGHT FOR YOUR OWN LIFE EVERYY SINGLE DAY!?"
     },
     {
         "name": "Void",
@@ -640,6 +660,21 @@
         "name": "Void",
         "expression": "knife-crying",
         "text": "Though I really have to go now, if you know what I mean."
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "It's just not worth it for me anymore. I have lost everyone I cared about. My family, my friends in the Resistance, my caretaker..."
+    },
+    {
+      "name": "Void",
+      "expression": "knife-crying",
+      "text": "All gone..."
+    },
+    {
+        "name": "Void",
+        "expression": "knife-crying",
+        "text": "All because I'm half a demonic being... along with that... thing... within me."
     },
     {
         "name": "Player",
@@ -668,7 +703,7 @@
     },
     {
         "name": "Void",
-        "expression": "sad-smoking",
+        "expression": "sad",
         "text": "..."
     },
     {
@@ -677,24 +712,39 @@
         "text": "Please… stay with me… it's okay… I will take care of you, I promise. No one will hurt nor leave you ever again…"
     },
     {
+        "name": "Player",
+        "expression": "crying",
+        "text": "I promise you that no one will ever judge you on what you are, and that your sins will be forgiven."
+    },
+    {
+        "name": "Player",
+        "expression": "crying",
+        "text": "I know it will be hard to believe coming from the person who attacked, and almost killed you, but... give me a chance..."
+    },
+    {
         "name": "Void",
-        "expression": "sad-smoking",
+        "expression": "sad",
         "text": "But… I… kil-"
     },
     {
         "name": "Player",
         "expression": "crying",
-        "text": "I don't care. You're safe now. That's what matters."
+        "text": "I know, and it hurts me. But like I said, it was something out of your control. And that part of you is gone now."
     },
     {
         "name": "Player",
         "expression": "crying",
-        "text": "I don't want to feel the guilt of leaving you behind."
+        "text": "I don't want to feel the guilt of leaving you behind, especially when you're like this."
     },
     {
         "name": "Player",
         "expression": "smile-cry",
         "text": "Please, take my hand you cutie, I'll try my best."
+    },
+    {
+        "name": "Player",
+        "expression": "smile-cry",
+        "text": "Let us find a way for you to be accepted, together."
     },
     {
         "name": "Void",
@@ -705,6 +755,13 @@
         "name": "Void",
         "expression": "blush",
         "text": "O-okay..."
+    },
+    
+    {
+      "name": "BREAKPOINT",
+      "expression": "BREAKPOINT",
+      "text": "BREAKPOINT"
     }
+
   ]
   
