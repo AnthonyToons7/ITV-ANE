@@ -3,7 +3,7 @@ Into the Void: A new end, is a brand new game. It's a solo-player story RPG. Not
 
 
 # Game functionality
-Into the Void: A new end is a RPG that sets it's main focus on surviving. Despite it not being PVP, I added a neat functionality that still sparks that bit of competitiveness inside you! By utilizing a leaderboard system, you can challenge yourself to be at the top for beating the most amount of enemies!.
+Into the Void: A new end is a RPG that sets it's main focus on surviving. Despite it not being PVP, I added a neat functionality that still sparks that bit of competitiveness inside you! By utilizing a leaderboard system, you can challenge yourself to be at the top for beating the most amount of enemies!
 
 The game spawns a new enemy every 3 turns (max 3). For every 10 enemies you defeat, a boss will spawn. This boss will only evolve in strength as time progresses. Have no fear however! Your arsenal of moves will make sure that you can beat the bosses. Use your blade, cast magical spells, or play a powerful card in order to assure your victory!
 
