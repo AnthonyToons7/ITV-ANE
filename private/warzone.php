@@ -25,6 +25,7 @@
             <div id="dialog-box" class="dialog-box"></div>
         </div>
     </main>
+    <button id="test">Test</button>
 <script src="../public/js/gamescripts/script.js"></script>
 </body>
 </html>
