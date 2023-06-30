@@ -14,6 +14,7 @@
     <script src="../public/js/jquery-3.6.1.js"></script>
 </head>
 <body>
+    <button id="test">Test</button>
     <main>
         <div id="dialog-box-container">
             <div id="dialog-box-characters">
@@ -25,7 +26,6 @@
             <div id="dialog-box" class="dialog-box"></div>
         </div>
     </main>
-    <button id="test">Test</button>
 <script src="../public/js/gamescripts/script.js"></script>
 </body>
 </html>

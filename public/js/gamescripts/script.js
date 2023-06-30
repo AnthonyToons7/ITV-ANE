@@ -94,56 +94,56 @@ class Boss extends Enemy {
 
 // TODO: 4-way multiscript that adds 4 canvas' and sets the right spritesheet for each canvas.
 // SPRITESHEETS SCRIPT
-let playerState = 'idle';
-const dropdownMenu = document.getElementById('animation');
-dropdownMenu.addEventListener('change', (e)=>{
-    playerState = e.target.value;
-})
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const CANVAS_WIDTH = canvas.width = 600;
-const CANVAS_HEIGHT = canvas.height = 600;
+// let playerState = 'idle';
+// const dropdownMenu = document.getElementById('animation');
+// dropdownMenu.addEventListener('change', (e)=>{
+//     playerState = e.target.value;
+// })
+// const canvas = document.getElementById('canvas');
+// const ctx = canvas.getContext('2d');
+// const CANVAS_WIDTH = canvas.width = 600;
+// const CANVAS_HEIGHT = canvas.height = 600;
 
-const spriteIMAGE = new Image();
-spriteIMAGE.src = '/src/img/void-spritesheet.png';
-const spriteWidth = 1000;
-const spriteHeight = 1000;
-let gameFrame = 0;
-const staggerFrames = 7;
-const spriteAnimations = [];
-const animationState = [
-    {
-        name: "idle",
-        frames: 4,
-    },
-    {
-        name: "slash",
-        frames: 5,
-    }
-];
-animationState.forEach((state, index) => {
-    let frames = {
-        loc: [],
-    }
-    for (let j = 0; j < state.frames; j++) {
-        let positionX = j * spriteWidth;
-        let positionY = index * spriteHeight;
-        frames.loc.push({x: positionX, y: positionY});
-    }
-    spriteAnimations[state.name] = frames;
-});
-function animateSheet(){
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].loc.length;
-    let frameX = spriteWidth * position;
-    let frameY = spriteAnimations[playerState].loc[position].y;
+// const spriteIMAGE = new Image();
+// spriteIMAGE.src = '/src/img/void-spritesheet.png';
+// const spriteWidth = 1000;
+// const spriteHeight = 1000;
+// let gameFrame = 0;
+// const staggerFrames = 7;
+// const spriteAnimations = [];
+// const animationState = [
+//     {
+//         name: "idle",
+//         frames: 4,
+//     },
+//     {
+//         name: "slash",
+//         frames: 5,
+//     }
+// ];
+// animationState.forEach((state, index) => {
+//     let frames = {
+//         loc: [],
+//     }
+//     for (let j = 0; j < state.frames; j++) {
+//         let positionX = j * spriteWidth;
+//         let positionY = index * spriteHeight;
+//         frames.loc.push({x: positionX, y: positionY});
+//     }
+//     spriteAnimations[state.name] = frames;
+// });
+// function animateSheet(){
+//     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+//     let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].loc.length;
+//     let frameX = spriteWidth * position;
+//     let frameY = spriteAnimations[playerState].loc[position].y;
 
-    ctx.drawImage(spriteIMAGE, frameX, frameY, spriteWidth, 
-    spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    gameFrame++;
-    requestAnimationFrame(animateSheet);
-};
-animateSheet();
+//     ctx.drawImage(spriteIMAGE, frameX, frameY, spriteWidth, 
+//     spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+//     gameFrame++;
+//     requestAnimationFrame(animateSheet);
+// };
+// animateSheet();
 
 
 // DIALOGS
