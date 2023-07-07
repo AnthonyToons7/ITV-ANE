@@ -25,6 +25,21 @@
             <div id="dialog-box-name" class="dialog-box"></div>
             <div id="dialog-box" class="dialog-box"></div>
         </div>
+        <section id="player-ui">
+            <div class="buttons-basic">
+                <!-- Load these in with JS -->
+                <!-- <div class="button button-attack"></div>
+                <div class="button button-defend"></div> -->
+            </div>
+            <div class="buttons-magic">
+                <!-- Load script in that makes all btns -->
+            </div>
+            <div class="buttons-cards">
+                <div class="deck"></div>
+                <div class="used-pile"></div>
+            <!-- Load script that creates all cards -->
+            </div>
+        </section>
     </main>
 <script src="../public/js/gamescripts/script.js"></script>
 </body>
