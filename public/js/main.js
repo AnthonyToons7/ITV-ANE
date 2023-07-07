@@ -1,3 +1,4 @@
+// Declarations
 const menu_btns = document.querySelectorAll("div.button.menu-button");
 const crosses = document.querySelectorAll("div.top-bar svg");
 const area1 = document.querySelector("main div.main-container.area-1");
@@ -16,7 +17,7 @@ let sfx;
 window.addEventListener("DOMContentLoaded",()=>{
     bgm = new Audio('../public/audio/menu-ambience.mp3');
     bgm.volume = .5;
-    sfx = new Audio('../public/audio/menu-ambience.mp3');
+    sfx = new Audio('../public/audio/DIRECTORY');
     sfx.volume = .5;
     bgm.volume = volSliderM.value / 100;
     sfx.volume = volSliderS.value / 100;
@@ -39,13 +40,10 @@ crosses.forEach(cross=>{
 });
 volSlider.forEach(slider=>{
     slider.addEventListener("input", ()=>{
-        if (slider.value === "0") {
-            slider.classList.add('empty');
-        } else {
-            slider.classList.remove('empty');
-        }
+        slider.value === "0" ? slider.classList.add('empty') : slider.classList.remove('empty');
     });
 });
+// Volume sliders
 volSliderM.addEventListener("input", ()=>bgm.volume = volSliderM.value / 100);
 volSliderS.addEventListener("input", ()=>sfx.volume = volSliderS.value / 100);
 disclaimer.addEventListener("click",()=>{
@@ -61,34 +59,21 @@ saveSettingsBtn.addEventListener("click",()=>{
 let isMuted = false;
 volumeButtonM.addEventListener("click", () => {
     isMuted = !isMuted; // Toggle the value of isMuted
-  
     bgm.muted = isMuted;
-    if (isMuted) {
-        volSliderM.classList.add("empty");
-      } else {
-        volSliderM.classList.remove("empty");
-      }
+    isMuted ? volSliderM.classList.add("empty") : volSliderM.classList.remove("empty");
 });
 continueButton.addEventListener("click", ()=>{
     var ele = document.querySelectorAll('input[name="difficulty-selection"]');
     for (i = 0; i < ele.length; i++) {
         if (ele[i].checked)
-        switch (ele[i].value) {
-            case 'story':
-                localStorage.setItem("difficulty", "story");
-                break;
-            case 'hard':
-                localStorage.setItem("difficulty", "hard");
-                break;
-            case 'insanity':
-                localStorage.setItem("difficulty", "insanity");
-                document.body.classList.add("damage");
-                setTimeout(() => {
-                    document.body.classList.remove("damage");
-                }, 1000);
-                return;
-                break;
-            }
+        localStorage.setItem("difficulty", `${ele[i].value}`);
+        if (ele[i].value == "insanity"){
+            document.body.classList.add("damage");
+            setTimeout(() => {
+                document.body.classList.remove("damage");
+            }, 1000);
+            return;
+        }
      }
      window.location.href = `../../private/gear?difficulty=${localStorage.getItem("difficulty")}`;
 });
@@ -104,19 +89,10 @@ function addMenuStage(clickedBtn) {
             }, 500);
         break;
         case "story-mode":
-            document.querySelector(".story-box").classList.add("show");
-            overlay.classList.add("show");
-        break;
         case "leaderboard":
-            document.querySelector(".leaderboard-box").classList.add("show");
-            overlay.classList.add("show");
-        break;
         case "history":
-            document.querySelector(".history-box").classList.add("show");
-            overlay.classList.add("show");
-        break;
         case "settings":
-            document.querySelector(".settings-box").classList.add("show");
+            document.querySelector(`.${clickedBtn.id}-box`).classList.add("show");
             overlay.classList.add("show");
         break;
         case "back":
@@ -126,9 +102,9 @@ function addMenuStage(clickedBtn) {
 
             current.classList.remove("zoomIn");
             current.classList.add("hidden");
-            setTimeout(() => {
+            setTimeout(()=> {
                 prev.style.display="flex";
-                setTimeout(() => {
+                setTimeout(()=> {
                     current.style.display="none";
                     prev.classList.remove("zoomOut");
                     prev.classList.add("zoomBack");
