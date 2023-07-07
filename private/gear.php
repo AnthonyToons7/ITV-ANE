@@ -27,7 +27,7 @@
                 <p>Wizards robe</p>
             </div>
             <!-- +2% HP, +3% ATK, -2% DEF, +20% SPD, +50% MANA -->
-            <div id="assassin-cloak" class="gear-piece">
+            <div id="dark-cloak" class="gear-piece">
                 <img src="" alt="">
                 <p>Dark cloak</p>
             </div>
