@@ -32,7 +32,7 @@
                 <p>Dark cloak</p>
             </div>
             <!-- -20% HP, +100% ATK, -20% DEF, -20% SPD -->
-            <div id="consuming armor" class="gear-piece">
+            <div id="consuming-armor" class="gear-piece">
                 <img src="" alt="">
                 <p>Consuming armor</p>
             </div>
@@ -59,5 +59,23 @@
             </ul>
         </div>
     </main>
+    <script>
+        // TEST
+        const gear_knight = document.getElementById("knight-armor");
+        const gear_robe = document.getElementById("wizards-robe");
+        const gear_cloak = document.getElementById("dark-cloak");
+        const gear_consuming = document.getElementById("consuming-armor");
+        const gear_none = document.getElementById("no-gear");
+        const gearPieces = document.querySelectorAll(".gear-pieces");
+        gearPieces.forEach(gear => {
+            gear.addEventListener("click", ()=>{
+                getStats();
+                gear.classList.add("selected");
+            })
+        });
+        function getStats(){
+            $.get()
+        }
+    </script>
 </body>
 </html>

@@ -17,7 +17,7 @@ let sfx;
 window.addEventListener("DOMContentLoaded",()=>{
     bgm = new Audio('../public/audio/menu-ambience.mp3');
     bgm.volume = .5;
-    sfx = new Audio('../public/audio/DIRECTORY');
+    sfx = new Audio('../public/audio/menu-ambience.mp3');
     sfx.volume = .5;
     bgm.volume = volSliderM.value / 100;
     sfx.volume = volSliderS.value / 100;
