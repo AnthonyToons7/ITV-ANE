@@ -14,10 +14,12 @@
 }
 body {
     background-color: #1c1c1c;
+    overflow: hidden;
 }
 main {
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 } 
 #arrow {
     border-left: 10px solid transparent;
@@ -33,6 +35,7 @@ main {
 #dialog-box-container {
     position: absolute;
     left: 0;
+    top: 0;
     height: 33vh;
     width: 100vw;
     padding: 20px;
@@ -76,7 +79,7 @@ main {
 }
 @media screen and (max-width: 996px) {
     #dialog-box-container {
-        height: 40vh;
+        height: 35vh;
     }
     .dialog-box {
         font-size: 14px;

@@ -156,7 +156,7 @@ function createDiag(dialog) {
     $('#dialog-box-container').hide();
     return;
   }
-  var individual = dialog.text.split('');
+  let individual = dialog.text.split('');
   for (let i = 0; i < individual.length; i++) {
     (function (i) {
       setTimeout(function () {

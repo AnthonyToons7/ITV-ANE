@@ -333,6 +333,7 @@ div.story-box .content {
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.8);
 }
+.story-mode-box {display: none;}
 @media screen and (min-width: 1024px) {
     div.background-menu{
         height: 45vh;
@@ -373,3 +374,63 @@ div.story-box .content {
 }
 
 /* GEAR MENU */
+div.container.center {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+div.container.center h1 {
+    font-family: danger;
+    letter-spacing: 7px;
+}
+div.gear-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.info-box {
+    width: 50%;
+}
+div.stat-change-container ul {
+    list-style-type: none;
+}
+.flex {
+    display: flex;
+}
+.information {
+    justify-content: space-evenly;
+}
+.armor-button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    background: linear-gradient(135deg, #313131, #777474);
+    color: #fff;
+    font-weight: 1000;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s;
+}
+i.value{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 1000;
+    font-size: 16px;
+}
+.selected {
+    background: #232383;
+    transition: all .5s;
+}
+div.stat-change-container {
+    width: 20%;
+}
+div.confirm.button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
