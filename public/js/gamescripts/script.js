@@ -152,18 +152,19 @@ let dialogIndex = 0;
 // CREATE A DIALOG ROW IN THE DIALOG BOX
 function createDiag(dialog) {
   $('#dialog-box').text('');
-  if (dialog.name === "BREAKPOINT") {
-    $('#dialog-box-container').hide();
-    return;
-  }
+  // if (dialog.name === "BREAKPOINT") {
+  //   $('#dialog-box-container').hide();
+  //   return;
+  // }
   let individual = dialog.text.split('');
   for (let i = 0; i < individual.length; i++) {
     (function (i) {
       setTimeout(function () {
-        $('#dialog-box').text($('#dialog-box').text() + individual[i]);
+        $('#dialog-box').html($('#dialog-box').text() + individual[i]);
         if (i == individual.length - 1) {
           $('#dialog-box').prepend('<div id="arrow"></div>');
         }
+        dialog.italic == "true" ? $('#dialog-box').addClass("italic") : $('#dialog-box').removeClass("italic");
       }, 10 * i);
     })(i);
   }

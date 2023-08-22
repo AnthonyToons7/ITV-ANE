@@ -32,7 +32,8 @@
   {
     "name": "...",
     "expression": "grumpy-talk",
-    "text": "<i>I wanna go home...</i>"
+    "italic": "true",
+    "text": "I wanna go home..."
   },
   {
     "name": "...",
@@ -152,7 +153,8 @@
   {
     "name": "Eva",
     "expression": "worried-side",
-    "text": "<i>You motherfu-</i>"
+    "italic": "true",
+    "text": "You motherfu-"
   },
   {
     "name": "Eva",
@@ -167,6 +169,7 @@
   {
     "name": "Void",
     "expression": "norm-sweat",
-    "text": "<i>What the fu-</i>"
+    "italic": "true",
+    "text": "What the fu-"
   }
 ]

@@ -77,6 +77,9 @@ main {
     background-size: contain !important;
     background-repeat: no-repeat;
 }
+.italic {
+    font-style: italic;
+}
 @media screen and (max-width: 996px) {
     #dialog-box-container {
         height: 35vh;
