@@ -198,4 +198,7 @@ function getNextDialog() {
 $("#dialog-box").on("click", function () {
   getNextDialog();
 });
-getNextDialog();
+
+$(document).ready(function(){
+  localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
+});

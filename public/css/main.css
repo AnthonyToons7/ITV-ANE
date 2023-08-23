@@ -421,6 +421,7 @@ i.value{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 1000;
     font-size: 16px;
+    color: #ff0000;
 }
 .selected {
     background: #232383;
