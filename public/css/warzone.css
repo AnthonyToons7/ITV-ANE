@@ -82,19 +82,72 @@ main {
 }
 section#player-ui {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 97vw;
+    bottom: 20px;
+    left: 20px;
+    width: 100vw;
+}
+.UI-MOVES{
+    width: 70%;
     padding: 20px;
     background-color: #0a0a39;
     border: 3px groove #fff;
     border-radius: 5px;
 }
+.buttons-cards {
+    width: 30%;
+    justify-content: space-evenly;
+}
+div.deck,
+div.used-pile,
+div.hand {
+    /* border: 3px solid #fff; */
+    height: 100%;
+    width: 100px;
+    /* border-radius: 6px; */
+    cursor: pointer;
+    padding: 5px;
+
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: joystix;
+}
+div.deck:hover,
+div.hand:hover {
+    filter: drop-shadow(0 0 1px #00ff7b);
+}
+div.used-pile:hover {
+    filter: drop-shadow(0 0 1px #000000);
+}
+div.deck::before,
+div.used-pile::before,
+div.hand::before {
+    content: "\25B6";
+    font-family: joystix;
+    position: absolute;
+    z-index: 99;
+    left: 35%;
+    top: 0%;
+    transform: translateY(-50%) rotate(90deg);
+    opacity: 0;
+}
+div.deck:hover::before,
+div.used-pile:hover::before,
+div.hand:hover::before,
+div.deck:focus::before,
+div.used-pile:focus::before,
+div.hand:focus::before{
+    opacity: 1;
+}
+  
+
 div#stats {
-    border: 3px solid #fff;
     border-radius: 5px;
-    padding: 10px;
+}
+div#stats .flex {
+    align-items: center;
 }
 .stat-bar {
     margin: 10px;
@@ -102,24 +155,85 @@ div#stats {
     border-radius: 5px;
     width: 100%;
 }
-.stat-value{
-    background-color: #ff0000;
+.stat-value {
+    background-color: #cd0c0c;
     padding: 10px;
     border-radius: 5px;
     height: 100%;
+    color: #fff;
+    font-family: joystix;
+    text-align: center;
+}
+#mana-value {
+    background-color: #482bdc;
 }
 .icon-svg-stats{
     height: 50px;
     width: 50px;
 }
 
+.buttons-basic,
+.buttons-magic {
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 20px;
+}
+
+/* BUTTONS */
+.move-option {
+    position: relative;
+    padding-left: 20px;
+    font-size: 20px;
+    color: #fff;
+    font-family: joystix;
+    margin-left: 20px;
+    cursor: pointer;
+    width: fit-content;
+}
+.move-option::before {
+    content: "\25B6";
+    font-family: joystix;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+.move-option:hover::before {
+    opacity: 1;
+}
+  
+.card {
+    width: 100%;
+}
+.hole {
+    padding: 50px;
+    box-shadow: inset 0 0 20px 20px purple;
+    filter: drop-shadow(0 0 10px #43093d);
+    border-radius: 100%;
+    cursor: pointer;
+    animation: glow 5s linear infinite;
+}
+@keyframes glow {
+    0% {box-shadow: inset 0 0 20px 20px purple;}
+    25% {box-shadow: inset 0 3px 20px 23px purple;}
+    50% {box-shadow: inset 3px 0px 20px 20px purple; transform: rotate(10deg);}
+    75% {box-shadow: inset 0 3px 20px 23px purple;}
+    100% {box-shadow: inset 0 0 20px 20px purple;}
+}
+
 /* CUSTOM BOOT */
 .col-2 {
     width: 15%;
 }
+.col-4 {
+    width: 30%;
+}
+.col-5{
+    width: 40%;
+}
 .flex {
     display: flex;
-    width: 100%;
 }
 
 @media screen and (max-width: 996px) {
@@ -128,6 +242,17 @@ div#stats {
     }
     .dialog-box {
         font-size: 14px;
+    }
+    .move-option {
+        font-size: 14px;
+        width: fit-content;
+    }
+    .UI-MOVES{
+        max-height: 110px;
+        padding: 5px 0 5px 20px;
+    }
+    div.deck, div.used-pile, div.hand {
+        width: 70px;
     }
 }
 @media screen and (min-width: 996px) {
