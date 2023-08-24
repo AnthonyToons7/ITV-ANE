@@ -202,3 +202,77 @@ $("#dialog-box").on("click", function () {
 $(document).ready(function(){
   localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
 });
+
+const buttons = document.querySelectorAll('.move-option');
+const popupContainer = document.querySelector('.popup-container');
+const popupContent = document.querySelector('.popup-content');
+
+let descriptionsData = []; // To store loaded JSON data
+
+// Load JSON data
+fetch('../public/js/data/descriptions.json')
+    .then(response => response.json())
+    .then(data => {
+        descriptionsData = data;
+    })
+    .catch(error => console.error('Error loading JSON:', error));
+
+buttons.forEach(button => {
+    button.addEventListener('mouseover', () => {
+        const moveName = button.textContent.trim();
+        const moveDescription = getDescriptionFromData(moveName);
+
+        popupContent.textContent = moveDescription;
+        popupContainer.style.display = 'block';
+
+        const buttonRect = button.getBoundingClientRect();
+        popupContainer.style.left = `${buttonRect.left + buttonRect.width / 2}px`;
+        popupContainer.style.top = `${buttonRect.top - popupContainer.clientHeight}px`;
+    });
+
+    button.addEventListener('mouseout', () => {
+        popupContainer.style.display = 'none';
+    });
+});
+
+function getDescriptionFromData(moveName) {
+    const moveData = descriptionsData.find(item => item.movename === moveName);
+    return moveData ? moveData.movedesc : 'Description not available.';
+}
+
+
+// STAT PAGE BTNS ARROWS
+const prev = $(".prev-page");
+const next = $(".next-page");
+next.on("click", ()=>{
+  document.querySelectorAll(".stats-bar").forEach(bar=>{
+    bar.style.display="none";
+  })
+  $(".overview").css("display", "block");
+  next.css("display", "none");
+  prev.css("display", "block");
+
+
+document.querySelectorAll("div.overview p span").forEach(span => {
+  fetch('../public/js/data/base-stats.json')
+    .then(response => response.json())
+    .then(data => {
+      const playerData = data.find(entry => entry.name === "Player");
+      if (playerData) {
+        const propertyName = span.parentElement.textContent.trim().split(':')[0];
+        span.textContent = playerData[propertyName];
+      }
+    })
+    .catch(error => console.error('Error loading JSON:', error));
+});
+
+  
+});
+prev.on("click", ()=>{
+  document.querySelectorAll(".stats-bar").forEach(bar=>{
+    bar.style.display="flex";
+  })
+  $(".overview").css("display", "none");
+  next.css("display", "block");
+  prev.css("display", "none");
+});

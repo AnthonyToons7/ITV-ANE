@@ -29,7 +29,7 @@
         <section id="player-ui" class="flex">
             <div class="UI-MOVES flex">
                 <div id="stats" class="col-5">
-                    <div class="flex">
+                    <div class="flex stats-bar">
                         <svg class="icon-svg-stats" version="1.0" xmlns="http://www.w3.org/2000/svg"
                             width="42.000000pt" height="36.000000pt" viewBox="0 0 42.000000 36.000000"
                             preserveAspectRatio="xMidYMid meet">
@@ -43,7 +43,7 @@
                         </svg>
                         <div id="health-bar" class="stat-bar"><div id="health-value" class="stat-value">100 / 100</div></div>
                     </div>
-                    <div class="flex" width="100%">
+                    <div class="flex stats-bar" width="100%">
                         <svg class="icon-svg-stats" version="1.0" xmlns="http://www.w3.org/2000/svg"
                             width="348.000000pt" height="349.000000pt" viewBox="0 0 348.000000 349.000000"
                             preserveAspectRatio="xMidYMid meet">
@@ -60,7 +60,17 @@
                             205 5 282 -14z"/>
                             </g>
                         </svg>
-                        <div id="mana-bar" class="stat-bar"><div id="mana-value" class="stat-value">100 / 100</div></div>
+                        <div id="mana-bar" class="stat-bar"><div id="mana-value" class="stat-value">40 / 40</div></div>
+                    </div>
+                    <div class="prev-page">&uarr;</div>
+                    <div class="next-page">&darr;</div>
+                    <div class="overview">
+                        <p>HP: <span></span></p>
+                        <p>ATK: <span></span></p>
+                        <p>DEF: <span></span></p>
+                        <p>SPD: <span></span></p>
+                        <p>MANA: <span></span></p>
+                        <p>STATUS: <span></span></p>
                     </div>
                 </div>
                 <div class="buttons-basic col-4 flex">
@@ -72,9 +82,9 @@
                     <div class="button button-defend"></div> -->
                 </div>
                 <div class="buttons-magic col-3 flex">
-                    <div class="button move-option">[magic]</div>
-                    <div class="button move-option">[magic]</div>
-                    <div class="button move-option">[magic]</div>
+                    <div class="button move-option">Shattered illusion</div>
+                    <div class="button move-option">Icebreaker</div>
+                    <div class="button move-option">Fired up</div>
                     <!-- Load script in that makes all btns -->
                 </div>
             </div>
@@ -110,6 +120,10 @@
             </div>
         </section>
     </main>
+    <div class="popup-container">
+                    <div class="popup-arrow"></div>
+                    <div class="popup-content">Description will be shown here</div>
+                </div>
 <script src="../public/js/gamescripts/script.js"></script>
 </body>
 </html> 
