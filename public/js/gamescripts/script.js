@@ -93,60 +93,70 @@ class Boss extends Enemy {
 
 
 // TODO: 4-way multiscript that adds 4 canvas' and sets the right spritesheet for each canvas.
-// SPRITESHEETS SCRIPT
-// let playerState = 'idle';
-// const dropdownMenu = document.getElementById('animation');
-// dropdownMenu.addEventListener('change', (e)=>{
-//     playerState = e.target.value;
-// })
-// const canvas = document.getElementById('canvas');
-// const ctx = canvas.getContext('2d');
-// const CANVAS_WIDTH = canvas.width = 600;
-// const CANVAS_HEIGHT = canvas.height = 600;
+// Retrieve the spritesheets
+function retrieveSprites(characterName){
+  fetch('../public/js/data/spritesheetDirs.json')
+    .then(response => response.json())
+    .then(data => {
+      // Remove hardcode:
+      const source = data[0][characterName];
+      sheetAnimator(source);
+    })
+    .catch(error => console.log(error));
+}
 
-// const spriteIMAGE = new Image();
-// spriteIMAGE.src = '/src/img/void-spritesheet.png';
-// const spriteWidth = 1000;
-// const spriteHeight = 1000;
-// let gameFrame = 0;
-// const staggerFrames = 7;
-// const spriteAnimations = [];
-// const animationState = [
-//     {
-//         name: "idle",
-//         frames: 4,
-//     },
-//     {
-//         name: "slash",
-//         frames: 5,
-//     }
-// ];
-// animationState.forEach((state, index) => {
-//     let frames = {
-//         loc: [],
-//     }
-//     for (let j = 0; j < state.frames; j++) {
-//         let positionX = j * spriteWidth;
-//         let positionY = index * spriteHeight;
-//         frames.loc.push({x: positionX, y: positionY});
-//     }
-//     spriteAnimations[state.name] = frames;
-// });
-// function animateSheet(){
-//     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//     let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].loc.length;
-//     let frameX = spriteWidth * position;
-//     let frameY = spriteAnimations[playerState].loc[position].y;
+// Animate the sheets
+function sheetAnimator(src){
+  const canvas = document.createElement("canvas");
+  let playerState = 'idle';
+  const ctx = canvas.getContext('2d');
+  const CANVAS_WIDTH = canvas.width = 400;
+  const CANVAS_HEIGHT = canvas.height = 400;
+  const spriteIMAGE = new Image();
+  spriteIMAGE.src = src;
+  const spriteWidth = 1000;
+  const spriteHeight = 1000;
+  let gameFrame = 0;
+  const staggerFrames = 9;
+  const spriteAnimations = [];
+  const animationState = [
+      {
+          name: "idle",
+          frames: 5,
+      }
+  ];
+  animationState.forEach((state, index) => {
+      let frames = {
+          loc: [],
+      }
+      for (let j = 0; j < state.frames; j++) {
+          let positionX = j * spriteWidth;
+          let positionY = index * spriteHeight;
+          frames.loc.push({x: positionX, y: positionY});
+      }
+      spriteAnimations[state.name] = frames;
+  });
+  function animateSheet(){
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].
+      loc.length;
+      let frameX = spriteWidth * position;
+      let frameY = spriteAnimations[playerState].loc[position].y;
+      ctx.drawImage(spriteIMAGE, frameX, frameY, spriteWidth, 
+      spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      gameFrame++;
+      requestAnimationFrame(animateSheet);
+  };
+  document.querySelectorAll("div.enemy").forEach(enemy=>{
+    if (!enemy.hasChildNodes()) {
+      enemy.appendChild(canvas);
+    }
+  })
 
-//     ctx.drawImage(spriteIMAGE, frameX, frameY, spriteWidth, 
-//     spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//     gameFrame++;
-//     requestAnimationFrame(animateSheet);
-// };
-// animateSheet();
+  animateSheet();
+}
 
 
-// DIALOGS
 
 let dialogIndex = 0;
 // CREATE A DIALOG ROW IN THE DIALOG BOX
@@ -201,6 +211,19 @@ $("#dialog-box").on("click", function () {
 
 $(document).ready(function(){
   localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
+
+  document.querySelectorAll("div.overview p span").forEach(span => {
+    fetch('../public/js/data/base-stats.json')
+      .then(response => response.json())
+      .then(data => {
+        const playerData = data.find(entry => entry.name === "Player");
+        if (playerData) {
+          const propertyName = span.parentElement.textContent.trim().split(':')[0];
+          span.textContent = playerData[propertyName];
+        }
+      })
+      .catch(error => console.error('Error loading JSON:', error));
+  });
 });
 
 const buttons = document.querySelectorAll('.move-option');
@@ -244,6 +267,7 @@ function getDescriptionFromData(moveName) {
 // STAT PAGE BTNS ARROWS
 const prev = $(".prev-page");
 const next = $(".next-page");
+
 next.on("click", ()=>{
   document.querySelectorAll(".stats-bar").forEach(bar=>{
     bar.style.display="none";
@@ -251,22 +275,6 @@ next.on("click", ()=>{
   $(".overview").css("display", "block");
   next.css("display", "none");
   prev.css("display", "block");
-
-
-document.querySelectorAll("div.overview p span").forEach(span => {
-  fetch('../public/js/data/base-stats.json')
-    .then(response => response.json())
-    .then(data => {
-      const playerData = data.find(entry => entry.name === "Player");
-      if (playerData) {
-        const propertyName = span.parentElement.textContent.trim().split(':')[0];
-        span.textContent = playerData[propertyName];
-      }
-    })
-    .catch(error => console.error('Error loading JSON:', error));
-});
-
-  
 });
 prev.on("click", ()=>{
   document.querySelectorAll(".stats-bar").forEach(bar=>{
@@ -276,3 +284,9 @@ prev.on("click", ()=>{
   next.css("display", "block");
   prev.css("display", "none");
 });
+
+
+
+retrieveSprites("Void");
+retrieveSprites("Void");
+retrieveSprites("Void");

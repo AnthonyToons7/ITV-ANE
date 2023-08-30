@@ -271,6 +271,49 @@ div#stats .flex {
 }
 
 
+section#battle-zone {
+    height: 100%;
+}
+/* PLAYERS/ENEMIES */
+.enemies-container {
+    justify-content: end;
+    align-items: end;
+    height: 55%;
+}
+
+.enemy-positions {
+    width: 710px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.enemy,
+.spacer-hidden {
+    height: 50px;
+    width: 180px;
+    border: 6px solid #fff;
+    border-top: 1px solid #fff;
+    border-radius: 100%;
+    position: relative;
+
+}
+
+.spacer-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.enemy canvas {
+    position: absolute;
+    top: -350px;
+    left: -110px;
+    transform: rotateY(180deg);
+}
+.enemy:hover {
+    filter: drop-shadow(rgb(19, 84, 150) 0 0 10px);
+}
+
+
 /* CUSTOM BOOT */
 .col-2 {
     width: 15%;

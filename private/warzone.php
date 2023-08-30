@@ -26,6 +26,23 @@
             <div id="dialog-box-name" class="dialog-box"></div>
             <div id="dialog-box" class="dialog-box"></div>
         </div>
+        <section id="battle-zone">
+            <div class="enemies-container flex">
+                <div class="flex enemy-positions">
+                    <div class="enemy"></div>
+
+                    <div class="spacer-hidden"></div>
+
+                    <div class="enemy"></div>
+
+                    <div class="spacer-hidden"></div>
+                    <div class="spacer-hidden"></div>
+                    <div class="spacer-hidden"></div>
+
+                    <div class="enemy"></div>
+                </div>
+            </div>
+        </section>
         <section id="player-ui" class="flex">
             <div class="UI-MOVES flex">
                 <div id="stats" class="col-5">
