@@ -1,5 +1,9 @@
 [
     {
         "Void":"http://localhost/public/img/spritesheets/TESTSHEET.png"
+    },
+    {
+        "Player":"http://localhost/public/img/spritesheets/enlarge_m6Quwh9.png",
+        "playertrue":"true"
     }
 ]

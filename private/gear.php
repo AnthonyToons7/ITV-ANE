@@ -17,22 +17,22 @@
         <div class="container center">
             <h1>Select gear</h1>
             <div class="gear-container">
-                <!-- +3% HP, +5% ATK, +6% DEF, -2% SPD -->
+                <!-- +3% HP, +5% ATK, +6% DEF, -2% RES -->
                 <div id="knight-armor" class="gear-piece armor-button">
                     <img src="" alt="">
                     <p>Knight's armor</p>
                 </div>
-                <!-- -1% HP, +9% ATK, -7% DEF, -3% SPD, +240% MANA -->
+                <!-- -1% HP, +9% ATK, -7% DEF, -3% RES, +240% MANA -->
                 <div id="wizards-robe" class="gear-piece armor-button">
                     <img src="" alt="">
                     <p>Wizards robe</p>
                 </div>
-                <!-- +2% HP, +3% ATK, -2% DEF, +20% SPD, +50% MANA -->
+                <!-- +2% HP, +3% ATK, -2% DEF, +20% RES, +50% MANA -->
                 <div id="dark-cloak" class="gear-piece armor-button">
                     <img src="" alt="">
                     <p>Dark cloak</p>
                 </div>
-                <!-- -20% HP, +100% ATK, -20% DEF, -20% SPD -->
+                <!-- -20% HP, +100% ATK, -20% DEF, -20% RES -->
                 <div id="consuming-armor" class="gear-piece armor-button">
                     <img src="" alt="">
                     <p>Consuming armor</p>
@@ -55,7 +55,7 @@
                         <li id="stat-HP">HP &nbsp;&nbsp; <i class="value"></i></li>
                         <li id="stat-ATK">ATK&nbsp;&nbsp; <i class="value"></i></li>
                         <li id="stat-DEF">DEF &nbsp;&nbsp;<i class="value"></i></li>
-                        <li id="stat-SPD">SPD &nbsp;&nbsp;<i class="value"></i></li>
+                        <li id="stat-RES">RES &nbsp;&nbsp;<i class="value"></i></li>
                         <li id="stat-MANA">MANA &nbsp;&nbsp;<i class="value"></i></li>
                     </ul>
                 </div>

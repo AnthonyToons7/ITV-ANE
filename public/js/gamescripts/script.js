@@ -3,10 +3,13 @@ class Game {
   constructor() {
     this.turnCount = 0;
     this.enemyPool = [];
+    this.killCount = 0;
   }
 
   spawnEnemy() {
     if (this.enemyPool.length < 3) {
+// TODO: choose a random enemy, and put each property into the creation
+
       const newEnemy = new Enemy(/* enemy properties */);
       this.enemyPool.push(newEnemy);
       console.log(`New spawn: ${newEnemy.name}`);
@@ -35,23 +38,20 @@ class Game {
   }
 }
 
-// Start a game
-const game = new Game();
-// Starting new turns:
-// game.processTurn();
-
 class Character {
-  constructor(name, hp, atk, def, spd) {
+  constructor(name, hp, atk, def, res) {
     this.name = name;
     this.hp = hp;
     this.atk = atk;
     this.def = def;
-    this.spd = spd;
+    this.res = res;
   }
 
   attack(target) {
     // Perform attack logic
-    // You can access target's properties using `target.propertyName`
+    let calculatedDamage = Number(this.atk - target.def);
+    target.hp = target.hp - calculatedDamage;
+    console.log(target);
   }
 
   defend() {
@@ -68,93 +68,60 @@ class Character {
 }
 
 class Player extends Character {
-  constructor(name, hp, atk, def, spd, mana, multiplier) {
+  constructor(name, hp, atk, def, res, mana, multiplier) {
     // 'super' is a keyword used to yank other properties from other classes
-    super(name, hp, atk, def, spd);
+    super(name, hp, atk, def, res);
     this.mana = mana;
     this.multiplier = multiplier || 1;
   }
+  updateStats(){
+    $("#health-value").text(`${this.hp} / 100`);
+    $(".stat-value-health").css("width", (this.hp / 100) * 100 + "%" );
+    $("#mana-value").text(`${this.mana} / 40`);
+    $(".stat-value-mana").css("width", (this.mana / 40) * 100 + "%" );
+  }
+  // card list here
 }
 
 class Enemy extends Character {
-  constructor(name, hp, atk, def, spd, multiplier) {
-    super(name, hp, atk, def, spd);
+  constructor(name, hp, atk, def, res, multiplier) {
+    super(name, hp, atk, def, res);
     // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
   }
 }
 
 class Boss extends Enemy {
-  constructor(name, hp, atk, def, spd, multiplier) {
-    super(name, hp, atk, def, spd);
+  constructor(name, hp, atk, def, res, multiplier) {
+    super(name, hp, atk, def, res);
     this.multiplier = multiplier || 1;
   }
 }
 
+class Card{
+  constructor(
+    name
+  ){
+    this.name = name;
+  }
 
-// TODO: 4-way multiscript that adds 4 canvas' and sets the right spritesheet for each canvas.
-// Retrieve the spritesheets
-function retrieveSprites(characterName){
-  fetch('../public/js/data/spritesheetDirs.json')
-    .then(response => response.json())
-    .then(data => {
-      // Remove hardcode:
-      const source = data[0][characterName];
-      sheetAnimator(source);
-    })
-    .catch(error => console.log(error));
 }
 
-// Animate the sheets
-function sheetAnimator(src){
-  const canvas = document.createElement("canvas");
-  let playerState = 'idle';
-  const ctx = canvas.getContext('2d');
-  const CANVAS_WIDTH = canvas.width = 400;
-  const CANVAS_HEIGHT = canvas.height = 400;
-  const spriteIMAGE = new Image();
-  spriteIMAGE.src = src;
-  const spriteWidth = 1000;
-  const spriteHeight = 1000;
-  let gameFrame = 0;
-  const staggerFrames = 9;
-  const spriteAnimations = [];
-  const animationState = [
-      {
-          name: "idle",
-          frames: 5,
-      }
-  ];
-  animationState.forEach((state, index) => {
-      let frames = {
-          loc: [],
-      }
-      for (let j = 0; j < state.frames; j++) {
-          let positionX = j * spriteWidth;
-          let positionY = index * spriteHeight;
-          frames.loc.push({x: positionX, y: positionY});
-      }
-      spriteAnimations[state.name] = frames;
-  });
-  function animateSheet(){
-      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-      let position = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].
-      loc.length;
-      let frameX = spriteWidth * position;
-      let frameY = spriteAnimations[playerState].loc[position].y;
-      ctx.drawImage(spriteIMAGE, frameX, frameY, spriteWidth, 
-      spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-      gameFrame++;
-      requestAnimationFrame(animateSheet);
-  };
-  document.querySelectorAll("div.enemy").forEach(enemy=>{
-    if (!enemy.hasChildNodes()) {
-      enemy.appendChild(canvas);
-    }
-  })
 
-  animateSheet();
-}
+
+const game = new Game();
+const playerCharacter = new Player("Player", "50", "25", "17", "15", "40", "1");
+const enemy = new Enemy("Slime", "50", "18", "15", "15", "1");
+enemy.attack(playerCharacter);
+playerCharacter.updateStats();
+
+$("#option-attack").on("click", ()=>{
+  playerCharacter.attack(enemy);
+});
+// Starting new turns:
+// game.processTurn();
+
+
 
 
 
@@ -162,10 +129,10 @@ let dialogIndex = 0;
 // CREATE A DIALOG ROW IN THE DIALOG BOX
 function createDiag(dialog) {
   $('#dialog-box').text('');
-  // if (dialog.name === "BREAKPOINT") {
-  //   $('#dialog-box-container').hide();
-  //   return;
-  // }
+  if (dialog.name === "BREAKPOINT") {
+    $('#dialog-box-container').hide();
+    return;
+  }
   let individual = dialog.text.split('');
   for (let i = 0; i < individual.length; i++) {
     (function (i) {
@@ -209,21 +176,18 @@ $("#dialog-box").on("click", function () {
   getNextDialog();
 });
 
-$(document).ready(function(){
-  localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
 
-  document.querySelectorAll("div.overview p span").forEach(span => {
-    fetch('../public/js/data/base-stats.json')
-      .then(response => response.json())
-      .then(data => {
-        const playerData = data.find(entry => entry.name === "Player");
-        if (playerData) {
-          const propertyName = span.parentElement.textContent.trim().split(':')[0];
-          span.textContent = playerData[propertyName];
-        }
-      })
-      .catch(error => console.error('Error loading JSON:', error));
-  });
+// CARD HAND
+$("div.hand").on("click", ()=>{
+  $("div.container").css("display", "block");
+  $("#player-ui .UI-MOVES div").css("opacity", "0");
+  $("#player-ui .UI-MOVES div").css("pointer-events", "none");
+});
+$("div.deck").on("click", ()=>{
+  $("div.container").css("display", "none");
+  $("#player-ui .UI-MOVES div").css("opacity", "1",);
+  $("#player-ui .UI-MOVES div").css("pointer-events", "unset");
+  $(".clicked").removeClass("clicked");
 });
 
 const buttons = document.querySelectorAll('.move-option');
@@ -286,7 +250,51 @@ prev.on("click", ()=>{
 });
 
 
+// READY
+$(document).ready(function(){
+  // START/CREATE GAME
 
-retrieveSprites("Void");
-retrieveSprites("Void");
-retrieveSprites("Void");
+  // READY UP SPRITES
+    retrieveSprites("Void");
+    retrieveSprites("Player");
+
+  
+  
+    localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
+  
+    document.querySelectorAll("div.overview p span").forEach(span => {
+      fetch('../public/js/data/base-stats.json')
+        .then(response => response.json())
+        .then(data => {
+          const playerData = data.find(entry => entry.name === "Player");
+          if (playerData) {
+            const propertyName = span.parentElement.textContent.trim().split(':')[0];
+            span.textContent = playerData[propertyName];
+          }
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+    });
+  
+    let cardsFront = document.querySelector('.cards');
+    let cardWidth = cardsFront.offsetWidth;
+    let totalarc = 200;
+    let numcards = 5; // Reset amount and draw 5 each turn
+    let angles = Array(numcards).fill('').map((a, i) => (totalarc / numcards * (i + 1)) - (totalarc/2 + (totalarc / numcards) / 2));
+    let margins = angles.map((a, i) => cardWidth / numcards * (i + 1));
+    
+    angles.forEach((a, i) => {
+      let s = `transform:rotate(${angles[i]}deg);margin-left:${margins[i]}px;`
+      let c = `<div class='cardd' style='${s}'></div>`;
+      cardsFront.innerHTML += c;
+    });
+    
+    let currentlyClickedCard = null;
+    cardsFront.addEventListener('click', function(event) {
+      if (event.target.classList.contains('cardd')) {
+        if (currentlyClickedCard) currentlyClickedCard.classList.remove('clicked');
+        event.target.classList.toggle('clicked');
+        currentlyClickedCard = event.target;
+      }
+    });
+  });
+  

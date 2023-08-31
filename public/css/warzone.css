@@ -89,7 +89,7 @@ section#player-ui {
 .UI-MOVES{
     width: 70%;
     padding: 20px;
-    background-color: #0a0a39;
+    background-color: #0a0a39e8;
     border: 3px groove #fff;
     border-radius: 5px;
 }
@@ -155,18 +155,30 @@ div#stats .flex {
     border: 1px solid #fff;
     border-radius: 5px;
     width: 100%;
+    position: relative;
 }
-.stat-value {
+.stat-value-health, .stat-value-mana {
     background-color: #cd0c0c;
     padding: 10px;
     border-radius: 5px;
+    padding: 20px 0;
     height: 100%;
     color: #fff;
-    font-family: joystix;
     text-align: center;
+    white-space: nowrap;
+    transition: all .5s;
 }
-#mana-value {
+.stat-value-mana {
     background-color: #482bdc;
+}
+.player-values {
+    font-family: joystix;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
 }
 .icon-svg-stats{
     height: 50px;
@@ -245,7 +257,7 @@ div#stats .flex {
     top: 50%;
     transform: translate(-50%,-50%);
     display: none;
-    background-color: #0c1749;
+    background-color: #975489;
     border: 1px solid #fff;
     border-radius: 5px;
     color: #fff;
@@ -270,15 +282,17 @@ div#stats .flex {
     font-size: 14px;
 }
 
-
 section#battle-zone {
     height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
 }
 /* PLAYERS/ENEMIES */
 .enemies-container {
     justify-content: end;
     align-items: end;
     height: 55%;
+    transform: translateX(-200px);
 }
 
 .enemy-positions {
@@ -312,6 +326,14 @@ section#battle-zone {
 .enemy:hover {
     filter: drop-shadow(rgb(19, 84, 150) 0 0 10px);
 }
+div.player {
+    width: 300px;
+    height: 300px;
+}
+.player img {
+    height: 100%;
+    width: 100%;
+}
 
 
 /* CUSTOM BOOT */
@@ -326,6 +348,43 @@ section#battle-zone {
 }
 .flex {
     display: flex;
+}
+.align-top{
+    align-items: start;
+}
+.align-center {
+    align-items: center;
+}
+
+.container {
+    display: none;
+    transform: translate(25%, -20rem);
+}
+  
+.cards {
+    width: 150px;
+}
+  
+.cardd {
+    width: 130px;
+    height: 200px;
+    background: #ffffff;
+    border: 1px solid #000;
+    position: absolute;
+    opacity: .9;
+    transform-origin: bottom center;
+    border-radius: 3px;
+    transition: all 1s;
+    cursor: pointer;
+}
+.cardd.clicked{
+    top: 50%;
+    left: 50%;
+    transform: scale(2) translate(-50%,-50%) !important;
+    background: rgb(58, 33, 63);
+    box-shadow: 0 0 5px 0px #fff;
+    opacity: 1;
+    transition: all 1s;
 }
 
 @media screen and (max-width: 996px) {
@@ -346,6 +405,9 @@ section#battle-zone {
     div.deck, div.used-pile, div.hand {
         width: 70px;
     }
+    .enemy-positions{
+        transform: scale(0.5) translateY(100px) translateX(40rem);
+    }
 }
 @media screen and (min-width: 996px) {
     #dialog-box-container {
@@ -353,6 +415,20 @@ section#battle-zone {
     }
     .UI-MOVES{
         min-height: 186px;
+    }
+    .enemy-positions{
+        transform: scale(0.7) translateY(30px) translateX(20rem);
+    }
+}
+@media screen and (min-width: 1400px) {
+    .enemy-positions{
+        transform: scale(1) translateY(50px) translateX(10rem);
+    }
+    section#battle-zone{
+        justify-content: space-around;
+    }
+    .stat-value {
+        max-height: 40px;
     }
 }
 #test {

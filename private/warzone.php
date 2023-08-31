@@ -27,19 +27,26 @@
             <div id="dialog-box" class="dialog-box"></div>
         </div>
         <section id="battle-zone">
-            <div class="enemies-container flex">
-                <div class="flex enemy-positions">
-                    <div class="enemy"></div>
+            <div class="align-top flex" height="100%">
+                <div class="enemies-container flex">
+                    <div class="flex enemy-positions">
+                        <div class="enemy"></div>
 
-                    <div class="spacer-hidden"></div>
+                        <div class="spacer-hidden"></div>
 
-                    <div class="enemy"></div>
+                        <div class="enemy"></div>
 
-                    <div class="spacer-hidden"></div>
-                    <div class="spacer-hidden"></div>
-                    <div class="spacer-hidden"></div>
+                        <div class="spacer-hidden"></div>
+                        <div class="spacer-hidden"></div>
+                        <div class="spacer-hidden"></div>
 
-                    <div class="enemy"></div>
+                        <div class="enemy"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="align-center flex" height="100%">
+                <div class="player-container flex">
+                    <div class="player"></div>
                 </div>
             </div>
         </section>
@@ -58,7 +65,10 @@
                             -29 -27 -62 -60z"/>
                             </g>
                         </svg>
-                        <div id="health-bar" class="stat-bar"><div id="health-value" class="stat-value">100 / 100</div></div>
+                        <div id="health-bar" class="stat-bar">
+                            <div id="health-value" class="player-values">100 / 100</div>
+                            <div class="stat-value-health"></div>
+                        </div>
                     </div>
                     <div class="flex stats-bar" width="100%">
                         <svg class="icon-svg-stats" version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +87,10 @@
                             205 5 282 -14z"/>
                             </g>
                         </svg>
-                        <div id="mana-bar" class="stat-bar"><div id="mana-value" class="stat-value">40 / 40</div></div>
+                        <div id="mana-bar" class="stat-bar">
+                            <div id="mana-value" class="player-values">40 / 40</div>
+                            <div class="stat-value-mana"></div>
+                        </div>
                     </div>
                     <div class="prev-page">&uarr;</div>
                     <div class="next-page">&darr;</div>
@@ -85,14 +98,14 @@
                         <p>HP: <span></span></p>
                         <p>ATK: <span></span></p>
                         <p>DEF: <span></span></p>
-                        <p>SPD: <span></span></p>
+                        <p>RES: <span></span></p>
                         <p>MANA: <span></span></p>
                         <p>STATUS: <span></span></p>
                     </div>
                 </div>
                 <div class="buttons-basic col-4 flex">
                     <!-- Load these in with JS -->
-                    <div class="button move-option">Attack</div>
+                    <div class="button move-option" id="option-attack">Attack</div>
                     <div class="button move-option">Defend</div>
                     <div class="button move-option">Pass</div>
                     <!-- <div class="button button-attack"></div>
@@ -134,13 +147,18 @@
                     <!-- <img src="../public/img/icons/card.png" alt="" class="card"> -->
                 </div>
             <!-- Load script that creates all cards -->
-            </div>
-        </section>
+        </div>
+    </section>
+    <div class='container'>
+        <div class='cards'></div>
+        <div class='hand'></div>
+    </div>
     </main>
     <div class="popup-container">
                     <div class="popup-arrow"></div>
                     <div class="popup-content">Description will be shown here</div>
                 </div>
 <script src="../public/js/gamescripts/script.js"></script>
+<script src="../public/js/gamescripts/spritesheets.js"></script>
 </body>
 </html> 

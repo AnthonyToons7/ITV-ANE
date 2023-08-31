@@ -6,7 +6,7 @@
  const gear_none = document.getElementById("no-gear");
  const gearPieces = document.querySelectorAll(".gear-piece");
  const valueBoxes = document.querySelectorAll(".value");
- const stats = ["HP", "ATK", "DEF", "SPD", "MANA"];
+ const stats = ["HP", "ATK", "DEF", "RES", "MANA"];
  gearPieces.forEach(gear => {
      gear.addEventListener("click", ()=>{
          getStats(gear.id)
