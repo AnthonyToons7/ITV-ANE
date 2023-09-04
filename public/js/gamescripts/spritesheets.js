@@ -19,6 +19,7 @@ function retrieveSprites(characterName) {
   // Animate the sheets
   function sheetAnimator(src, playerTrue){
     const canvas = document.createElement("canvas");
+    canvas.classList.add("spritecanvas");
     let playerState = 'idle';
     const ctx = canvas.getContext('2d');
     const CANVAS_WIDTH = canvas.width = 400;

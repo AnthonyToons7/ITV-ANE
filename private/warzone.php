@@ -106,7 +106,7 @@
                 <div class="buttons-basic col-4 flex">
                     <!-- Load these in with JS -->
                     <div class="button move-option" id="option-attack">Attack</div>
-                    <div class="button move-option">Defend</div>
+                    <div class="button move-option" id="option-defend">Defend</div>
                     <div class="button move-option">Pass</div>
                     <!-- <div class="button button-attack"></div>
                     <div class="button button-defend"></div> -->
@@ -154,10 +154,12 @@
         <div class='hand'></div>
     </div>
     </main>
+    <div class="enemy-data-stats">
+    </div>
     <div class="popup-container">
-                    <div class="popup-arrow"></div>
-                    <div class="popup-content">Description will be shown here</div>
-                </div>
+        <div class="popup-arrow"></div>
+        <div class="popup-content">Description will be shown here</div>
+    </div>
 <script src="../public/js/gamescripts/script.js"></script>
 <script src="../public/js/gamescripts/spritesheets.js"></script>
 </body>

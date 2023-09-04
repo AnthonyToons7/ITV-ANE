@@ -305,11 +305,10 @@ section#battle-zone {
 .spacer-hidden {
     height: 50px;
     width: 180px;
-    border: 6px solid #fff;
-    border-top: 1px solid #fff;
+    border: 6px solid #c90000;
+    border-top: 1px solid #c90000;
     border-radius: 100%;
     position: relative;
-
 }
 
 .spacer-hidden {
@@ -364,7 +363,6 @@ div.player {
 .cards {
     width: 150px;
 }
-  
 .cardd {
     width: 130px;
     height: 200px;
@@ -380,7 +378,7 @@ div.player {
 .cardd.clicked{
     top: 50%;
     left: 50%;
-    transform: scale(2) translate(-50%,-50%) !important;
+    transform: scale(2) translate(-50%,-25%) !important;
     background: rgb(58, 33, 63);
     box-shadow: 0 0 5px 0px #fff;
     opacity: 1;
@@ -433,4 +431,12 @@ div.player {
 }
 #test {
     display: none;
+}
+
+.enemy-data-stats{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 100px;
+    color: #fff;
 }

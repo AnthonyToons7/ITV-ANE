@@ -8,7 +8,7 @@ class Game {
 
   spawnEnemy() {
     if (this.enemyPool.length < 3) {
-// TODO: choose a random enemy, and put each property into the creation
+    // TODO: choose a random enemy, and put each property into the creation
 
       const newEnemy = new Enemy(/* enemy properties */);
       this.enemyPool.push(newEnemy);
@@ -55,7 +55,8 @@ class Character {
   }
 
   defend() {
-    // Perform defend logic
+    this.def = (this.def / 100) * 150;
+    this.res = (this.res / 100) * 150;
   }
 
   useBuff(target) {
@@ -89,6 +90,9 @@ class Enemy extends Character {
     // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
   }
+  showData(){
+    $(".enemy-data-stats").text(this.hp);
+  }
 }
 
 class Boss extends Enemy {
@@ -107,19 +111,25 @@ class Card{
 
 }
 
+$(document).ready(()=>{
+  const game = new Game();
+  const playerCharacter = new Player("Player", "50", "25", "17", "15", "40", "1");
+  const enemy = new Enemy("Slime", "50", "18", "15", "15", "1");
+  enemy.attack(playerCharacter);
+  playerCharacter.updateStats();
+  
+  // Starting new turns:
+  game.processTurn();
 
-
-const game = new Game();
-const playerCharacter = new Player("Player", "50", "25", "17", "15", "40", "1");
-const enemy = new Enemy("Slime", "50", "18", "15", "15", "1");
-enemy.attack(playerCharacter);
-playerCharacter.updateStats();
-
-$("#option-attack").on("click", ()=>{
-  playerCharacter.attack(enemy);
-});
-// Starting new turns:
-// game.processTurn();
+  $("#option-attack").on("click", ()=>{
+    playerCharacter.attack(enemy);
+    enemy.showData();
+  });
+  $("#option-defend").on("click", ()=>{
+    playerCharacter.defend("50%");
+    enemy.showData();
+  });
+})
 
 
 
