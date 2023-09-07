@@ -108,8 +108,6 @@
                     <div class="button move-option" id="option-attack">Attack</div>
                     <div class="button move-option" id="option-defend">Defend</div>
                     <div class="button move-option">Pass</div>
-                    <!-- <div class="button button-attack"></div>
-                    <div class="button button-defend"></div> -->
                 </div>
                 <div class="buttons-magic col-3 flex">
                     <div class="button move-option">Shattered illusion</div>

@@ -1,3 +1,5 @@
+let strengthMultiplier = 1;
+
 // CLASSES
 class Game {
   constructor() {
@@ -10,7 +12,7 @@ class Game {
     if (this.enemyPool.length < 3) {
     // TODO: choose a random enemy, and put each property into the creation
 
-      const newEnemy = new Enemy(/* enemy properties */);
+      const newEnemy = new Enemy("name", "hp", "atk", "def", "res", strengthMultiplier);
       this.enemyPool.push(newEnemy);
       console.log(`New spawn: ${newEnemy.name}`);
     }
@@ -31,6 +33,7 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
     if (this.turnCount % 3 === 0) {
       this.spawnEnemy();
+      strengthMultiplier = (((strengthMultiplier / 100) / (strengthMultiplier * 101)) + 0.5) * 2.4;
     }
 
     // Perform other logic like calling the enemy's algorithm
@@ -262,6 +265,7 @@ prev.on("click", ()=>{
 
 // READY
 $(document).ready(function(){
+
   // START/CREATE GAME
 
   // READY UP SPRITES
