@@ -6,14 +6,17 @@ class Game {
     this.turnCount = 0;
     this.enemyPool = [];
     this.killCount = 0;
+    this.enemies = ["Void", "Slime"];
   }
 
   spawnEnemy() {
     if (this.enemyPool.length < 3) {
-    // TODO: choose a random enemy, and put each property into the creation
+      let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
+      // TODO: choose a random enemy, and put each property into the creation
 
-      const newEnemy = new Enemy("name", "hp", "atk", "def", "res", strengthMultiplier);
+      const newEnemy = new Enemy(this.enemies[chosenEnemyIndex], "hp", "atk", "def", "res", strengthMultiplier);
       this.enemyPool.push(newEnemy);
+      retrieveSprites(this.enemies[chosenEnemyIndex]);
       console.log(`New spawn: ${newEnemy.name}`);
     }
   }
@@ -93,8 +96,9 @@ class Enemy extends Character {
     // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
   }
-  showData(){
-    $(".enemy-data-stats").text(this.hp);
+  updateHp(){
+    $(".enemy-health-num").text(`${this.hp}`);
+    $(".enemy-health-value").css("width", (this.hp / 100) * 100 + "%" );
   }
 }
 
@@ -118,21 +122,28 @@ $(document).ready(()=>{
   const game = new Game();
   const playerCharacter = new Player("Player", "50", "25", "17", "15", "40", "1");
   const enemy = new Enemy("Slime", "50", "18", "15", "15", "1");
-  enemy.attack(playerCharacter);
-  playerCharacter.updateStats();
   
   // Starting new turns:
   game.processTurn();
+  enemy.updateHp();
 
-  $("#option-attack").on("click", ()=>{
-    playerCharacter.attack(enemy);
-    enemy.showData();
+  document.querySelectorAll(".button.move-option").forEach(button=>{
+    button.addEventListener("click",()=>{
+    switch(button.id){
+        case "option-attack":
+          playerCharacter.attack(enemy);
+          enemy.updateHp();
+          break;
+        case "option-defend":
+          playerCharacter.defend("50%");
+          break;
+      }
+      setTimeout(() => {
+        game.processTurn();
+      }, 2000);
+    });
   });
-  $("#option-defend").on("click", ()=>{
-    playerCharacter.defend("50%");
-    enemy.showData();
-  });
-})
+});
 
 
 
@@ -288,6 +299,7 @@ $(document).ready(function(){
         })
         .catch(error => console.error('Error loading JSON:', error));
     });
+
   
     let cardsFront = document.querySelector('.cards');
     let cardWidth = cardsFront.offsetWidth;

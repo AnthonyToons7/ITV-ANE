@@ -43,6 +43,12 @@
                         <div class="enemy"></div>
                     </div>
                 </div>
+                <div class="enemy-health-container">
+                    <div class="enemy-health-bar stat-bar">
+                        <div class="enemy-health-num">100/100</div>
+                        <div class="enemy-health-value"></div>
+                    </div>
+                </div>
             </div>
             <div class="align-center flex" height="100%">
                 <div class="player-container flex">
@@ -152,8 +158,8 @@
         <div class='hand'></div>
     </div>
     </main>
-    <div class="enemy-data-stats">
-    </div>
+    <!-- <div class="enemy-data-stats">
+    </div> -->
     <div class="popup-container">
         <div class="popup-arrow"></div>
         <div class="popup-content">Description will be shown here</div>

@@ -157,7 +157,16 @@ div#stats .flex {
     width: 100%;
     position: relative;
 }
-.stat-value-health, .stat-value-mana {
+.enemy-health-bar {
+    width: 200px;
+}
+.enemy-health-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.stat-value-health, .stat-value-mana,
+.enemy-health-value {
     background-color: #cd0c0c;
     padding: 10px;
     border-radius: 5px;
@@ -171,7 +180,8 @@ div#stats .flex {
 .stat-value-mana {
     background-color: #482bdc;
 }
-.player-values {
+.player-values,
+.enemy-health-num {
     font-family: joystix;
     position: absolute;
     top: 50%;
@@ -179,6 +189,7 @@ div#stats .flex {
     transform: translateY(-50%);
     width: 100%;
     text-align: center;
+    color: #fff;
 }
 .icon-svg-stats{
     height: 50px;
@@ -350,6 +361,7 @@ div.player {
 }
 .align-top{
     align-items: start;
+    position: relative;
 }
 .align-center {
     align-items: center;
@@ -429,14 +441,16 @@ div.player {
         max-height: 40px;
     }
 }
+
+/* JUNK: TEST */
 #test {
     display: none;
 }
-
+/* 
 .enemy-data-stats{
     position: absolute;
     top: 50%;
     left: 50%;
     font-size: 100px;
     color: #fff;
-}
+} */
