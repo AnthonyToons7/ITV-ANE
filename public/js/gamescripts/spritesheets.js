@@ -68,6 +68,6 @@ function retrieveSprites(characterName) {
       });
     }
   
-    animateSheet();
+    // animateSheet();
   }
   

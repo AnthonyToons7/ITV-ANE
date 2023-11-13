@@ -27,7 +27,8 @@ class Game {
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
       if (enemy.hp <= 0) {
-        this.enemyPool.splice(i,1)
+        this.enemyPool.splice(i,1);
+        document.querySelectorAll("spritecanvas")[i].remove();
         i--;
       }
     }
@@ -41,6 +42,7 @@ class Game {
 
     // Perform other logic like calling the enemy's algorithm
     // ...
+    return this.enemyPool;
   }
 }
 
@@ -139,7 +141,13 @@ $(document).ready(()=>{
           break;
       }
       setTimeout(() => {
-        game.processTurn();
+        const enemyTurn = ()=> game.processTurn()
+        .then((a)=>{
+          a.forEach(enemy=>{
+            enemy.attack(playerCharacter);
+          });
+          console.log(enemyTurn);
+        });
       }, 2000);
     });
   });
