@@ -168,6 +168,7 @@
 <script src="../public/js/gamescripts/script.js"></script>
 <script src="../public/js/gamescripts/magic.js"></script>
 <script src="../public/js/gamescripts/dialog.js"></script>
+<script src="../public/js/gamescripts/damagesprites.js"></script>
 <!-- <script src="../public/js/gamescripts/spritesheets.js"></script> -->
 </body>
 </html> 

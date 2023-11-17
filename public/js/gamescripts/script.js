@@ -13,7 +13,6 @@ class Game {
   spawnEnemy() {
     if (this.enemyPool.length < 3) {
       let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
-      // TODO: choose a random enemy, and put each property into the creation
       const newEnemy = new Enemy(this.enemies[chosenEnemyIndex], "50", "50", "10", "5", "2", strengthMultiplier, "enemy-"+id);
       this.enemyPool.push(newEnemy);
 
@@ -86,19 +85,21 @@ class Character {
     this.res = res;
   }
 
-  attack(target, playerAttacking, targetId, magicDamage) {
+  attack(target, playerAttacking, targetId, magicDamage, damageMult) {
     // Perform attack logic
+    let trueDamageMult;
     let minDamage = 1;
     if (playerAttacking && targetId != target.id) return;
-
+    !damageMult ? trueDamageMult = 1 : trueDamageMult = damageMult;
     if (magicDamage){
-      let calculatedDamage = Math.max(minDamage, this.atk - target.res);
+      let calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.res)) ;
       target.hp = Math.max(0, target.hp - calculatedDamage);
     } else {
-      let calculatedDamage = Math.max(minDamage, this.atk - target.def);
+      let calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.def)) ;
       target.hp = Math.max(0, target.hp - calculatedDamage);
     }
     if (playerAttacking){
+      sheetAnimator();
       target.updateHp();
     }
     console.log(target);
@@ -145,9 +146,11 @@ class Player extends Character {
   dropMana(cost){
     this.mana = this.mana - cost;
   }
-  gainmana(amt){
-    this.mana = this.mana + amt;
-  }
+  gainmana(amt) {
+    this.mana = Math.min(Number(this.mana) + Number(amt), 40);
+}
+
+
   // card list here
 }
 
@@ -213,16 +216,16 @@ $(document).ready(()=>{
         case "option-magic-1":
           playerCharacter.dropMana(10);
           playerCharacter.updateStats();
-          // game.retrieveEnemies().forEach(enemy=>{
-          //   playerCharacter.attack(enemy, "player", targetId, "magic");
-          // });
+          game.retrieveEnemies().forEach(enemy=>{
+            playerCharacter.attack(enemy, "player", targetId, "magic", 0.75);
+          });
           break;
         case "option-magic-2":
           playerCharacter.healSelf(playerCharacter, 10);
           playerCharacter.dropMana(15);
           playerCharacter.updateStats();
           game.retrieveEnemies().forEach(enemy=>{
-            playerCharacter.attack(enemy, "player", targetId, "magic");
+            playerCharacter.attack(enemy, "player", targetId, "magic", 1.25);
           });
           break;
         default:
@@ -314,7 +317,6 @@ prev.on("click", ()=>{
 
 // READY
 $(document).ready(function(){
-
   // START/CREATE GAME
 
   // READY UP SPRITES
@@ -323,18 +325,18 @@ $(document).ready(function(){
   
     localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
   
-    document.querySelectorAll("div.overview p span").forEach(span => {
-      fetch('../public/js/data/base-stats.json')
-        .then(response => response.json())
-        .then(data => {
+    fetch('../public/js/data/base-stats.json')
+      .then(response => response.json())
+      .then(data => {
+        document.querySelectorAll("div.overview p span").forEach(span => {
           const playerData = data.find(entry => entry.name === "Player");
           if (playerData) {
             const propertyName = span.parentElement.textContent.trim().split(':')[0];
             span.textContent = playerData[propertyName];
           }
-        })
-        .catch(error => console.error('Error loading JSON:', error));
-    });
+        });
+      })
+      .catch(error => console.error('Error loading JSON:', error));
 
   
     let cardsFront = document.querySelector('.cards');
@@ -359,4 +361,3 @@ $(document).ready(function(){
       }
     });
   });
-  

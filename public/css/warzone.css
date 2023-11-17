@@ -229,6 +229,12 @@ div#stats .flex {
     padding-left: 20px;
 }
 
+.damagecanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* BUTTONS */
 .move-option {
     position: relative;
@@ -340,11 +346,16 @@ section#battle-zone {
     pointer-events: none;
 }
 
-.enemy canvas {
+.enemy .spritecanvas {
     position: absolute;
     top: -350px;
     left: -110px;
     transform: rotateY(180deg);
+}
+.enemy .damagecanvas{
+    position: absolute;
+    top: -170px;
+    left: -60px;
 }
 .enemy:hover {
     filter: drop-shadow(rgb(19, 84, 150) 0 0 10px);
