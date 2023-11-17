@@ -1,11 +1,12 @@
 [
     {
         "name":"Player",
-        "HP":"100",
+        "HP":"50",
         "ATK":"25",
         "DEF":"17",
         "RES":"15",
-        "MANA":"40"
+        "MANA":"40",
+        "STATUS":"Well"
     },
     {
         "name":"Void",

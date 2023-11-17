@@ -156,6 +156,7 @@ div#stats .flex {
     border-radius: 5px;
     width: 100%;
     position: relative;
+    overflow: hidden;
 }
 .enemy-health-bar {
     width: 200px;
@@ -166,10 +167,10 @@ div#stats .flex {
     left: 50%;
 }
 .stat-value-health, .stat-value-mana,
+.stat-cost-mana,
 .enemy-health-value {
     background-color: #cd0c0c;
     padding: 10px;
-    border-radius: 5px;
     padding: 20px 0;
     height: 100%;
     color: #fff;
@@ -179,6 +180,14 @@ div#stats .flex {
 }
 .stat-value-mana {
     background-color: #482bdc;
+    width: 100%;
+}
+.stat-cost-mana {
+    background-color: rgb(220, 108, 43);
+    width: 0%;
+}
+#mana-bar {
+    display: flex;
 }
 .player-values,
 .enemy-health-num {
@@ -199,6 +208,10 @@ div#stats .flex {
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+    background: #000;
+    padding: 2px;
+    border: 2px solid #fff;
+    border-radius: 10px;
 }
 .prev-page {
     display: none;
@@ -316,8 +329,8 @@ section#battle-zone {
 .spacer-hidden {
     height: 50px;
     width: 180px;
-    border: 6px solid #c90000;
-    border-top: 1px solid #c90000;
+    border: 6px solid #ba71a4;
+    border-top: 2px solid #ba71a4;
     border-radius: 100%;
     position: relative;
 }
@@ -396,7 +409,17 @@ div.player {
     opacity: 1;
     transition: all 1s;
 }
-
+.targeted {
+    filter:drop-shadow(0 0 8px red)
+}
+.enemyHP {
+    background-color: red;
+    padding: 5px;
+    border-radius: 15px;
+    transform: translateY(70px);
+    width: 100%;
+    transition: all .6s;
+}
 @media screen and (max-width: 996px) {
     #dialog-box-container {
         height: 35vh;
@@ -440,6 +463,16 @@ div.player {
     .stat-value {
         max-height: 40px;
     }
+}
+@media screen and (max-width: 888px){
+    .stat-value-health, .stat-value-mana, .enemy-health-value{
+        padding: 10px 0;
+    }
+}
+div.enemy img {
+    width: 100%;
+    position: absolute;
+    top: -280%;
 }
 
 /* JUNK: TEST */

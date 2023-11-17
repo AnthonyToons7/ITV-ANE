@@ -43,12 +43,12 @@
                         <div class="enemy"></div>
                     </div>
                 </div>
-                <div class="enemy-health-container">
+                <!-- <div class="enemy-health-container">
                     <div class="enemy-health-bar stat-bar">
                         <div class="enemy-health-num">100/100</div>
                         <div class="enemy-health-value"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="align-center flex" height="100%">
                 <div class="player-container flex">
@@ -72,7 +72,7 @@
                             </g>
                         </svg>
                         <div id="health-bar" class="stat-bar">
-                            <div id="health-value" class="player-values">100 / 100</div>
+                            <div id="health-value" class="player-values">50 / 50</div>
                             <div class="stat-value-health"></div>
                         </div>
                     </div>
@@ -96,6 +96,7 @@
                         <div id="mana-bar" class="stat-bar">
                             <div id="mana-value" class="player-values">40 / 40</div>
                             <div class="stat-value-mana"></div>
+                            <div class="stat-cost-mana"></div>
                         </div>
                     </div>
                     <div class="prev-page">&uarr;</div>
@@ -116,9 +117,9 @@
                     <div class="button move-option">Pass</div>
                 </div>
                 <div class="buttons-magic col-3 flex">
-                    <div class="button move-option">Shattered illusion</div>
-                    <div class="button move-option">Icebreaker</div>
-                    <div class="button move-option">Fired up</div>
+                    <div class="button move-option magic-option" id="option-magic-1">Shattered illusion</div>
+                    <div class="button move-option magic-option" id="option-magic-2">Icebreaker</div>
+                    <div class="button move-option magic-option" id="option-magic-3">Fired up</div>
                     <!-- Load script in that makes all btns -->
                 </div>
             </div>
@@ -165,6 +166,8 @@
         <div class="popup-content">Description will be shown here</div>
     </div>
 <script src="../public/js/gamescripts/script.js"></script>
-<script src="../public/js/gamescripts/spritesheets.js"></script>
+<script src="../public/js/gamescripts/magic.js"></script>
+<script src="../public/js/gamescripts/dialog.js"></script>
+<!-- <script src="../public/js/gamescripts/spritesheets.js"></script> -->
 </body>
 </html> 

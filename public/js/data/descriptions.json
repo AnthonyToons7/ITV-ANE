@@ -5,7 +5,7 @@
     },
     {
         "movename": "Defend",
-        "movedesc": "Brace yourself against the next hit(s), reducing the damage you take by half."
+        "movedesc": "Brace yourself against the next hit(s), increasing your DEF by 50%."
     },
     {
         "movename": "Pass",
@@ -19,11 +19,11 @@
     {
         "movename": "Icebreaker",
         "cost": "15 mana",
-        "movedesc": "Hit an opponent with a MEDIUM hit, reducing their speed by 5%."
+        "movedesc": "Hit an opponent with a MEDIUM hit, HEAL yourself for 10% of your max HP."
     },
     {
         "movename": "Fired up",
         "cost": "10 mana",
-        "movedesc": "Defend (25%), and increase your attack for 2 turns."
+        "movedesc": "Defend (25%), and increase your ATK for 2 turns."
     }
 ]

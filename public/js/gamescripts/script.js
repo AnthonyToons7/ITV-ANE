@@ -1,23 +1,47 @@
 let strengthMultiplier = 1;
-
+let id = 1;
+let targetId;
 // CLASSES
 class Game {
   constructor() {
     this.turnCount = 0;
     this.enemyPool = [];
     this.killCount = 0;
-    this.enemies = ["Void", "Slime"];
+    this.enemies = ["Slime"];
   }
 
   spawnEnemy() {
     if (this.enemyPool.length < 3) {
       let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
       // TODO: choose a random enemy, and put each property into the creation
-
-      const newEnemy = new Enemy(this.enemies[chosenEnemyIndex], "hp", "atk", "def", "res", strengthMultiplier);
+      const newEnemy = new Enemy(this.enemies[chosenEnemyIndex], "50", "50", "10", "5", "2", strengthMultiplier, "enemy-"+id);
       this.enemyPool.push(newEnemy);
-      retrieveSprites(this.enemies[chosenEnemyIndex]);
-      console.log(`New spawn: ${newEnemy.name}`);
+
+      const hpbar = document.createElement("div");
+      hpbar.classList.add("enemyHP");
+
+      const img = document.createElement("img");
+      img.src = "/public/img/spritesheets/Slime.png";
+      img.classList.add("enemy-"+id);
+      document.querySelectorAll(".enemy").forEach(enemy=>{
+        if (!enemy.firstChild){
+          enemy.append(hpbar, img);
+        }
+      })
+      document.querySelectorAll(".enemy img").forEach(enemyImg => {
+        enemyImg.addEventListener("click", () => {
+          if (targetId && !document.querySelector(".targeted")){
+            targetId = false;
+          } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
+          targetId = enemyImg.className;
+          enemyImg.classList.add("targeted");
+        });
+      });
+      
+      // retrieveSprites(this.enemies[chosenEnemyIndex]);
+      // console.log(`New spawn: ${newEnemy.name}`);
+      console.log(newEnemy);
+      id++;
     }
   }
 
@@ -27,8 +51,9 @@ class Game {
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
       if (enemy.hp <= 0) {
+        const targetImg = document.querySelectorAll(`.enemy img.${targetId}`);
         this.enemyPool.splice(i,1);
-        document.querySelectorAll("spritecanvas")[i].remove();
+        targetImg[i].remove();
         i--;
       }
     }
@@ -37,34 +62,56 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
     if (this.turnCount % 3 === 0) {
       this.spawnEnemy();
-      strengthMultiplier = (((strengthMultiplier / 100) / (strengthMultiplier * 101)) + 0.5) * 2.4;
+      strengthMultiplier = (strengthMultiplier / (strengthMultiplier * 101) + 0.5) * 2.4;
     }
 
     // Perform other logic like calling the enemy's algorithm
     // ...
     return this.enemyPool;
   }
+
+  retrieveEnemies(){
+    return this.enemyPool;
+  }
 }
 
+// Character constructor
 class Character {
-  constructor(name, hp, atk, def, res) {
+  constructor(name, hp, maxHp, atk, def, res) {
     this.name = name;
     this.hp = hp;
+    this.maxHp = maxHp;
     this.atk = atk;
     this.def = def;
     this.res = res;
   }
 
-  attack(target) {
+  attack(target, playerAttacking, targetId, magicDamage) {
     // Perform attack logic
-    let calculatedDamage = Number(this.atk - target.def);
-    target.hp = target.hp - calculatedDamage;
+    let minDamage = 1;
+    if (playerAttacking && targetId != target.id) return;
+
+    if (magicDamage){
+      let calculatedDamage = Math.max(minDamage, this.atk - target.res);
+      target.hp = Math.max(0, target.hp - calculatedDamage);
+    } else {
+      let calculatedDamage = Math.max(minDamage, this.atk - target.def);
+      target.hp = Math.max(0, target.hp - calculatedDamage);
+    }
+    if (playerAttacking){
+      target.updateHp();
+    }
     console.log(target);
   }
 
   defend() {
     this.def = (this.def / 100) * 150;
     this.res = (this.res / 100) * 150;
+  }
+
+  healSelf(target, amount){
+    target.hp = Number(target.hp + Math.max(0, Number(target.maxHp / amount)));
+    if (target.hp > target.maxHp) target.hp = target.maxHp;
   }
 
   useBuff(target) {
@@ -77,30 +124,52 @@ class Character {
 }
 
 class Player extends Character {
-  constructor(name, hp, atk, def, res, mana, multiplier) {
+  constructor(name, hp, maxHp, atk, def, res, mana, multiplier) {
     // 'super' is a keyword used to yank other properties from other classes
-    super(name, hp, atk, def, res);
+    super(name, hp, maxHp, atk, def, res);
     this.mana = mana;
     this.multiplier = multiplier || 1;
   }
   updateStats(){
-    $("#health-value").text(`${this.hp} / 100`);
-    $(".stat-value-health").css("width", (this.hp / 100) * 100 + "%" );
+    $("#health-value").text(`${Math.ceil(this.hp)} / ${this.maxHp}`);
+    $(".stat-value-health").css("width", (this.hp / this.maxHp) * 100 + "%" );
     $("#mana-value").text(`${this.mana} / 40`);
     $(".stat-value-mana").css("width", (this.mana / 40) * 100 + "%" );
+
+    const statProperties = ['hp', 'atk', 'def', 'res', 'mana'];
+    document.querySelectorAll("div.overview p span").forEach((stat, index) => {
+        const propName = statProperties[index];
+        stat.textContent = this[propName];
+    });
+  }
+  dropMana(cost){
+    this.mana = this.mana - cost;
+  }
+  gainmana(amt){
+    this.mana = this.mana + amt;
   }
   // card list here
 }
 
 class Enemy extends Character {
-  constructor(name, hp, atk, def, res, multiplier) {
-    super(name, hp, atk, def, res);
+  constructor(name, hp, maxHp, atk, def, res, multiplier, id) {
+    super(
+      name,
+      Math.ceil(hp * multiplier),
+      Math.ceil(maxHp * multiplier),
+      Math.ceil(atk * multiplier),
+      Math.ceil(def * multiplier),
+      Math.ceil(res * multiplier)
+    );
+    
     // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
+    this.id = id;
   }
   updateHp(){
-    $(".enemy-health-num").text(`${this.hp}`);
-    $(".enemy-health-value").css("width", (this.hp / 100) * 100 + "%" );
+    const enemy = document.querySelector(`.${targetId}`).parentElement;
+    const $hpBar = enemy.querySelector(".enemyHP");
+    this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
   }
 }
 
@@ -122,92 +191,54 @@ class Card{
 
 $(document).ready(()=>{
   const game = new Game();
-  const playerCharacter = new Player("Player", "50", "25", "17", "15", "40", "1");
-  const enemy = new Enemy("Slime", "50", "18", "15", "15", "1");
+  const playerCharacter = new Player("Player", "50", "50", "25", "17", "15", "40", 1);
+  game.spawnEnemy();
+  getData(playerCharacter.mana)
+  console.log(playerCharacter.mana);
   
   // Starting new turns:
   game.processTurn();
-  enemy.updateHp();
 
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
     switch(button.id){
         case "option-attack":
-          playerCharacter.attack(enemy);
-          enemy.updateHp();
+          game.retrieveEnemies().forEach(enemy=>{
+            playerCharacter.attack(enemy, "player", targetId);
+          });
           break;
         case "option-defend":
           playerCharacter.defend("50%");
           break;
+        case "option-magic-1":
+          playerCharacter.dropMana(10);
+          playerCharacter.updateStats();
+          // game.retrieveEnemies().forEach(enemy=>{
+          //   playerCharacter.attack(enemy, "player", targetId, "magic");
+          // });
+          break;
+        case "option-magic-2":
+          playerCharacter.healSelf(playerCharacter, 10);
+          playerCharacter.dropMana(15);
+          playerCharacter.updateStats();
+          game.retrieveEnemies().forEach(enemy=>{
+            playerCharacter.attack(enemy, "player", targetId, "magic");
+          });
+          break;
+        default:
+          break;
       }
       setTimeout(() => {
-        const enemyTurn = ()=> game.processTurn()
-        .then((a)=>{
-          a.forEach(enemy=>{
+          const enemyTurn = game.processTurn();
+          enemyTurn.forEach(enemy=>{
             enemy.attack(playerCharacter);
           });
-          console.log(enemyTurn);
-        });
+          playerCharacter.gainmana(5);
+          playerCharacter.updateStats();
       }, 2000);
     });
   });
 });
-
-
-
-
-
-let dialogIndex = 0;
-// CREATE A DIALOG ROW IN THE DIALOG BOX
-function createDiag(dialog) {
-  $('#dialog-box').text('');
-  if (dialog.name === "BREAKPOINT") {
-    $('#dialog-box-container').hide();
-    return;
-  }
-  let individual = dialog.text.split('');
-  for (let i = 0; i < individual.length; i++) {
-    (function (i) {
-      setTimeout(function () {
-        $('#dialog-box').html($('#dialog-box').text() + individual[i]);
-        if (i == individual.length - 1) {
-          $('#dialog-box').prepend('<div id="arrow"></div>');
-        }
-        dialog.italic == "true" ? $('#dialog-box').addClass("italic") : $('#dialog-box').removeClass("italic");
-      }, 10 * i);
-    })(i);
-  }
-
-  // APPEND THE TEXT TO THE HTML AND ADD THE RIGHT BACKGROUND IMAGE TO THE CHARACTER BOX USING THE VARIABLES AS DIRECTORIES
-  $('#dialog-box-name').text(dialog.name);
-  $(`#dialog-${dialog.name}`).css("background-image", `url(../public/img/dialog-expressions/${dialog.name}/dialog-${dialog.name}-${dialog.expression}.png)`);
-}
-
-// TEST: REACTIVATE THE DIALOG BOX AFTER CONDITION
-$("#test").on("click",()=>{
-  $('#dialog-box-container').show();
-  getNextDialog();
-});
-
-
-function getNextDialog() {
-  fetch('../public/js/data/dialog.json')
-    .then(response => response.json())
-    .then(data => {
-      if (dialogIndex < data.length) {
-        var dialog = data[dialogIndex];
-        dialogIndex++;
-        createDiag(dialog);
-      }
-    })
-    .catch(error => console.log(error));
-}
-
-
-$("#dialog-box").on("click", function () {
-  getNextDialog();
-});
-
 
 // CARD HAND
 $("div.hand").on("click", ()=>{
@@ -281,17 +312,14 @@ prev.on("click", ()=>{
   prev.css("display", "none");
 });
 
-
 // READY
 $(document).ready(function(){
 
   // START/CREATE GAME
 
   // READY UP SPRITES
-    retrieveSprites("Void");
-    retrieveSprites("Player");
-
-  
+    // retrieveSprites("Void");
+    // retrieveSprites("Player");
   
     localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
   
