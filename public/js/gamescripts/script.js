@@ -7,7 +7,7 @@ class Game {
     this.turnCount = 0;
     this.enemyPool = [];
     this.killCount = 0;
-    this.enemies = ["Slime"];
+    this.enemies = ["Void","Slime"];
   }
 
   spawnEnemy() {
@@ -20,8 +20,9 @@ class Game {
       hpbar.classList.add("enemyHP");
 
       const img = document.createElement("img");
-      img.src = "/public/img/spritesheets/Slime.png";
+      img.src = "/public/img/spritesheets/"+newEnemy.name+".png";
       img.classList.add("enemy-"+id);
+      img.id="enemy-"+newEnemy.name;
       document.querySelectorAll(".enemy").forEach(enemy=>{
         if (!enemy.firstChild){
           enemy.append(hpbar, img);
@@ -45,27 +46,25 @@ class Game {
   }
 
   processTurn() {
-
     // If an enemy dies, remove them from the character pool
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
       if (enemy.hp <= 0) {
-        const targetImg = document.querySelectorAll(`.enemy img.${targetId}`);
+        const targetImg = document.querySelector(`.enemy img.${targetId}`);
         this.enemyPool.splice(i,1);
-        targetImg[i].remove();
+        targetImg.remove();
         i--;
       }
     }
     this.turnCount++;
-
     // Check if it's the third turn and spawn a new enemy if needed
-    if (this.turnCount % 3 === 0) {
-      this.spawnEnemy();
-      strengthMultiplier = (strengthMultiplier / (strengthMultiplier * 101) + 0.5) * 2.4;
-    }
 
-    // Perform other logic like calling the enemy's algorithm
-    // ...
+    if (this.turnCount % 6 === 0) {
+      strengthMultiplier = strengthMultiplier * 1.2;
+      console.log("Stats increased x ", strengthMultiplier);
+      this.spawnEnemy();
+    } 
+    else if (this.turnCount % 3 === 0) this.spawnEnemy();
     return this.enemyPool;
   }
 
@@ -102,7 +101,6 @@ class Character {
       sheetAnimator();
       target.updateHp();
     }
-    console.log(target);
   }
 
   defend() {
@@ -197,8 +195,6 @@ $(document).ready(()=>{
   const playerCharacter = new Player("Player", "50", "50", "25", "17", "15", "40", 1);
   game.spawnEnemy();
   getData(playerCharacter.mana)
-  console.log(playerCharacter.mana);
-  
   // Starting new turns:
   game.processTurn();
 

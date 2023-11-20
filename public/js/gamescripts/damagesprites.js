@@ -44,15 +44,12 @@ function sheetAnimator(src, playerTrue){
         gameFrame++;
         currentLoop++;
         if (currentLoop >= maxLoops) {
-            $(canvas).hide();
+            $(canvas).remove();
             return;
         }
     
         requestAnimationFrame(animateDamageSheet);
     }
-    
-    // Assuming your animation is correctly set up, e.g., spriteAnimations, staggerFrames, etc.
-    // Make sure gameFrame is initialized to 0 before calling animateDamageSheet
     
     document.querySelector(".enemy img.targeted").parentElement.appendChild(canvas);
     animateDamageSheet();

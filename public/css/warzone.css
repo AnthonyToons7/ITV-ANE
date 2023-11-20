@@ -39,6 +39,7 @@ main {
     height: 33vh;
     width: 100vw;
     padding: 20px;
+    z-index: 99;
 }
 .dialog-box {
     background: #1c1c1c;
@@ -485,10 +486,14 @@ div.enemy img {
     position: absolute;
     top: -280%;
 }
+img#enemy-Void {
+    transform: scale(2);
+    top: -500% !important;
+}
 
 /* JUNK: TEST */
 #test {
-    display: none;
+    /* display: none; */
 }
 /* 
 .enemy-data-stats{
