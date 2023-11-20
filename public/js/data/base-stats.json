@@ -10,66 +10,65 @@
     },
     {
         "name":"Void",
-        "HP":"",
-        "ATK":"",
-        "DEF":"",
-        "RES":"",
-        "MANA":""
+        "HP":"23",
+        "ATK":"13",
+        "DEF":"20",
+        "RES":"30"
     },
     {
         "name":"Fallen-Void",
         "HP":"",
         "ATK":"",
         "DEF":"",
-        "RES":"",
-        "MANA":""
+        "RES":""
     },
     {
         "name":"Brave-Void",
         "HP":"",
         "ATK":"",
         "DEF":"",
-        "RES":"",
-        "MANA":""
+        "RES":""
     },
     {
         "name":"Corrupted-Void",
         "HP":"",
         "ATK":"",
         "DEF":"",
-        "RES":"",
-        "MANA":""
+        "RES":""
     },
     {
-        "name":"Sword-knight",
-        "HP":"",
-        "ATK":"",
-        "DEF":"",
-        "RES":"",
-        "MANA":""
+        "name":"Fallen-Rose-knight",
+        "HP":"30",
+        "ATK":"19",
+        "DEF":"15",
+        "RES":"12"
     },
     {
         "name":"Armored-Knight",
-        "HP":"",
-        "ATK":"",
-        "DEF":"",
-        "RES":"",
-        "MANA":""
+        "HP":"31",
+        "ATK":"15",
+        "DEF":"20",
+        "RES":"18"
     },
     {
         "name":"Slime",
-        "HP":"",
-        "ATK":"",
-        "DEF":"",
-        "RES":"",
-        "MANA":""
+        "HP":"23",
+        "ATK":"5",
+        "DEF":"20",
+        "RES":"30"
     },
     {
         "name":"Water-dragon",
-        "HP":"",
-        "ATK":"",
-        "DEF":"",
-        "RES":"",
-        "MANA":""
+        "HP":"17",
+        "ATK":"13",
+        "DEF":"17",
+        "RES":"18"
+    },
+    {
+        "name":"Blind-nightstalker",
+        "HP":"10",
+        "ATK":"35",
+        "DEF":"8",
+        "RES":"9"
     }
 ]

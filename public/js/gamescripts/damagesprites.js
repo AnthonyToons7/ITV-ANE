@@ -1,4 +1,8 @@
-function sheetAnimator(src, playerTrue){
+function sheetAnimator(){
+    const container = document.createElement("div");
+    const statusEffects = document.createElement("div");
+    container.classList.add("enemy-stat-container");
+
     const canvas = document.createElement("canvas");
     canvas.classList.add("damagecanvas");
     let playerState = 'idle';
@@ -47,11 +51,10 @@ function sheetAnimator(src, playerTrue){
             $(canvas).remove();
             return;
         }
-    
         requestAnimationFrame(animateDamageSheet);
     }
-    
-    document.querySelector(".enemy img.targeted").parentElement.appendChild(canvas);
+    container.append(statusEffects, canvas);
+    document.querySelector(".enemy img.targeted").parentElement.appendChild(container);
     animateDamageSheet();
     
   }

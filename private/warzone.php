@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Battlefield</title>
     <link rel="stylesheet" href="../public/css/warzone.css">
     <script src="../public/js/jquery-3.6.1.js"></script>
 </head>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="buttons-magic col-3 flex">
                     <div class="button move-option magic-option" id="option-magic-1">Shattered illusion</div>
-                    <div class="button move-option magic-option" id="option-magic-2">Icebreaker</div>
+                    <div class="button move-option magic-option" id="option-magic-2">Celeste</div>
                     <div class="button move-option magic-option" id="option-magic-3">Fired up</div>
                     <!-- Load script in that makes all btns -->
                 </div>

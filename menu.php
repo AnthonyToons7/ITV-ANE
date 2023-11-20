@@ -131,7 +131,6 @@
                         <p>The game has:</p>
                         <ul>
                             <li>Mentions of violence</li>
-                            <li>Mentions of suicide</li>
                         </ul>
                     </div>
                 </div>

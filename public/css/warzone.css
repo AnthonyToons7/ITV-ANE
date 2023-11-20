@@ -428,9 +428,11 @@ div.player {
     background-color: red;
     padding: 5px;
     border-radius: 15px;
-    transform: translateY(70px);
     width: 100%;
     transition: all .6s;
+}
+.enemy-stat-container{
+    transform: translateY(70px);
 }
 @media screen and (max-width: 996px) {
     #dialog-box-container {

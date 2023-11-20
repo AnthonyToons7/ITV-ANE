@@ -49,18 +49,18 @@ div.background-menu {
     opacity: .5;
     bottom: 0;
     right: 0;
-    height: 75vh;
-    width: 69vw;
-    background: url(../img/assets/fallenvoid.png);
+    height: 72vh;
+    width: 58vw;
+    background: url(../img/spritesheets/Void.png);
     background-size: cover;
     background-repeat: no-repeat;
     pointer-events: none;
 }
 .glitchParticle{
     z-index: 99;   
-    background-image: url(../img/assets/fallenvoid.png);
+    background-image: url(../img/spritesheets/Void.png);
     background-repeat: no-repeat;
-    background-size: 620%;
+    background-size: 740%;
     background-position:70%;
 }
 canvas {
@@ -336,10 +336,11 @@ div.story-box .content {
 .story-mode-box {display: none;}
 @media screen and (min-width: 1024px) {
     div.background-menu{
-        height: 45vh;
-        width: 57vw;
-        background-size: 105%;
-        background-position: -15px -1px;
+        height: 36vh;
+        width: 49vw;
+        transform: scale(1.5);
+        background-size: 80%;
+        background-position: 15px -1px;
     }
     .version {
         font-size: 20px;
@@ -348,9 +349,12 @@ div.story-box .content {
 @media screen and (min-width: 1440px){
     div.background-menu {
         height: 48vh;
-        width: 60vw;
-        background-size: 95%;
-        background-position: -5px -1px;
+        width: 52vw;
+        background-size: 65%;
+        background-position: 5px -1px;
+    }
+    .glitchParticle{
+        background-size: 420%;
     }
     canvas#title {
         height: 90px;

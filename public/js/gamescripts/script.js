@@ -1,3 +1,11 @@
+const baseStats = ()=>{
+  fetch('../data/base-stats.json')
+  .then(response => response.json())
+  .then(data => {
+    return data;
+  })
+  .catch(error => console.log(error));
+}
 let strengthMultiplier = 1;
 let id = 1;
 let targetId;
@@ -7,17 +15,35 @@ class Game {
     this.turnCount = 0;
     this.enemyPool = [];
     this.killCount = 0;
-    this.enemies = ["Void","Slime"];
+    this.enemies = ["Void","Slime", "Fallen-Rose-Knight"];
   }
-
   spawnEnemy() {
     if (this.enemyPool.length < 3) {
       let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
-      const newEnemy = new Enemy(this.enemies[chosenEnemyIndex], "50", "50", "10", "5", "2", strengthMultiplier, "enemy-"+id);
+      const enemystats = baseStats.find(character => character.name === this.enemies[chosenEnemyIndex]);
+      const newEnemy = new Enemy
+        (
+          this.enemies[chosenEnemyIndex], 
+          // HP
+          enemystats["HP"], 
+          // MAXHP
+          enemystats["HP"], 
+          enemystats["ATK"], 
+          enemystats["DEF"], 
+          enemystats["RES"], 
+          strengthMultiplier, 
+          "enemy-"+id
+        );
       this.enemyPool.push(newEnemy);
 
+      const container = document.createElement("div");
       const hpbar = document.createElement("div");
+      const statusEffects = document.createElement("div");
+      container.classList.add("enemy-stat-container");
+  
+      container.append(hpbar,statusEffects)
       hpbar.classList.add("enemyHP");
+      statusEffects.classList.add("enemyStatus");
 
       const img = document.createElement("img");
       img.src = "/public/img/spritesheets/"+newEnemy.name+".png";
@@ -25,7 +51,7 @@ class Game {
       img.id="enemy-"+newEnemy.name;
       document.querySelectorAll(".enemy").forEach(enemy=>{
         if (!enemy.firstChild){
-          enemy.append(hpbar, img);
+          enemy.append(container, img);
         }
       })
       document.querySelectorAll(".enemy img").forEach(enemyImg => {
@@ -52,6 +78,8 @@ class Game {
       if (enemy.hp <= 0) {
         const targetImg = document.querySelector(`.enemy img.${targetId}`);
         this.enemyPool.splice(i,1);
+        const parent = targetImg.parentElement;
+        parent.querySelectorAll(".enemy-stat-container").forEach(container=>container.remove());
         targetImg.remove();
         i--;
       }
@@ -60,7 +88,7 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
 
     if (this.turnCount % 6 === 0) {
-      strengthMultiplier = strengthMultiplier * 1.2;
+      strengthMultiplier = strengthMultiplier * 1.1;
       console.log("Stats increased x ", strengthMultiplier);
       this.spawnEnemy();
     } 
@@ -87,16 +115,19 @@ class Character {
   attack(target, playerAttacking, targetId, magicDamage, damageMult) {
     // Perform attack logic
     let trueDamageMult;
+    let calculatedDamage;
     let minDamage = 1;
     if (playerAttacking && targetId != target.id) return;
     !damageMult ? trueDamageMult = 1 : trueDamageMult = damageMult;
-    if (magicDamage){
-      let calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.res)) ;
-      target.hp = Math.max(0, target.hp - calculatedDamage);
-    } else {
-      let calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.def)) ;
-      target.hp = Math.max(0, target.hp - calculatedDamage);
+    magicDamage ? calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.res)) :
+      calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.def));
+
+    if(damageMult){
+      calculatedDamage = calculatedDamage * damageMult;
     }
+
+    // finish calculating
+    target.hp = Math.max(0, target.hp - calculatedDamage);
     if (playerAttacking){
       sheetAnimator();
       target.updateHp();
@@ -113,8 +144,9 @@ class Character {
     if (target.hp > target.maxHp) target.hp = target.maxHp;
   }
 
-  useBuff(target) {
-    // Perform buff logic
+  useBuff(target, amt) {
+    target.def = (target.def / 100) * (100+amt);
+    console.log(target.def);
   }
 
   useDebuff(target) {
@@ -170,6 +202,7 @@ class Enemy extends Character {
   updateHp(){
     const enemy = document.querySelector(`.${targetId}`).parentElement;
     const $hpBar = enemy.querySelector(".enemyHP");
+
     this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
   }
 }
@@ -187,7 +220,18 @@ class Card{
   ){
     this.name = name;
   }
+}
 
+class StatusEffect{
+  constructor(
+    bleed_light,
+    bleed_normal,
+    bleed_heavy,
+  ){
+    this.bleed_light = bleed_light
+    this.bleed_normal = bleed_normal
+    this.bleed_heavy = bleed_heavy
+  }
 }
 
 $(document).ready(()=>{
@@ -213,7 +257,7 @@ $(document).ready(()=>{
           playerCharacter.dropMana(10);
           playerCharacter.updateStats();
           game.retrieveEnemies().forEach(enemy=>{
-            playerCharacter.attack(enemy, "player", targetId, "magic", 0.75);
+            playerCharacter.attack(enemy, "player", targetId, "magic", 0.75, "bleed-0.04");
           });
           break;
         case "option-magic-2":
@@ -221,9 +265,15 @@ $(document).ready(()=>{
           playerCharacter.dropMana(15);
           playerCharacter.updateStats();
           game.retrieveEnemies().forEach(enemy=>{
-            playerCharacter.attack(enemy, "player", targetId, "magic", 1.25);
+            playerCharacter.attack(enemy, "player", targetId, "magic", 1.15);
           });
           break;
+        case "option-magic-3":
+          playerCharacter.dropMana(35);
+          playerCharacter.updateStats();
+          playerCharacter.defend();
+          playerCharacter.useBuff(playerCharacter, 50);
+          return;
         default:
           break;
       }
@@ -234,7 +284,7 @@ $(document).ready(()=>{
           });
           playerCharacter.gainmana(5);
           playerCharacter.updateStats();
-      }, 2000);
+      }, 800);
     });
   });
 });
@@ -260,11 +310,11 @@ let descriptionsData = []; // To store loaded JSON data
 
 // Load JSON data
 fetch('../public/js/data/descriptions.json')
-    .then(response => response.json())
-    .then(data => {
-        descriptionsData = data;
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+  .then(response => response.json())
+  .then(data => {
+      descriptionsData = data;
+  })
+  .catch(error => console.error('Error loading JSON:', error));
 
 buttons.forEach(button => {
     button.addEventListener('mouseover', () => {
