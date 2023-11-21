@@ -3,7 +3,7 @@
         "name":"Player",
         "HP":"50",
         "ATK":"25",
-        "DEF":"17",
+        "DEF":"7",
         "RES":"15",
         "MANA":"40",
         "STATUS":"Well"
@@ -12,8 +12,8 @@
         "name":"Void",
         "HP":"23",
         "ATK":"13",
-        "DEF":"20",
-        "RES":"30"
+        "DEF":"18",
+        "RES":"15"
     },
     {
         "name":"Fallen-Void",
@@ -54,8 +54,8 @@
         "name":"Slime",
         "HP":"23",
         "ATK":"5",
-        "DEF":"20",
-        "RES":"30"
+        "DEF":"10",
+        "RES":"15"
     },
     {
         "name":"Water-dragon",

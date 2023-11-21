@@ -24,6 +24,6 @@
     {
         "movename": "Fired up",
         "cost": "10 mana",
-        "movedesc": "Defend, and increase your ATK for 2 turns."
+        "movedesc": "Buff your ATK, DEF and RES, and gain another turn."
     }
 ]

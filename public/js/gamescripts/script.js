@@ -1,77 +1,140 @@
-const baseStats = ()=>{
-  fetch('../data/base-stats.json')
+
+const prev = $(".prev-page");
+const next = $(".next-page");
+next.on("click", () => toggleStatsPage(true));
+prev.on("click", () => toggleStatsPage(false));
+
+// CARD HAND
+$("div.hand").on("click", ()=>{
+  $("div.container").css("display", "block");
+  $("#player-ui .UI-MOVES div").css("opacity", "0");
+  $("#player-ui .UI-MOVES div").css("pointer-events", "none");
+});
+$("div.deck").on("click", ()=>{
+  $("div.container").css("display", "none");
+  $("#player-ui .UI-MOVES div").css("opacity", "1",);
+  $("#player-ui .UI-MOVES div").css("pointer-events", "unset");
+  $(".clicked").removeClass("clicked");
+});
+
+const buttons = document.querySelectorAll('.move-option');
+const popupContainer = document.querySelector('.popup-container');
+const popupContent = document.querySelector('.popup-content');
+
+let descriptionsData = []; // To store loaded JSON data
+// Load JSON data
+fetch('../public/js/data/descriptions.json')
   .then(response => response.json())
   .then(data => {
-    return data;
+      descriptionsData = data;
   })
-  .catch(error => console.log(error));
+  .catch(error => console.error('Error loading JSON:', error));
+  buttons.forEach(button => {
+    button.addEventListener('mouseover', () => {
+        const moveName = button.textContent.trim();
+        const moveDescription = getDescriptionFromData(moveName);
+
+        popupContent.textContent = moveDescription;
+        popupContainer.style.display = 'block';
+
+        const buttonRect = button.getBoundingClientRect();
+        popupContainer.style.left = `${buttonRect.left + buttonRect.width / 2}px`;
+        popupContainer.style.top = `${buttonRect.top - popupContainer.clientHeight}px`;
+    });
+
+    button.addEventListener('mouseout', () => {
+        popupContainer.style.display = 'none';
+    });
+});
+
+function getDescriptionFromData(moveName) {
+    const moveData = descriptionsData.find(item => item.movename === moveName);
+    return moveData ? moveData.movedesc : 'Description not available.';
+}
+
+
+const baseStats = async ()=>{
+  try {
+    const response = await fetch('../public/js/data/base-stats.json');
+    return await response.json();
+  } catch (error) {
+    return console.log(error);
+  }
 }
 let strengthMultiplier = 1;
 let id = 1;
 let targetId;
+let defending = false;
 // CLASSES
 class Game {
   constructor() {
     this.turnCount = 0;
     this.enemyPool = [];
     this.killCount = 0;
-    this.enemies = ["Void","Slime", "Fallen-Rose-Knight"];
+    this.enemies = ["Void","Slime"];
   }
-  spawnEnemy() {
-    if (this.enemyPool.length < 3) {
-      let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
-      const enemystats = baseStats.find(character => character.name === this.enemies[chosenEnemyIndex]);
-      const newEnemy = new Enemy
-        (
-          this.enemies[chosenEnemyIndex], 
-          // HP
-          enemystats["HP"], 
-          // MAXHP
-          enemystats["HP"], 
-          enemystats["ATK"], 
-          enemystats["DEF"], 
-          enemystats["RES"], 
-          strengthMultiplier, 
-          "enemy-"+id
-        );
-      this.enemyPool.push(newEnemy);
+  async spawnEnemy() {
+    try {
+      const data = await baseStats(); // Use 'await' here
 
-      const container = document.createElement("div");
-      const hpbar = document.createElement("div");
-      const statusEffects = document.createElement("div");
-      container.classList.add("enemy-stat-container");
-  
-      container.append(hpbar,statusEffects)
-      hpbar.classList.add("enemyHP");
-      statusEffects.classList.add("enemyStatus");
+      if (this.enemyPool.length < 3) {
+        let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
+        const enemystats = data.find(character => character.name === this.enemies[chosenEnemyIndex]);
 
-      const img = document.createElement("img");
-      img.src = "/public/img/spritesheets/"+newEnemy.name+".png";
-      img.classList.add("enemy-"+id);
-      img.id="enemy-"+newEnemy.name;
-      document.querySelectorAll(".enemy").forEach(enemy=>{
-        if (!enemy.firstChild){
-          enemy.append(container, img);
+        if (enemystats) {
+          const newEnemy = new Enemy(
+            this.enemies[chosenEnemyIndex],
+            enemystats["HP"],
+            enemystats["HP"],
+            enemystats["ATK"],
+            enemystats["DEF"],
+            enemystats["RES"],
+            strengthMultiplier,
+            "enemy-" + id
+          );
+          this.enemyPool.push(newEnemy);
+
+          const container = document.createElement("div");
+          const hpbar = document.createElement("div");
+          const statusEffects = document.createElement("div");
+          container.classList.add("enemy-stat-container");
+
+          container.append(hpbar, statusEffects);
+          hpbar.classList.add("enemyHP");
+          statusEffects.classList.add("enemyStatus");
+
+          const img = document.createElement("img");
+          img.src = "/public/img/spritesheets/" + newEnemy.name + ".png";
+          img.classList.add("enemy-" + id);
+          img.id = "enemy-" + newEnemy.name;
+          document.querySelectorAll(".enemy").forEach(enemy => {
+            if (!enemy.firstChild) {
+              enemy.append(container, img);
+            }
+          });
+          document.querySelectorAll(".enemy img").forEach(enemyImg => {
+            enemyImg.addEventListener("click", () => {
+              if (targetId && !document.querySelector(".targeted")) {
+                targetId = false;
+              } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
+              targetId = enemyImg.className;
+              enemyImg.classList.add("targeted");
+            });
+          });
+
+          console.log(newEnemy);
+          id++;
+        } else {
+          console.log("Enemy stats not found for: " + this.enemies[chosenEnemyIndex]);
         }
-      })
-      document.querySelectorAll(".enemy img").forEach(enemyImg => {
-        enemyImg.addEventListener("click", () => {
-          if (targetId && !document.querySelector(".targeted")){
-            targetId = false;
-          } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
-          targetId = enemyImg.className;
-          enemyImg.classList.add("targeted");
-        });
-      });
-      
-      // retrieveSprites(this.enemies[chosenEnemyIndex]);
-      // console.log(`New spawn: ${newEnemy.name}`);
-      console.log(newEnemy);
-      id++;
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
   processTurn() {
+    $(".attack-anim-overlay").addClass("hideAnim");
     // If an enemy dies, remove them from the character pool
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
@@ -129,14 +192,27 @@ class Character {
     // finish calculating
     target.hp = Math.max(0, target.hp - calculatedDamage);
     if (playerAttacking){
+      battleAnimator("player");
       sheetAnimator();
       target.updateHp();
+    } else {
+      battleAnimator("enemy");
     }
   }
 
   defend() {
-    this.def = (this.def / 100) * 150;
-    this.res = (this.res / 100) * 150;
+    this.def = Math.floor((this.def / 100) * 150);
+    this.res = Math.floor((this.res / 100) * 150);
+    defending = true;
+    this.updateStats();
+  }
+  
+
+  reduceDefense(){
+    this.def = Math.ceil((this.def / 150) * 100);
+    this.res = Math.ceil((this.res / 150) * 100);
+    defending = false;
+    this.updateStats();
   }
 
   healSelf(target, amount){
@@ -144,9 +220,8 @@ class Character {
     if (target.hp > target.maxHp) target.hp = target.maxHp;
   }
 
-  useBuff(target, amt) {
-    target.def = (target.def / 100) * (100+amt);
-    console.log(target.def);
+  useBuff(target, amt, stat) {
+    target[stat] = Math.ceil((target[stat] / 100) * (100+amt));
   }
 
   useDebuff(target) {
@@ -162,6 +237,7 @@ class Player extends Character {
     this.multiplier = multiplier || 1;
   }
   updateStats(){
+    // Update all player stats. Not only in the bars, but also in the overview
     $("#health-value").text(`${Math.ceil(this.hp)} / ${this.maxHp}`);
     $(".stat-value-health").css("width", (this.hp / this.maxHp) * 100 + "%" );
     $("#mana-value").text(`${this.mana} / 40`);
@@ -174,9 +250,15 @@ class Player extends Character {
     });
   }
   dropMana(cost){
-    this.mana = this.mana - cost;
+    // Reduce mana
+    if (cost > this.mana) {
+      console.log("Not enough mana!");
+    } else {
+      this.mana -= cost;
+    }
   }
   gainmana(amt) {
+    // Gain mana each turn. Max is 40
     this.mana = Math.min(Number(this.mana) + Number(amt), 40);
 }
 
@@ -234,143 +316,118 @@ class StatusEffect{
   }
 }
 
-$(document).ready(()=>{
+$(document).ready(async ()=>{
   const game = new Game();
-  const playerCharacter = new Player("Player", "50", "50", "25", "17", "15", "40", 1);
+
+  // Create your character by using data from the base stats json
+  const data = await baseStats();
+  console.log(data);
+  const playerStats = data.find(character => character.name === "Player");
+  const playerCharacter = new Player(
+    "Player",
+    playerStats["HP"],
+    playerStats["HP"],
+    playerStats["ATK"],
+    playerStats["DEF"],
+    playerStats["RES"],
+    40,
+    strengthMultiplier,
+  );
+
   game.spawnEnemy();
-  getData(playerCharacter.mana)
+
   // Starting new turns:
   game.processTurn();
 
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
+      // Check what attack option you chose
     switch(button.id){
         case "option-attack":
+          // Get all enemies, and preform the attack function on each, but the target can only be one enemy
           game.retrieveEnemies().forEach(enemy=>{
             playerCharacter.attack(enemy, "player", targetId);
           });
           break;
         case "option-defend":
+          // Increase defense by 50% and end your turn
           playerCharacter.defend("50%");
           break;
         case "option-magic-1":
+          // Return if player does not have enough mana
+          if(playerCharacter.mana < 10) return;
+
+          // Reduce mana
           playerCharacter.dropMana(10);
+
+          // Update player stats
           playerCharacter.updateStats();
           game.retrieveEnemies().forEach(enemy=>{
+            // Tell the game that it's a magic attack
             playerCharacter.attack(enemy, "player", targetId, "magic", 0.75, "bleed-0.04");
           });
           break;
         case "option-magic-2":
-          playerCharacter.healSelf(playerCharacter, 10);
+          if(playerCharacter.mana < 15) return;
           playerCharacter.dropMana(15);
+          playerCharacter.healSelf(playerCharacter, 10);
           playerCharacter.updateStats();
           game.retrieveEnemies().forEach(enemy=>{
             playerCharacter.attack(enemy, "player", targetId, "magic", 1.15);
           });
           break;
         case "option-magic-3":
-          playerCharacter.dropMana(35);
-          playerCharacter.updateStats();
+          if(playerCharacter.mana < 25) return;
+          playerCharacter.dropMana(25);
+          // Increase your stats
+          playerCharacter.useBuff(playerCharacter, 15, "atk");
           playerCharacter.defend();
-          playerCharacter.useBuff(playerCharacter, 50);
+          playerCharacter.updateStats();
           return;
         default:
           break;
       }
-      setTimeout(() => {
-          const enemyTurn = game.processTurn();
-          enemyTurn.forEach(enemy=>{
-            enemy.attack(playerCharacter);
-          });
-          playerCharacter.gainmana(5);
+
+      // Use delays in order to play the animations correctly
+      function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function playTurn() {
+        const enemyTurn = game.processTurn();
+      
+        for (const enemy of enemyTurn) {
+          await delay(1000);          
+          enemy.attack(playerCharacter);
+
+          await delay(900);
+          $(".attack-anim-overlay").addClass("hideAnim");
+      
+          await delay(800);
           playerCharacter.updateStats();
-      }, 800);
+      
+        }
+        playerCharacter.gainmana(3);
+        if (defending){
+          playerCharacter.reduceDefense();
+        }
+
+      }
+      setTimeout(() => {
+        playTurn();
+      }, 1000);
     });
   });
-});
 
-// CARD HAND
-$("div.hand").on("click", ()=>{
-  $("div.container").css("display", "block");
-  $("#player-ui .UI-MOVES div").css("opacity", "0");
-  $("#player-ui .UI-MOVES div").css("pointer-events", "none");
-});
-$("div.deck").on("click", ()=>{
-  $("div.container").css("display", "none");
-  $("#player-ui .UI-MOVES div").css("opacity", "1",);
-  $("#player-ui .UI-MOVES div").css("pointer-events", "unset");
-  $(".clicked").removeClass("clicked");
-});
-
-const buttons = document.querySelectorAll('.move-option');
-const popupContainer = document.querySelector('.popup-container');
-const popupContent = document.querySelector('.popup-content');
-
-let descriptionsData = []; // To store loaded JSON data
-
-// Load JSON data
-fetch('../public/js/data/descriptions.json')
-  .then(response => response.json())
-  .then(data => {
-      descriptionsData = data;
-  })
-  .catch(error => console.error('Error loading JSON:', error));
-
-buttons.forEach(button => {
-    button.addEventListener('mouseover', () => {
-        const moveName = button.textContent.trim();
-        const moveDescription = getDescriptionFromData(moveName);
-
-        popupContent.textContent = moveDescription;
-        popupContainer.style.display = 'block';
-
-        const buttonRect = button.getBoundingClientRect();
-        popupContainer.style.left = `${buttonRect.left + buttonRect.width / 2}px`;
-        popupContainer.style.top = `${buttonRect.top - popupContainer.clientHeight}px`;
-    });
-
-    button.addEventListener('mouseout', () => {
-        popupContainer.style.display = 'none';
-    });
-});
-
-function getDescriptionFromData(moveName) {
-    const moveData = descriptionsData.find(item => item.movename === moveName);
-    return moveData ? moveData.movedesc : 'Description not available.';
-}
-
-
-// STAT PAGE BTNS ARROWS
-const prev = $(".prev-page");
-const next = $(".next-page");
-
-next.on("click", ()=>{
-  document.querySelectorAll(".stats-bar").forEach(bar=>{
-    bar.style.display="none";
-  })
-  $(".overview").css("display", "block");
-  next.css("display", "none");
-  prev.css("display", "block");
-});
-prev.on("click", ()=>{
-  document.querySelectorAll(".stats-bar").forEach(bar=>{
-    bar.style.display="flex";
-  })
-  $(".overview").css("display", "none");
-  next.css("display", "block");
-  prev.css("display", "none");
-});
-
-// READY
-$(document).ready(function(){
-  // START/CREATE GAME
+  // ---------NON BATTLE RELATED FUNCTION ONLOAD----------------
 
   // READY UP SPRITES
     // retrieveSprites("Void");
     // retrieveSprites("Player");
   
+    // Is the gamemode story? Play dialog!
     localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
   
+    // Fetch all base stats and show it in the player data
     fetch('../public/js/data/base-stats.json')
       .then(response => response.json())
       .then(data => {
@@ -384,7 +441,7 @@ $(document).ready(function(){
       })
       .catch(error => console.error('Error loading JSON:', error));
 
-  
+    // Cards
     let cardsFront = document.querySelector('.cards');
     let cardWidth = cardsFront.offsetWidth;
     let totalarc = 200;
@@ -392,6 +449,7 @@ $(document).ready(function(){
     let angles = Array(numcards).fill('').map((a, i) => (totalarc / numcards * (i + 1)) - (totalarc/2 + (totalarc / numcards) / 2));
     let margins = angles.map((a, i) => cardWidth / numcards * (i + 1));
     
+    // Set the cards in the right angle
     angles.forEach((a, i) => {
       let s = `transform:rotate(${angles[i]}deg);margin-left:${margins[i]}px;`
       let c = `<div class='cardd' style='${s}'></div>`;
@@ -406,4 +464,14 @@ $(document).ready(function(){
         currentlyClickedCard = event.target;
       }
     });
+});
+
+const toggleStatsPage = (showOverview) => {
+  document.querySelectorAll(".stats-bar").forEach(bar => {
+    bar.style.display = showOverview ? "none" : "flex";
   });
+
+  $(".overview").css("display", showOverview ? "block" : "none");
+  next.css("display", showOverview ? "none" : "block");
+  prev.css("display", showOverview ? "block" : "none");
+};

@@ -7,6 +7,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 @keyframes arrow_animation {
     from { bottom: 20px; }
@@ -15,6 +16,8 @@
 body {
     background-color: #1c1c1c;
     overflow: hidden;
+    box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0);
+    transition: box-shadow .3s;
 }
 main {
     height: 100vh;
@@ -369,6 +372,9 @@ div.player {
     height: 100%;
     width: 100%;
 }
+#player-sheet {
+    transform: translateY(-20px) translateX(150px);
+}
 
 
 /* CUSTOM BOOT */
@@ -434,6 +440,63 @@ div.player {
 .enemy-stat-container{
     transform: translateY(70px);
 }
+
+/* attack animation */
+.hurt {
+    box-shadow: inset 0 0 50px 50px red;
+    animation: damageShake .2s linear;
+    transition: box-shadow .3s;
+}
+@keyframes damageShake {
+    0% { transform: translate(20px, 20px); }
+    25% { transform: translate(30px, -20px); }
+    50% { transform: translate(20px, 15px); }
+    75% { transform: translate(-20px, 25px); }
+    100% { transform: translate(0, 0); }
+}
+.attack-anim-overlay {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background-color: #000000b8;
+}
+div.player-box,
+div.enemy-box {
+    position: absolute;
+    top: 0;
+    left: -20vw;
+    height: 100%;
+    width: 300px;
+    transform: skew(-15deg);
+    background-color: rgba(0, 0, 255, 0.415);
+    border: 2px solid white;
+    /* transition: all 1s cubic-bezier(1,.48,1,.29); */
+}
+div.enemy-box{
+    background-color: rgba(255, 0, 0, 0.41);
+    transform: skew(15deg);
+    right: -20vw;
+    left: unset;
+}
+div.player-box.attacking{
+    left: 110vw;
+    transition: all 1s cubic-bezier(.12,1.03,1,-0.11);
+}
+div.enemy-box.attacking{
+    right: 100vw;
+    transition: all 1s cubic-bezier(.12,1.03,1,-0.11);
+}
+.hideAnim{
+    top: unset !important;
+    left: unset !important;
+    bottom: 100vw;
+    transition: all .8s;
+}
+
 @media screen and (max-width: 996px) {
     #dialog-box-container {
         height: 35vh;
@@ -466,6 +529,10 @@ div.player {
     .enemy-positions{
         transform: scale(0.7) translateY(30px) translateX(20rem);
     }
+    div.player{
+        width: 400px;
+        height: 400px;
+    }
 }
 @media screen and (min-width: 1400px) {
     .enemy-positions{
@@ -495,7 +562,7 @@ img#enemy-Void {
 
 /* JUNK: TEST */
 #test {
-    /* display: none; */
+    display: none;
 }
 /* 
 .enemy-data-stats{

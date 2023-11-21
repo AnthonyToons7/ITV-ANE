@@ -43,16 +43,12 @@
                         <div class="enemy"></div>
                     </div>
                 </div>
-                <!-- <div class="enemy-health-container">
-                    <div class="enemy-health-bar stat-bar">
-                        <div class="enemy-health-num">100/100</div>
-                        <div class="enemy-health-value"></div>
-                    </div>
-                </div> -->
             </div>
             <div class="align-center flex" height="100%">
                 <div class="player-container flex">
-                    <div class="player"></div>
+                    <div class="player">
+                        <img src="../public/img/spritesheets/player.png" alt="" id="player-sheet">
+                    </div>
                 </div>
             </div>
         </section>
@@ -165,9 +161,14 @@
         <div class="popup-arrow"></div>
         <div class="popup-content">Description will be shown here</div>
     </div>
+    <div class="attack-anim-overlay hideAnim">
+        <div class="player-box"></div>
+        <div class="enemy-box"></div>
+    </div>
 <script src="../public/js/gamescripts/script.js"></script>
 <script src="../public/js/gamescripts/magic.js"></script>
 <script src="../public/js/gamescripts/dialog.js"></script>
+<script src="../public/js/gamescripts/battleAnimator.js"></script>
 <script src="../public/js/gamescripts/damagesprites.js"></script>
 <!-- <script src="../public/js/gamescripts/spritesheets.js"></script> -->
 </body>
