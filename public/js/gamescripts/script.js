@@ -61,6 +61,16 @@ const baseStats = async ()=>{
     return console.log(error);
   }
 }
+const gearStats = async ()=>{
+  try {
+    const response = await fetch('../public/js/data/buffs&debuffs.json');
+    return await response.json();
+  } catch (error) {
+    return console.log(error);
+  }
+}
+
+
 let strengthMultiplier = 1;
 let id = 1;
 let targetId;
@@ -248,6 +258,10 @@ class Player extends Character {
         const propName = statProperties[index];
         stat.textContent = this[propName];
     });
+    if(this.hp <= 0){
+      displayGameOver();
+    }
+    getData(this.mana);
   }
   dropMana(cost){
     // Reduce mana
@@ -321,7 +335,9 @@ $(document).ready(async ()=>{
 
   // Create your character by using data from the base stats json
   const data = await baseStats();
-  console.log(data);
+  const gearData = await gearStats();
+  console.log(gearData[localStorage.getItem('gear')]);
+  
   const playerStats = data.find(character => character.name === "Player");
   const playerCharacter = new Player(
     "Player",
@@ -338,6 +354,7 @@ $(document).ready(async ()=>{
 
   // Starting new turns:
   game.processTurn();
+  getData(playerCharacter.mana);
 
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
@@ -395,16 +412,16 @@ $(document).ready(async ()=>{
       async function playTurn() {
         const enemyTurn = game.processTurn();
       
+        await delay(1000);          
         for (const enemy of enemyTurn) {
-          await delay(1000);          
           enemy.attack(playerCharacter);
 
-          await delay(900);
+          await delay(1200);
           $(".attack-anim-overlay").addClass("hideAnim");
-      
-          await delay(800);
+
+          await delay(400);
           playerCharacter.updateStats();
-      
+
         }
         playerCharacter.gainmana(3);
         if (defending){
@@ -414,7 +431,7 @@ $(document).ready(async ()=>{
       }
       setTimeout(() => {
         playTurn();
-      }, 1000);
+      }, 1200);
     });
   });
 
@@ -475,3 +492,7 @@ const toggleStatsPage = (showOverview) => {
   next.css("display", showOverview ? "none" : "block");
   prev.css("display", showOverview ? "block" : "none");
 };
+
+function displayGameOver(){
+
+}

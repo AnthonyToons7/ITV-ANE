@@ -6,17 +6,17 @@ function battleAnimator(attacking){
         document.querySelector("div.player-box").classList.add("attacking");
         setTimeout(() => {
             document.querySelector("div.player-box").classList.remove("attacking");
-        }, 1300);
+        }, 1200);
     }else{
         document.querySelector("div.enemy-box").classList.add("attacking");
         setTimeout(() => {
             document.body.classList.add("hurt");
             document.querySelector(".attack-anim-overlay").classList.add("hurt");
-        }, 900);
+        }, 1000);
         setTimeout(() => {
             document.body.classList.remove("hurt");
             document.querySelector(".attack-anim-overlay").classList.remove("hurt");
             document.querySelector("div.enemy-box").classList.remove("attacking");
-        }, 1300);
+        }, 1500);
     }
 }
