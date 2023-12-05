@@ -27,6 +27,8 @@ function createDiag(dialog) {
 // TEST: REACTIVATE THE DIALOG BOX AFTER CONDITION
 $("#test").on("click",()=>{
   $('#dialog-box-container').show();
+  $('#dialog-box').show();
+  $('#dialog-box-name').show();
   getNextDialog();
 });
 

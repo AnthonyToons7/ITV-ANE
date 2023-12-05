@@ -1,54 +1,165 @@
 [
   {
-    "name": "Eva",
-    "expression": "worried",
-    "text": "H-Hi..."
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You find yourself walking home, after spending an entire day working."
   },
   {
-    "name": "...",
-    "expression": "grumpy",
-    "text": "What."
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "Frustrated, you continue to move on, only to be stopped by the loud sounds of explosions."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You watch the blood of the innocent drop in front of you... a truly horrific sight, as a being armed with a blade emerges from the smoke."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "What the..."
+  },
+  {
+    "name": "Void",
+    "expression": "tired",
+    "text": "And you... you... aaand you."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "italic": "true",
+    "text": "Oh shit."
   },  
   {
-    "name": "Eva",
-    "expression": "worried",
-    "text": "Am I being a bother..?"
-  },
-  {
-    "name": "...",
-    "expression": "grumpy",
-    "text": "Yes. What do you want?"
-  },
-  {
-    "name": "Eva",
-    "expression": "worried",
-    "text": "I... just picked the first person for this, sorry..."
-  },
-  {
-    "name": "Eva",
-    "expression": "worried",
-    "text": "I... was looking for someone who could help me out with a very important task... Someone who has the courage and is willing to risk their life for it..."
-  },
-  {
-    "name": "...",
-    "expression": "grumpy-talk",
+    "name": " ",
+    "expression": " ",
     "italic": "true",
-    "text": "I wanna go home..."
-  },
-  {
-    "name": "...",
-    "expression": "grumpy-talk",
-    "text": "What is it?"
+    "text": "You decide to back off."
   },
   {
     "name": "Eva",
-    "expression": "happy",
-    "text": "You're interested? Great!"
+    "expression": "grumpy",
+    "text": "Void, I gave you the order to bring down a few, not to murder half the cities' population. Remember the deal."
   },
   {
-    "name": "...",
-    "expression": "shocked",
-    "text": "H-Hey!? I didn't agr-"
+    "name": "Void",
+    "expression": "pissed",
+    "text": "IT'S TAKING TOO LONG! I'VE BEEN WAITING FOR AGES!"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "What is going on..."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "!"
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "H-Hey! H-help!"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "W-What? N-no!"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "She hides behind you."
+  },
+  {
+    "name": "Eva",
+    "expression": "scared",
+    "text": "P-please, he's trying to kill me."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "Don't drag me into this!"
+  },
+  {
+    "name": "Eva",
+    "expression": "scared",
+    "text": "L-Let's teleport away!"
+  },
+  {
+    "name": "Void",
+    "expression": "pissed",
+    "text": "NO YOU DON'T!"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "In the blink of an eye, the two of you are gone."
+  },
+  {
+    "name": "Eva",
+    "expression": "scared",
+    "text": "I'm sorry! I had to!"
+  },
+  {
+    "name": "Eva",
+    "expression": "scared",
+    "text": "He'll find us soon... Can you help me out?!"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "tired",
+    "text": "I just wanna go home..."
+  },
+  {
+    "name": "Eva",
+    "expression": "scared",
+    "text": "I can't do this alone, pleaaaaase?"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "tired",
+    "text": "Why was he even after you in the first place? Better question, who are you?"
+  },
+  {
+    "name": "Eva",
+    "expression": "lying",
+    "text": "I'm Eva, queen of the mirror world. That imbecilic child after me is a mercinary, targeted to kill me."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "thinking",
+    "text": "I see... so... why do you need me?"
+  },
+  {
+    "name": "Eva",
+    "expression": "lying",
+    "text": "He already got rid of my strongest warriors."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "thinking",
+    "text": "A h . . ."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "thinking",
+    "text": "So you're putting all your hopes and dreams on a random girl you found walking on the street wiith no fighting experience."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "I can teach you to become stronger I suppose?"
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Take this blade.... and let's spar on this slime over here."
   },
   {
     "name": "BREAKPOINT",
@@ -56,29 +167,39 @@
     "text": "BREAKPOINT"
   },
   {
-    "name": "...",
-    "expression": "angry-talk",
-    "text": "What the fuck?!"
+    "name": "Aubrey",
+    "expression": "tired",
+    "text": "So tired..."
   },
   {
     "name": "Eva",
     "expression": "happy",
-    "text": "Here, put this on!"
+    "text": "You're a natural!"
   },
   {
-    "name": "...",
-    "expression": "angry-talk",
-    "text": "I demand an explanation"
-  },
-  {
-    "name": "Eva",
-    "expression": "happy",
-    "text": "No time for that!"
+    "name": "Aubrey",
+    "expression": "tired",
+    "text": "I just wanna rest!"
   },
   {
     "name": "Eva",
-    "expression": "happy",
-    "text": "I'll immediately explain how this works!"
+    "expression": "worried",
+    "text": "No time for that."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "After sparring on some slimes, footsteps approach rapidly."
+  },
+  {
+    "name": "Void",
+    "expression": "pissed",
+    "text": "Found you."
+  },
+  {
+    "name": "Eva",
+    "expression": "scared",
+    "text": "Time for your first test!"
   },
   {
     "name": "BREAKPOINT",
@@ -91,85 +212,375 @@
     "text": "See? Wasn't so hard right?"
   },
   {
-    "name": "...",
-    "expression": "angry-talk",
-    "text": "I will fucking kill you."
+    "name": "Aubrey",
+    "expression": "pissed",
+    "text": "Once I'm done with him, I will fucking kill you."
   },  
   {
-    "name": "...",
-    "expression": "angry-talk",
-    "text": "I just came off a 9-5 shift, only to be greeted by your ass, taking me to this place, forcing me to kill god knows what."
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Suuuuuuuurely you won't, right?"
   },
   {
     "name": "Eva",
-    "expression": "worried-side",
-    "text": "This is... just... preperation..."
+    "expression": "worried",
+    "text": "I mean, we have a long journey to go! You can't just end me!"
   },
   {
-    "name": "...",
-    "expression": "angry-talk",
-    "text": "FOR WHAT?!"
+    "name": "Aubrey",
+    "expression": "pissed",
+    "text": "There's nothing in it for me! Besides, what even is he!"
   },
   {
     "name": "Eva",
-    "expression": "worried-side",
-    "text": "Uuuuh... him..."
+    "expression": "worried",
+    "text": "He's just like you! Just with two fancy weapons."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "pissed",
+    "text": "How are you thinking that this is a fair matchup?!"
   },
   {
     "name": "Void",
-    "expression": "crazy-grin",
+    "expression": "angry",
     "text": "..."
   },
   {
-    "name": "...",
-    "expression": "angry-talk",
-    "text": "How am I supossed to be afraid of a tiny wimp like him?!"
-  },
-  {
-    "name": "Eva",
-    "expression": "worried-side",
-    "text": "He has killed half my kind! H-He used to be friendly to us and now he's suddenly turned on all of us! We can't stop him!"
-  },
-  {
     "name": "Void",
-    "expression": "crazy-grin",
-    "text": "You brought a new companion Eva? The whole earth will run out of people if you keep bringing people like this!"
+    "expression": "angry",
+    "text": "Are you siding with a liar?"
   },
   {
-    "name": "Void",
-    "expression": "crazy-grin",
-    "text": "The blood of every person will flow through this grass like rain, and I will become the most powerful existance KNOWN TO MAN OR DEMON KIND."
-  },
-  {
-    "name": "Eva",
-    "expression": "worried-side",
-    "text": "..., please... I'm sorry I dragged you into this but... help me and my kind. At this rate, none are left."
-  },
-  {
-    "name": "...",
-    "expression": "annoyed",
-    "text": "What's in it for me?"
-  },
-  {
-    "name": "Eva",
-    "expression": "worried-side",
+    "name": " ",
+    "expression": " ",
     "italic": "true",
-    "text": "You motherfu-"
+    "text": "You turn around."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "confused",
+    "text": "What..?"
   },
   {
     "name": "Eva",
-    "expression": "worried-side",
-    "text": "You won't have to work for the rest of your l-"
-  },
-  {
-    "name": "...",
-    "expression": "happy",
-    "text": "Deal."
+    "expression": "worried",
+    "text": "Ignore him. He's trying to make you side with him against me."
   },
   {
     "name": "Void",
-    "expression": "norm-sweat",
+    "expression": "angry",
+    "text": "You promised me something Eva. It's been long enough."
+  },
+  {
+    "name": "Eva",
+    "expression": "angry",
+    "text": "ć̷̛͇̿̀̃̃̍͋̐͌́͊͑̈́̎o̸̘̍̿̍̚n̸̨̮̲̖̺̺̣̘̝̝͙̩̘̠̐͌̇͛̽́̾̆̉̏́̋͊͘̚ͅt̶̻͚͙̃̍̿̒̓̚ȑ̸̨̦̖̩͖̻̝̽͒͐͆͘͠ͅo̸̗̫̭̥̼͓͚̩͚̓̃́͐̈́̑̃̇l̴̛̯̥̠̺̻͔̪̟̙̱̎̇̉͑̌͑̀͗͐͘͘͘͘͜ ̴̨͉̮̜̝͚̥͚̪͕̼̥̬̆̂̎̔̌̚͝ͅh̶͙̦͔̺̳͉̙̀̃̀͛̈́̓̊̌̾̏̒̕ĩ̶̗̯͚̺̹̌͑͊̐͒̚ḿ̶̮̯̤̙̪̮̹̠̜̗̺̲͙̈͊̌͑͑̉̇̾̀ͅ.̶̻̦͇͙͍̯̫̱̙̅͜͝.̸̼̮̥͋͂̀͊̀̈̿̊̍͋̕̚͝͝ͅ.̶͎́"
+  },
+  {
+    "name": " ",
+    "expression": " ",
     "italic": "true",
-    "text": "What the fu-"
+    "text": "You cannot understand what Eva is saying. It's like she's speaking in a completely different language."
+  },
+  {
+    "name": "Void",
+    "expression": "corrupted",
+    "text": "Kill..."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "Hey! W-What's going on???"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You feel afraid. You feel uneasy at Eva's precense."
+  },
+  {
+    "name": "Void",
+    "expression": "corrupted",
+    "text": "KILL..."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You grip your sword tightly. You feel the weight of Eva sitting on your shoulder."
+  },
+  {
+    "name": "Eva",
+    "expression": "confident",
+    "text": "Stay calm. It should be over in a flash."
+  },
+  {
+    "name": "BREAKPOINT",
+    "expression": "BREAKPOINT",
+    "text": "BREAKPOINT"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "Acck..."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "That was close..."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "Eva nods."
+  },
+  {
+    "name": "Eva",
+    "expression": "damaged",
+    "text": "We can't allow that to happen again."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "I agree."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "He will only return stronger, what do we do?"
+  },
+  {
+    "name": "Eva",
+    "expression": "damaged",
+    "text": "Honestly... I don't know."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "Why did he suddenly become so agressive?"
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "His second blade is known as the Dark Spire. It's an ancient blade cursed with the soul of an old beast."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Legends say that the beast still has not passed to the afterlife after thousands of years. It's angry that the human race takes it."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Thus, it corrupts the user that wields it."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "thinking",
+    "text": "Interesting..."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "thinking",
+    "text": "Can those effects be reversed..?"
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Sadly, I do not posess the power to weaken an angry spirit."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "We have to resort to brute forcing it."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Then, we take Void's soul."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "I see..."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You take a deep breath. Is this the final fight? Can you really trust Eva's words? They feel right."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You think back to Void's words."
+  },
+  {
+    "name": "Void",
+    "expression": "memory",
+    "italic": "true",
+    "text": "You promised me something Eva. It's been long enough."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "It bugs you. What did he mean by that?"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "Are you really... siding with the correct person..?"
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Aubrey? You alright?"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "thinking",
+    "text": "Yeah, I'm fine. It's nothing."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "Eva looks at you suspisciously."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Hm.. okay. I believe your words."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "Ready to explore more?"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You nod, proceeding to continue the adventure with Eva."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You feel like you're being stalked. It emits a dangering aura."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You hold your blade tightly."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "In the corner of your eye, you see something lunge at Eva."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You quickly draw your blade and slash it."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "The loud sound of something shattering overwhelms the quiet place."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "The shattered pieces scatter everywhere, one cutting your cheek."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "A-Aubrey?!"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "A sudden attack..."
+  },
+  {
+    "name": "Eva",
+    "expression": "worried",
+    "text": "W-What?"
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-grin",
+    "text": "..."
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-grin",
+    "text": "É̶̡̧̨̢̨̨͎̥̹̙̜̳̗̳͖̜͎̲̝̫̥̪̯͙̰͇̠̞̲̬̜̜͙̩̘̈́̅̏̃̈́̋̔͛̀͊͘͘ͅv̴̨̡̨̡̛̮͙̳̱̳̭̼͍͎͔̤̖̼͙͙͓̹̟͉̀̓̊͋͒̐͒͛̐̀ͅa̵̡̛̞̤͔̺̞̲̘̩̥̠̽͗͑͌͋̃͛̃̓̈̿͂̆̔̈́͛̑̋͆͒̕͠ͅͅ"
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-grin",
+    "text": "H̷̢̨̜̜̠̙͉̗̩͖̭͕̖̣̳̪̫̞̮͙͎̤͙͙̪̞̎͐͊͂̓̃̚̚͜a̷̡̢̛̞̞̹̱͚̫̺̦̖̺̫̰̲̺̫̟͎̝̩̞̺͖̜̗̯̺͇̣̝̭̩̮̝̻̠͑̀̆͌̀͆̔̏́̽̂̓͆̏̕ͅͅn̴̡̛̗̘̳͎̣͉̤̰͇͍͎͉̦̖̩͖̗̻͉̎̿͑͊͒̂̒̿̈́̔̒́̀̈́͊̽̀̋̂̉̌̆̋̔̈͐͛̂̍̉̑̂̍̌̽̒̇́͘͝͝͠͝͝͠͝͠d̵̢̧̛̛̺̰͇̱͇̞̣͓͔̩͚̎̅̿̈́̓̆̌̎̌̈͂̎̐͋̊̈̄̓̑̈͛͛̚͝͝͠͝ͅ ̸̢̭͉͚͎̝͉̘̖͉̮̥̯͙̱̯̬̪̮̲͙͔͈̄̆̆͛̃̾̓̽͑̓̈́̈̀̕͘͜͠͝ḧ̷̢̢̧̨̫̲͓͍͓̯͈̪̻̰̻̮͕̫̫̤̫̦̼͎̟̗̹̖̝̹̝̭̲̼̜͇̦͉͓̰̀̓̆̾̎̈͂̈́̃̈̈́̎̀͊̀̔͒̿͋̓̌̀̌̃̀͂̒̑̉̕͜͠͠͠ę̵̡̧̢̧̟͔̣͖̹̖͍̞͖̳̳̩̤͚̠͓͙̳̺̞͚̗̻̳̩̤̲͍̗̫͑̊̿̈́͗̏́̾́͊̃͗̈́́͋̒̌́͌͌̓̊̇͑̉̍̈́͘̚̚̚͜͜͠ͅr̵̤͇̘͗̆̀̈́̓̈̿̈̀̄̈́̾̕͝͝ͅ ̴̢̛͎͕̳̱̠̼͉̗̗̫͚͒͑̈́̎̑̀̅̓́̉̋̔́̃̆̎̀̈́̐̆̏̌͑̊̐́͑̎̓͘͘͜͜͝͝͠ͅǫ̷̛͔̬̙̯̭̖͐͐̈́̒͋̏̅̊̌̓̍̉̇͂̃̆̓̑̑͆̀̿͛͌̇͋̎̑͒̅͐̕̚̚͠ͅv̴̨̢̧̨̢̡̛͙̻͈̺̗͚̻̼̥̘͓̱̲͎͇̰̙̙̭̼͐͒̆̓͗̐ȅ̴̢̨̢̳͙̩̳͎͓̻͕͙̲̼͚̫̭͎̖̤̗̟̲͈͖͂̀͌̐r̶̢̧̛̙̮̲̰͖̩͈̝̱̹͉͚͚̮̝̣̯̺̫̬̟̜̝͖̙̦̼͚̞̱̬̱͓̫̪̲̭̟̀̽̿͑̒́́̀̍͂̈́͛́̓̀̋̓̑̾̈́̐̉̈́̒̓̕͜͝͝"
+  },
+  {
+    "name": "Eva",
+    "expression": "angry",
+    "text": "I don't know what you're speaking of, foul beast!"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "You get in front of Eva"
+  },
+  {
+    "name": "Aubrey",
+    "expression": "damaged",
+    "text": "I got this."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "The creature in front of you steps out of the shadows, revealing it's true glory. Huge, magnificent crystals for claws, blades merged with it."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "It stares at you with great anger, before shifting eye color and trembling."
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-grin",
+    "text": "Ḣ̷̝̙̑̎͆-̷͓͎͗͝h̴͈̙͎̥̍̈́͛ě̴̡̚͝l̶͔͎̝̍̈́̎ṗ̸̨̤̜̟̇̋"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "italic": "true",
+    "text": "It lunges at you again, forcing you to dodge."
+  },
+  {
+    "name": "Eva",
+    "expression": "angry",
+    "text": "Aubrey, I trust you. End this."
+  },
+  {
+    "name": "BREAKPOINT",
+    "expression": "BREAKPOINT",
+    "text": "BREAKPOINT"
   }
 ]

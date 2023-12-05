@@ -3,6 +3,7 @@ const prev = $(".prev-page");
 const next = $(".next-page");
 next.on("click", () => toggleStatsPage(true));
 prev.on("click", () => toggleStatsPage(false));
+let pturnCount = 0;
 
 // CARD HAND
 $("div.hand").on("click", ()=>{
@@ -63,7 +64,7 @@ const baseStats = async ()=>{
 }
 const gearStats = async ()=>{
   try {
-    const response = await fetch('../public/js/data/buffs&debuffs.json');
+    const response = await fetch('../public/js/data/gear.json');
     return await response.json();
   } catch (error) {
     return console.log(error);
@@ -81,62 +82,84 @@ class Game {
     this.turnCount = 0;
     this.enemyPool = [];
     this.killCount = 0;
-    this.enemies = ["Void","Slime"];
+    this.enemies = ["Slime", 
+      // "Fallen-Rose-knight"
+    ];
+    this.bosses = ["Void", "Fallen-Void", "Corrupted-Void", "Brave-Void"]
+    this.bossesKilled = 0;
+    this.enemiesKilled = 0;
   }
   async spawnEnemy() {
     try {
       const data = await baseStats(); // Use 'await' here
 
       if (this.enemyPool.length < 3) {
+        let newEnemy;
         let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
         const enemystats = data.find(character => character.name === this.enemies[chosenEnemyIndex]);
-
-        if (enemystats) {
-          const newEnemy = new Enemy(
-            this.enemies[chosenEnemyIndex],
-            enemystats["HP"],
-            enemystats["HP"],
-            enemystats["ATK"],
-            enemystats["DEF"],
-            enemystats["RES"],
+        if (this.bossesKilled == 0 && this.enemiesKilled >= 1) {
+          let chosenBossName = this.bosses[this.bossesKilled];
+          const bossStats = data.find(character => character.name === chosenBossName);
+          newEnemy = new Boss(
+            chosenBossName, 
+            bossStats["HP"],
+            bossStats["HP"],
+            bossStats["ATK"],
+            bossStats["DEF"],
+            bossStats["RES"],
             strengthMultiplier,
             "enemy-" + id
           );
-          this.enemyPool.push(newEnemy);
-
-          const container = document.createElement("div");
-          const hpbar = document.createElement("div");
-          const statusEffects = document.createElement("div");
-          container.classList.add("enemy-stat-container");
-
-          container.append(hpbar, statusEffects);
-          hpbar.classList.add("enemyHP");
-          statusEffects.classList.add("enemyStatus");
-
-          const img = document.createElement("img");
-          img.src = "/public/img/spritesheets/" + newEnemy.name + ".png";
-          img.classList.add("enemy-" + id);
-          img.id = "enemy-" + newEnemy.name;
-          document.querySelectorAll(".enemy").forEach(enemy => {
-            if (!enemy.firstChild) {
-              enemy.append(container, img);
-            }
-          });
-          document.querySelectorAll(".enemy img").forEach(enemyImg => {
-            enemyImg.addEventListener("click", () => {
-              if (targetId && !document.querySelector(".targeted")) {
-                targetId = false;
-              } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
-              targetId = enemyImg.className;
-              enemyImg.classList.add("targeted");
-            });
-          });
-
-          console.log(newEnemy);
-          id++;
-        } else {
-          console.log("Enemy stats not found for: " + this.enemies[chosenEnemyIndex]);
+          $("#bossWarning").addClass("bossWarning");
+          setTimeout(() => {
+            // $("#bossWarning").removeClassClass("bossWarning");
+          }, 2000);
         }
+         else {
+            if (enemystats) {
+              newEnemy = new Enemy(
+              this.enemies[chosenEnemyIndex],
+              enemystats["HP"],
+              enemystats["HP"],
+              enemystats["ATK"],
+              enemystats["DEF"],
+              enemystats["RES"],
+              strengthMultiplier,
+              "enemy-" + id
+              );
+              this.enemyPool.push(newEnemy);
+            }
+          }
+        const container = document.createElement("div");
+        const hpbar = document.createElement("div");
+        const statusEffects = document.createElement("div");
+        container.classList.add("enemy-stat-container");
+
+        container.append(hpbar, statusEffects);
+        hpbar.classList.add("enemyHP");
+        statusEffects.classList.add("enemyStatus");
+
+        const img = document.createElement("img");
+        img.src = "/public/img/spritesheets/" + newEnemy.name + ".png";
+        img.classList.add("enemy-" + id);
+        img.id = "enemy-" + newEnemy.name;
+        document.querySelectorAll(".enemy").forEach(enemy => {
+          if (!enemy.firstChild) {
+            enemy.append(container, img);
+          }
+        });
+        document.querySelectorAll(".enemy img").forEach(enemyImg => {
+          enemyImg.addEventListener("click", () => {
+            if (targetId && !document.querySelector(".targeted")) {
+              targetId = false;
+            } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
+            targetId = enemyImg.className;
+            enemyImg.classList.add("targeted");
+          });
+        });
+
+        console.log(newEnemy);
+        id++;
       }
     } catch (error) {
       console.error(error);
@@ -151,6 +174,7 @@ class Game {
       if (enemy.hp <= 0) {
         const targetImg = document.querySelector(`.enemy img.${targetId}`);
         this.enemyPool.splice(i,1);
+        this.enemiesKilled = this.enemiesKilled += 1;
         const parent = targetImg.parentElement;
         parent.querySelectorAll(".enemy-stat-container").forEach(container=>container.remove());
         targetImg.remove();
@@ -240,28 +264,33 @@ class Character {
 }
 
 class Player extends Character {
-  constructor(name, hp, maxHp, atk, def, res, mana, multiplier) {
+  constructor(name, hp, maxHp, atk, def, res, mana, maxMana, multiplier) {
     // 'super' is a keyword used to yank other properties from other classes
     super(name, hp, maxHp, atk, def, res);
     this.mana = mana;
+    this.maxMana = maxMana;
     this.multiplier = multiplier || 1;
   }
   updateStats(){
+    this.updateMulti();
     // Update all player stats. Not only in the bars, but also in the overview
     $("#health-value").text(`${Math.ceil(this.hp)} / ${this.maxHp}`);
     $(".stat-value-health").css("width", (this.hp / this.maxHp) * 100 + "%" );
-    $("#mana-value").text(`${this.mana} / 40`);
-    $(".stat-value-mana").css("width", (this.mana / 40) * 100 + "%" );
+    $("#mana-value").text(`${this.mana} / ${this.maxMana}`);
+    $(".stat-value-mana").css("width", (this.mana / this.maxMana) * 100 + "%" );
 
-    const statProperties = ['hp', 'atk', 'def', 'res', 'mana'];
-    document.querySelectorAll("div.overview p span").forEach((stat, index) => {
+    setTimeout(() => {
+      const statProperties = ['hp', 'atk', 'def', 'res', 'mana'];
+      document.querySelectorAll("div.overview p span").forEach((stat, index) => {
         const propName = statProperties[index];
         stat.textContent = this[propName];
-    });
+      });
+    }, 500);
     if(this.hp <= 0){
       displayGameOver();
     }
     getData(this.mana);
+    pturnCount++;
   }
   dropMana(cost){
     // Reduce mana
@@ -274,10 +303,18 @@ class Player extends Character {
   gainmana(amt) {
     // Gain mana each turn. Max is 40
     this.mana = Math.min(Number(this.mana) + Number(amt), 40);
-}
-
-
-  // card list here
+  }
+  updateMulti() {
+    if (pturnCount % 6 === 0) {
+      console.log("Playerstats multiplied x " + 1.05);
+      const properties = ["hp", "maxHp", "atk", "def", "res", "mana", "maxMana"];
+  
+      properties.forEach(property => {
+        this[property] = Math.ceil((this[property] / 100) * (100 + strengthMultiplier * 1.05));
+      });
+    }
+  }
+  
 }
 
 class Enemy extends Character {
@@ -303,10 +340,26 @@ class Enemy extends Character {
   }
 }
 
-class Boss extends Enemy {
-  constructor(name, hp, atk, def, res, multiplier) {
-    super(name, hp, atk, def, res);
+class Boss extends Character {
+  constructor(name, hp, maxHp, atk, def, res, multiplier, id) {
+    super(
+      name,
+      Math.ceil(hp * multiplier),
+      Math.ceil(maxHp * multiplier),
+      Math.ceil(atk * multiplier),
+      Math.ceil(def * multiplier),
+      Math.ceil(res * multiplier)
+    );
+    
+    // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
+    this.id = id;
+  }
+  updateHp(){
+    const enemy = document.querySelector(`.${targetId}`).parentElement;
+    const $hpBar = enemy.querySelector(".enemyHP");
+
+    this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
   }
 }
 
@@ -336,20 +389,23 @@ $(document).ready(async ()=>{
   // Create your character by using data from the base stats json
   const data = await baseStats();
   const gearData = await gearStats();
-  console.log(gearData[localStorage.getItem('gear')]);
+  const chosenGear = gearData[localStorage.getItem('gear')];
+  console.log(chosenGear);
   
   const playerStats = data.find(character => character.name === "Player");
   const playerCharacter = new Player(
     "Player",
-    playerStats["HP"],
-    playerStats["HP"],
-    playerStats["ATK"],
-    playerStats["DEF"],
-    playerStats["RES"],
-    40,
+    Math.ceil(playerStats["HP"] / 100 * chosenGear[0]["HP"]),
+    Math.ceil(playerStats["HP"] / 100 * chosenGear[0]["HP"]),
+    Math.ceil(playerStats["ATK"] / 100 * chosenGear[1]["ATK"]),
+    Math.ceil(playerStats["DEF"] / 100 * chosenGear[2]["DEF"]),
+    Math.ceil(playerStats["RES"] / 100 * chosenGear[3]["RES"]),
+    Math.ceil(40 / 100 * chosenGear[4]["MANA"]),
+    Math.ceil(40 / 100 * chosenGear[4]["MANA"]),
     strengthMultiplier,
   );
-
+  playerCharacter.updateStats();
+  console.log(playerCharacter);
   game.spawnEnemy();
 
   // Starting new turns:
