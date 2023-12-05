@@ -475,6 +475,7 @@ div.enemy-box {
     width: 500px;
     background-position: center;
     background-size: contain;
+    background-repeat: no-repeat;
     transition: all 1.2s cubic-bezier(.12,.99,.99,.15);
     background-color: rgba(0, 0, 255, 0.415);
     background-image: url(../img/Void-attack-render.png);
@@ -563,7 +564,7 @@ img#enemy-Void {
     transform: scale(2);
     top: -500% !important;
 }
-#bossWarning {
+#bossWarning.bossWarning {
     display: flex;
     justify-content: center;
     align-items: center;

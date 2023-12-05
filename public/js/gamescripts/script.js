@@ -22,7 +22,7 @@ const buttons = document.querySelectorAll('.move-option');
 const popupContainer = document.querySelector('.popup-container');
 const popupContent = document.querySelector('.popup-content');
 
-let descriptionsData = []; // To store loaded JSON data
+let descriptionsData = [];
 // Load JSON data
 fetch('../public/js/data/descriptions.json')
   .then(response => response.json())
@@ -52,7 +52,6 @@ function getDescriptionFromData(moveName) {
     const moveData = descriptionsData.find(item => item.movename === moveName);
     return moveData ? moveData.movedesc : 'Description not available.';
 }
-
 
 const baseStats = async ()=>{
   try {
@@ -91,13 +90,15 @@ class Game {
   }
   async spawnEnemy() {
     try {
-      const data = await baseStats(); // Use 'await' here
+      const data = await baseStats();
 
       if (this.enemyPool.length < 3) {
         let newEnemy;
         let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
         const enemystats = data.find(character => character.name === this.enemies[chosenEnemyIndex]);
-        if (this.bossesKilled == 0 && this.enemiesKilled >= 1) {
+
+        // check if enough time has passed to spawn a boss in
+        if (this.bossesKilled == 0 && this.enemiesKilled >= 10 &&  this.enemyPool.every(enemy => !enemy.name.includes("Void"))) {
           let chosenBossName = this.bosses[this.bossesKilled];
           const bossStats = data.find(character => character.name === chosenBossName);
           newEnemy = new Boss(
@@ -112,8 +113,9 @@ class Game {
           );
           $("#bossWarning").addClass("bossWarning");
           setTimeout(() => {
-            // $("#bossWarning").removeClassClass("bossWarning");
+            $("#bossWarning").removeClass("bossWarning");
           }, 2000);
+          this.enemyPool.push(newEnemy);
         }
          else {
             if (enemystats) {
@@ -173,8 +175,14 @@ class Game {
       const enemy = this.enemyPool[i];
       if (enemy.hp <= 0) {
         const targetImg = document.querySelector(`.enemy img.${targetId}`);
-        this.enemyPool.splice(i,1);
+        if (enemy.name.includes("Void")){
+          this.bossesKilled = this.bossesKilled += 1;
+          if (localStorage.getItem("difficulty") == "story"){
+            getNextDialog();
+          }
+        }
         this.enemiesKilled = this.enemiesKilled += 1;
+        this.enemyPool.splice(i,1);
         const parent = targetImg.parentElement;
         parent.querySelectorAll(".enemy-stat-container").forEach(container=>container.remove());
         targetImg.remove();
@@ -289,7 +297,7 @@ class Player extends Character {
     if(this.hp <= 0){
       displayGameOver();
     }
-    getData(this.mana);
+    // getData(this.mana);
     pturnCount++;
   }
   dropMana(cost){
@@ -390,7 +398,6 @@ $(document).ready(async ()=>{
   const data = await baseStats();
   const gearData = await gearStats();
   const chosenGear = gearData[localStorage.getItem('gear')];
-  console.log(chosenGear);
   
   const playerStats = data.find(character => character.name === "Player");
   const playerCharacter = new Player(
@@ -410,7 +417,7 @@ $(document).ready(async ()=>{
 
   // Starting new turns:
   game.processTurn();
-  getData(playerCharacter.mana);
+  // getData(playerCharacter.mana);
 
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
@@ -550,5 +557,8 @@ const toggleStatsPage = (showOverview) => {
 };
 
 function displayGameOver(){
-
+  $("#defeat-screen").addClass("show");
+  setTimeout(() => {
+    window.location.replace("http://localhost/menu.php");
+  }, 3000);
 }
