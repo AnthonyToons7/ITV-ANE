@@ -70,8 +70,13 @@ const gearStats = async ()=>{
   }
 }
 
-
-let strengthMultiplier = 1;
+let gameModeStrength;
+if (localStorage.getItem("difficulty") == "hard" || localStorage.getItem("difficulty") == "story"){
+  gameModeStrength = 1;
+} else {
+  gameModeStrength = 2;
+}
+let strengthMultiplier = gameModeStrength;
 let id = 1;
 let targetId;
 let defending = false;
@@ -313,8 +318,8 @@ class Player extends Character {
     this.mana = Math.min(Number(this.mana) + Number(amt), 40);
   }
   updateMulti() {
-    if (pturnCount % 6 === 0) {
-      console.log("Playerstats multiplied x " + 1.05);
+    if (pturnCount % 10 === 0) {
+      console.log("Playerstats multiplied x " + 1.01);
       const properties = ["hp", "maxHp", "atk", "def", "res", "mana", "maxMana"];
   
       properties.forEach(property => {
@@ -322,7 +327,6 @@ class Player extends Character {
       });
     }
   }
-  
 }
 
 class Enemy extends Character {

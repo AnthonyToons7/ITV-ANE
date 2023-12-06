@@ -2,7 +2,10 @@
     font-family: joystix;
     src: url(../fonts/joystix\ monospace.otf);
 }
-
+@font-face {
+    font-family: danger;
+    src: url(../fonts/another_danger/Another\ Danger\ -\ Demo.otf);
+}
 * {
     padding: 0;
     margin: 0;
@@ -315,7 +318,9 @@ div#stats .flex {
     transform: translateX(-50%);
 }
 .popup-content {
+    font-family: joystix;
     font-size: 14px;
+    /* letter-spacing: 5px; */
 }
 
 section#battle-zone {
