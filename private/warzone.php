@@ -166,7 +166,7 @@
         <div class="enemy-box"></div>
     </div>
     <div id="bossWarning">
-        <h1>Boss incoming!</h1>
+        <h1>Boss incoming!!</h1>
     </div>
 <script src="../public/js/gamescripts/script.js"></script>
 <script src="../public/js/gamescripts/magic.js"></script>
