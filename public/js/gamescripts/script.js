@@ -222,7 +222,7 @@ class Character {
     this.res = res;
   }
 
-  attack(target, playerAttacking, targetId, magicDamage, damageMult) {
+  attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect) {
     // Perform attack logic
     let trueDamageMult;
     let calculatedDamage;
@@ -235,7 +235,15 @@ class Character {
     if(damageMult){
       calculatedDamage = calculatedDamage * damageMult;
     }
-
+    if (statusEffect){
+      const statusEff = new StatusEffect(statusEffect, 4, 5, target);
+      statusEff.tick();
+      const statusEffImg = document.createElement("img");
+      statusEffImg.src = `/public/img/effects/${statusEff.name}.gif`;
+      const targetEl = document.querySelector('.'+target.id);
+      targetEl.parentElement.querySelector('div.enemyStatus').appendChild(statusEffImg);
+    }
+    
     // finish calculating
     target.hp = Math.max(0, target.hp - calculatedDamage);
     if (playerAttacking){
@@ -385,13 +393,22 @@ class Card{
 
 class StatusEffect{
   constructor(
-    bleed_light,
-    bleed_normal,
-    bleed_heavy,
+    name,
+    duration,
+    damage,
+    target
   ){
-    this.bleed_light = bleed_light
-    this.bleed_normal = bleed_normal
-    this.bleed_heavy = bleed_heavy
+    this.name = name;
+    this.duration = duration;
+    this.damage = damage;
+    this.target = target;
+  }
+  tick(){
+    setTimeout(()=>{
+      console.log("Bleed-tick");
+      this.target.hp = this.target.hp - this.damage;
+      this.target.updateHp();
+    }, 4000);
   }
 }
 
@@ -448,7 +465,7 @@ $(document).ready(async ()=>{
           playerCharacter.updateStats();
           game.retrieveEnemies().forEach(enemy=>{
             // Tell the game that it's a magic attack
-            playerCharacter.attack(enemy, "player", targetId, "magic", 0.75, "bleed-0.04");
+            playerCharacter.attack(enemy, "player", targetId, "magic", 0.75, "bleed");
           });
           break;
         case "option-magic-2":
