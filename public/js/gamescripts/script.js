@@ -175,6 +175,22 @@ class Game {
 
   processTurn() {
     $(".attack-anim-overlay").addClass("hideAnim");
+
+    this.checkEnemies();
+
+    this.turnCount++;
+    // Check if it's the third turn and spawn a new enemy if needed
+
+    if (this.turnCount % 6 === 0) {
+      strengthMultiplier = strengthMultiplier * 1.1;
+      console.log("Stats increased x ", strengthMultiplier);
+      this.spawnEnemy();
+    } 
+    else if (this.turnCount % 3 === 0) this.spawnEnemy();
+    return this.enemyPool;
+  }
+
+  checkEnemies(){
     // If an enemy dies, remove them from the character pool
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
@@ -189,21 +205,12 @@ class Game {
         this.enemiesKilled = this.enemiesKilled += 1;
         this.enemyPool.splice(i,1);
         const parent = targetImg.parentElement;
+        console.log(parent);
         parent.querySelectorAll(".enemy-stat-container").forEach(container=>container.remove());
         targetImg.remove();
         i--;
       }
     }
-    this.turnCount++;
-    // Check if it's the third turn and spawn a new enemy if needed
-
-    if (this.turnCount % 6 === 0) {
-      strengthMultiplier = strengthMultiplier * 1.1;
-      console.log("Stats increased x ", strengthMultiplier);
-      this.spawnEnemy();
-    } 
-    else if (this.turnCount % 3 === 0) this.spawnEnemy();
-    return this.enemyPool;
   }
 
   retrieveEnemies(){
@@ -220,9 +227,10 @@ class Character {
     this.atk = atk;
     this.def = def;
     this.res = res;
+    this.status = [];
   }
 
-  attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect) {
+  attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect, attacker) {
     // Perform attack logic
     let trueDamageMult;
     let calculatedDamage;
@@ -237,13 +245,15 @@ class Character {
     }
     if (statusEffect){
       const statusEff = new StatusEffect(statusEffect, 4, 5, target);
-      statusEff.tick();
+      target.registerEffect(statusEff);
       const statusEffImg = document.createElement("img");
       statusEffImg.src = `/public/img/effects/${statusEff.name}.gif`;
       const targetEl = document.querySelector('.'+target.id);
       targetEl.parentElement.querySelector('div.enemyStatus').appendChild(statusEffImg);
     }
     
+    this.checkStatus();
+
     // finish calculating
     target.hp = Math.max(0, target.hp - calculatedDamage);
     if (playerAttacking){
@@ -252,6 +262,20 @@ class Character {
       target.updateHp();
     } else {
       battleAnimator("enemy");
+    }
+  }
+  
+  registerEffect(status){
+    this.status.push(status);
+  }
+
+  checkStatus(){
+    if (this.status){
+      this.status.forEach(statusEff=>{
+        if (statusEff.duration > 0){
+          statusEff.tick();
+        }
+      });
     }
   }
 
@@ -408,7 +432,8 @@ class StatusEffect{
       console.log("Bleed-tick");
       this.target.hp = this.target.hp - this.damage;
       this.target.updateHp();
-    }, 4000);
+
+    }, 100);
   }
 }
 
@@ -498,13 +523,15 @@ $(document).ready(async ()=>{
       
         await delay(1000);          
         for (const enemy of enemyTurn) {
-          enemy.attack(playerCharacter);
+          enemy.attack(playerCharacter, '', '', '', '', '', enemy);
 
           await delay(1200);
           $(".attack-anim-overlay").addClass("hideAnim");
 
           await delay(400);
           playerCharacter.updateStats();
+
+          game.checkEnemies();
 
         }
         playerCharacter.gainmana(3);
