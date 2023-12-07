@@ -164,7 +164,6 @@ class Game {
             enemyImg.classList.add("targeted");
           });
         });
-
         console.log(newEnemy);
         id++;
       }
@@ -195,21 +194,21 @@ class Game {
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
       if (enemy.hp <= 0) {
-        const targetImg = document.querySelector(`.enemy img.${targetId}`);
-        if (enemy.name.includes("Void")){
-          this.bossesKilled = this.bossesKilled += 1;
-          if (localStorage.getItem("difficulty") == "story"){
-            getNextDialog();
-          }
+        const targetImg = document.querySelector(`img.${enemy.id}`);
+        if (enemy.name.includes("Void")) {
+            this.bossesKilled = this.bossesKilled += 1;
+            if (localStorage.getItem("difficulty") == "story") {
+                getNextDialog();
+            }
         }
         this.enemiesKilled = this.enemiesKilled += 1;
-        this.enemyPool.splice(i,1);
+        this.enemyPool.splice(i, 1);
         const parent = targetImg.parentElement;
-        console.log(parent);
-        parent.querySelectorAll(".enemy-stat-container").forEach(container=>container.remove());
+        parent.querySelectorAll(".enemy-stat-container").forEach(container => container.remove());
         targetImg.remove();
         i--;
-      }
+    }
+    
     }
   }
 
@@ -244,6 +243,7 @@ class Character {
       calculatedDamage = calculatedDamage * damageMult;
     }
     if (statusEffect){
+      console.log(target);
       const statusEff = new StatusEffect(statusEffect, 4, 5, target);
       target.registerEffect(statusEff);
       const statusEffImg = document.createElement("img");
@@ -376,11 +376,11 @@ class Enemy extends Character {
     this.multiplier = multiplier || 1;
     this.id = id;
   }
-  updateHp(){
-    const enemy = document.querySelector(`.${targetId}`).parentElement;
+  updateHp(statusEffect, correctId) {
+    const targetClass = statusEffect ? correctId : targetId;
+    const enemy = document.querySelector(`.${targetClass}`).parentElement;
     const $hpBar = enemy.querySelector(".enemyHP");
-
-    this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
+    this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%");
   }
 }
 
@@ -399,11 +399,18 @@ class Boss extends Character {
     this.multiplier = multiplier || 1;
     this.id = id;
   }
-  updateHp(){
-    const enemy = document.querySelector(`.${targetId}`).parentElement;
-    const $hpBar = enemy.querySelector(".enemyHP");
+  updateHp(statusEffect, correctId){
+    if(statusEffect){
+      console.log(correctId);
+      const enemy = document.querySelector(`.${correctId}`).parentElement;
+      const $hpBar = enemy.querySelector(".enemyHP");
+      this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
+    } else {
+      const enemy = document.querySelector(`.${targetId}`).parentElement;
+      const $hpBar = enemy.querySelector(".enemyHP");
+      this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
+    }
 
-    this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
   }
 }
 
@@ -420,21 +427,26 @@ class StatusEffect{
     name,
     duration,
     damage,
-    target
+    targetEnemy
   ){
     this.name = name;
     this.duration = duration;
     this.damage = damage;
-    this.target = target;
+    this.targetEnemy = targetEnemy;
   }
-  tick(){
-    setTimeout(()=>{
-      console.log("Bleed-tick");
-      this.target.hp = this.target.hp - this.damage;
-      this.target.updateHp();
-
+  // atew
+  tick() {
+    setTimeout(() => {
+      if (this.targetEnemy) {
+        const currentTarget = this.targetEnemy; // Capture the current target
+        console.log(currentTarget);
+        console.log("Bleed-tick");
+        currentTarget.hp = Math.max(0, currentTarget.hp - this.damage);
+        currentTarget.updateHp("bleed", currentTarget.id);
+      }
     }, 100);
   }
+  
 }
 
 $(document).ready(async ()=>{
@@ -521,25 +533,29 @@ $(document).ready(async ()=>{
       async function playTurn() {
         const enemyTurn = game.processTurn();
       
-        await delay(1000);          
+        const delayMultiplier = localStorage.getItem("skip-battle-animations") ? 0.2 : 1;
+      
+        await delay(1000 * delayMultiplier);
+      
         for (const enemy of enemyTurn) {
           enemy.attack(playerCharacter, '', '', '', '', '', enemy);
-
-          await delay(1200);
+      
+          await delay(1200 * delayMultiplier);
           $(".attack-anim-overlay").addClass("hideAnim");
-
-          await delay(400);
+      
+          await delay(400 * delayMultiplier);
           playerCharacter.updateStats();
-
+      
           game.checkEnemies();
-
         }
+      
         playerCharacter.gainmana(3);
-        if (defending){
+      
+        if (defending) {
           playerCharacter.reduceDefense();
         }
-
       }
+      
       setTimeout(() => {
         playTurn();
       }, 1200);

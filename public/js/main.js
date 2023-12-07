@@ -9,6 +9,7 @@ const volSliderM = document.getElementById("vol-slider-music");
 const volSliderS = document.getElementById("vol-slider-SFX");
 const saveSettingsBtn = document.querySelector(".save-settings");
 const volumeButtonM = document.getElementById("volume-btn");
+const battleAnimsBtn = document.getElementById("battleAnims");
 const overlay = document.querySelector(".overlay-box-overlay");
 const disclaimer = document.querySelector(".disclaimer");
 let bgm;
@@ -61,6 +62,11 @@ volumeButtonM.addEventListener("click", () => {
     isMuted = !isMuted; // Toggle the value of isMuted
     bgm.muted = isMuted;
     isMuted ? volSliderM.classList.add("empty") : volSliderM.classList.remove("empty");
+});
+let toggleBattleAnims = false;
+battleAnimsBtn.addEventListener("click", () => {
+    toggleBattleAnims = !toggleBattleAnims;
+    localStorage.setItem("skip-battle-animations", toggleBattleAnims);
 });
 continueButton.addEventListener("click", ()=>{
     var ele = document.querySelectorAll('input[name="difficulty-selection"]');

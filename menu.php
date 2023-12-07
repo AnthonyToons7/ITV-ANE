@@ -137,6 +137,10 @@
                 <div class="account-settings setting">
                     <a href="../private/account.php">Account settings</a>
                 </div>
+                <div class="animation-settings setting">
+                    <label for="battleAnims">Turn off battle animations</label>
+                    <input type="checkbox" name="battleAnims" id="battleAnims">
+                </div>
                 <div class="account-settings"></div>
                 <div class="saved">Saved!</div>
                 <button class="save-settings">Save</button>
