@@ -173,6 +173,7 @@
 <script src="../public/js/gamescripts/dialog.js"></script>
 <script src="../public/js/gamescripts/battleAnimator.js"></script>
 <script src="../public/js/gamescripts/damagesprites.js"></script>
+<script src="../public/js/gamescripts/AI.js"></script>
 <!-- <script src="../public/js/gamescripts/spritesheets.js"></script> -->
 </body>
 </html> 

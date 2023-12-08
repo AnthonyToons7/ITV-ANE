@@ -546,7 +546,7 @@ div.enemy-box.attacking {
 }
 @media screen and (min-width: 1400px) {
     .enemy-positions{
-        transform: scale(1) translateY(50px) translateX(10rem);
+        transform: scale(1) translateY(-50px) translateX(10rem);
     }
     section#battle-zone{
         justify-content: space-around;

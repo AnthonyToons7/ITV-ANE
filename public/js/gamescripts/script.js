@@ -80,6 +80,7 @@ let strengthMultiplier = gameModeStrength;
 let id = 1;
 let targetId;
 let defending = false;
+let enemyDefending = false;
 // CLASSES
 class Game {
   constructor() {
@@ -114,7 +115,8 @@ class Game {
             bossStats["DEF"],
             bossStats["RES"],
             strengthMultiplier,
-            "enemy-" + id
+            "enemy-" + id,
+            false
           );
           $("#bossWarning").addClass("bossWarning");
           setTimeout(() => {
@@ -248,6 +250,7 @@ class Character {
       target.registerEffect(statusEff);
       const statusEffImg = document.createElement("img");
       statusEffImg.src = `/public/img/effects/${statusEff.name}.gif`;
+      statusEffImg.classList.add(statusEff.name);
       const targetEl = document.querySelector('.'+target.id);
       targetEl.parentElement.querySelector('div.enemyStatus').appendChild(statusEffImg);
     }
@@ -263,6 +266,9 @@ class Character {
     } else {
       battleAnimator("enemy");
     }
+    if (target.enemyDefending){
+      target.enemyReduceDefense();
+    }
   }
   
   registerEffect(status){
@@ -272,8 +278,10 @@ class Character {
   checkStatus(){
     if (this.status){
       this.status.forEach(statusEff=>{
-        if (statusEff.duration > 0){
-          statusEff.tick();
+        console.log(this.status);
+        statusEff.tick();
+        if (statusEff.duration <= 0){
+          this.status.splice(statusEff);
         }
       });
     }
@@ -362,7 +370,7 @@ class Player extends Character {
 }
 
 class Enemy extends Character {
-  constructor(name, hp, maxHp, atk, def, res, multiplier, id) {
+  constructor(name, hp, maxHp, atk, def, res, multiplier, id, defending) {
     super(
       name,
       Math.ceil(hp * multiplier),
@@ -375,6 +383,7 @@ class Enemy extends Character {
     // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
     this.id = id;
+    this.enemyDefending = defending;
   }
   updateHp(statusEffect, correctId) {
     const targetClass = statusEffect ? correctId : targetId;
@@ -382,10 +391,20 @@ class Enemy extends Character {
     const $hpBar = enemy.querySelector(".enemyHP");
     this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%");
   }
+  enemyDefend() {
+    this.def = Math.floor((this.def / 100) * 150);
+    this.res = Math.floor((this.res / 100) * 150);
+    this.enemyDefending = true;
+  }
+  enemyReduceDefense(){
+    this.def = Math.ceil((this.def / 150) * 100);
+    this.res = Math.ceil((this.res / 150) * 100);
+    this.enemyDefending = false;
+  }
 }
 
 class Boss extends Character {
-  constructor(name, hp, maxHp, atk, def, res, multiplier, id) {
+  constructor(name, hp, maxHp, atk, def, res, multiplier, id, defending) {
     super(
       name,
       Math.ceil(hp * multiplier),
@@ -398,6 +417,7 @@ class Boss extends Character {
     // The multiplier '1' = 100%;
     this.multiplier = multiplier || 1;
     this.id = id;
+    this.enemyDefending = defending;
   }
   updateHp(statusEffect, correctId){
     if(statusEffect){
@@ -410,7 +430,16 @@ class Boss extends Character {
       const $hpBar = enemy.querySelector(".enemyHP");
       this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
     }
-
+  }
+  enemyDefend() {
+    this.def = Math.floor((this.def / 100) * 150);
+    this.res = Math.floor((this.res / 100) * 150);
+    enemyDefending = true;
+  }
+  enemyReduceDefense(){
+    this.def = Math.ceil((this.def / 150) * 100);
+    this.res = Math.ceil((this.res / 150) * 100);
+    enemyDefending = false;
   }
 }
 
@@ -437,12 +466,16 @@ class StatusEffect{
   // atew
   tick() {
     setTimeout(() => {
-      if (this.targetEnemy) {
-        const currentTarget = this.targetEnemy; // Capture the current target
-        console.log(currentTarget);
-        console.log("Bleed-tick");
+      if (this.targetEnemy && this.duration > 0) {
+        const currentTarget = this.targetEnemy;
         currentTarget.hp = Math.max(0, currentTarget.hp - this.damage);
         currentTarget.updateHp("bleed", currentTarget.id);
+        this.duration = this.duration - 1;
+        console.log(this.targetEnemy.id + " is bleeding!");
+      } else if (this.duration <= 0){
+        console.log("test");
+        const container = document.querySelector("."+this.targetEnemy.id).parentElement;
+        container.querySelector(".enemy-stat-container .enemyStatus ." + this.name).remove();
       }
     }, 100);
   }
@@ -475,7 +508,8 @@ $(document).ready(async ()=>{
 
   // Starting new turns:
   game.processTurn();
-  // getData(playerCharacter.mana);
+  
+  const lastMoves = [];
 
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
@@ -486,10 +520,13 @@ $(document).ready(async ()=>{
           game.retrieveEnemies().forEach(enemy=>{
             playerCharacter.attack(enemy, "player", targetId);
           });
+          // Add your last used move to an array (for AI)
+          lastMoves.push("attack");
           break;
         case "option-defend":
           // Increase defense by 50% and end your turn
           playerCharacter.defend("50%");
+          lastMoves.push("defend");
           break;
         case "option-magic-1":
           // Return if player does not have enough mana
@@ -504,6 +541,7 @@ $(document).ready(async ()=>{
             // Tell the game that it's a magic attack
             playerCharacter.attack(enemy, "player", targetId, "magic", 0.75, "bleed");
           });
+          lastMoves.push("attack");
           break;
         case "option-magic-2":
           if(playerCharacter.mana < 15) return;
@@ -513,6 +551,7 @@ $(document).ready(async ()=>{
           game.retrieveEnemies().forEach(enemy=>{
             playerCharacter.attack(enemy, "player", targetId, "magic", 1.15);
           });
+          lastMoves.push("attack");
           break;
         case "option-magic-3":
           if(playerCharacter.mana < 25) return;
@@ -523,6 +562,7 @@ $(document).ready(async ()=>{
           playerCharacter.updateStats();
           return;
         default:
+          lastMoves.push("pass");
           break;
       }
 
@@ -538,7 +578,10 @@ $(document).ready(async ()=>{
         await delay(1000 * delayMultiplier);
       
         for (const enemy of enemyTurn) {
-          enemy.attack(playerCharacter, '', '', '', '', '', enemy);
+
+          runEnemyAi(enemy, playerCharacter, lastMoves);
+
+          // enemy.attack(playerCharacter, '', '', '', '', '', enemy);
       
           await delay(1200 * delayMultiplier);
           $(".attack-anim-overlay").addClass("hideAnim");
