@@ -103,7 +103,10 @@
                         <p>DEF: <span></span></p>
                         <p>RES: <span></span></p>
                         <p>MANA: <span></span></p>
-                        <p>STATUS: <span></span></p>
+                        <div class="flex">
+                            <p>STATUS: </p>
+                            <div class="status-effects-player"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="buttons-basic col-4 flex">

@@ -208,7 +208,7 @@ input[type="radio"] {
     display: none;
 }
 .show {
-    display: flex;
+    display: flex !important;
 }
 .leaderboard-place {
     display: flex;
@@ -295,6 +295,21 @@ div.story-box .content {
     padding: 30px;
     font-family: sans-serif;
 }
+.story-mode-box {
+    display: none;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    max-height: 90%;
+    flex-direction: column;
+    background: #1f1f1f;
+}
+.story-mode-box .content {
+    padding: 20px;
+    max-height: 50%;
+  }
 
 /* CUSTOM CHECKBOX */
 .checkbox {

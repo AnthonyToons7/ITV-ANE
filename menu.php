@@ -148,7 +148,7 @@
         </div>
         <div class="overlay-box-overlay"></div>
         <!-- HARDCODED, MUST REMOVE -->
-        <p class="version">Ver 1.0.0</p>
+        <p class="version">Ver. BETA</p>
     </main>
     <div class="background-menu"></div>
     <script src="public/js/glitch.js"></script>

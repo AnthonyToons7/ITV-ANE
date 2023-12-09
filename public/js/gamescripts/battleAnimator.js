@@ -2,8 +2,6 @@
 function battleAnimator(attacking){
     if (!localStorage.getItem("skip-battle-animations"))
     {
-        console.log(localStorage.getItem("skip-battle-animations"));
-        console.log("test");
         // show the overlay
         document.querySelector(".attack-anim-overlay").classList.remove("hideAnim");
         if(attacking == "player"){

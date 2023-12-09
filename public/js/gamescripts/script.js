@@ -134,7 +134,8 @@ class Game {
               enemystats["DEF"],
               enemystats["RES"],
               strengthMultiplier,
-              "enemy-" + id
+              "enemy-" + id,
+              false
               );
               this.enemyPool.push(newEnemy);
             }
@@ -245,14 +246,27 @@ class Character {
       calculatedDamage = calculatedDamage * damageMult;
     }
     if (statusEffect){
-      console.log(target);
-      const statusEff = new StatusEffect(statusEffect, 4, 5, target);
+      let durationTimer = 0;
+      let damage = 0;
+      if (statusEffect == "bleed"){
+        damage = 5;
+        durationTimer = 4;
+      }
+      else{
+        damage = 8;
+        durationTimer = 8;
+      }
+      const statusEff = new StatusEffect(statusEffect, durationTimer, damage, target);
       target.registerEffect(statusEff);
       const statusEffImg = document.createElement("img");
       statusEffImg.src = `/public/img/effects/${statusEff.name}.gif`;
       statusEffImg.classList.add(statusEff.name);
-      const targetEl = document.querySelector('.'+target.id);
-      targetEl.parentElement.querySelector('div.enemyStatus').appendChild(statusEffImg);
+      if(target.name == "Aubrey"){
+        document.querySelector('.status-effects-player').appendChild(statusEffImg);
+      } else {
+        const targetEl = document.querySelector('.'+target.id);
+        targetEl.parentElement.querySelector('div.enemyStatus').appendChild(statusEffImg);
+      }
     }
     
     this.checkStatus();
@@ -278,7 +292,6 @@ class Character {
   checkStatus(){
     if (this.status){
       this.status.forEach(statusEff=>{
-        console.log(this.status);
         statusEff.tick();
         if (statusEff.duration <= 0){
           this.status.splice(statusEff);
@@ -336,7 +349,7 @@ class Player extends Character {
       const statProperties = ['hp', 'atk', 'def', 'res', 'mana'];
       document.querySelectorAll("div.overview p span").forEach((stat, index) => {
         const propName = statProperties[index];
-        stat.textContent = this[propName];
+        stat.textContent = Math.ceil(this[propName]);
       });
     }, 500);
     if(this.hp <= 0){
@@ -463,17 +476,19 @@ class StatusEffect{
     this.damage = damage;
     this.targetEnemy = targetEnemy;
   }
-  // atew
+
   tick() {
     setTimeout(() => {
       if (this.targetEnemy && this.duration > 0) {
         const currentTarget = this.targetEnemy;
+        console.log(currentTarget.hp);
         currentTarget.hp = Math.max(0, currentTarget.hp - this.damage);
-        currentTarget.updateHp("bleed", currentTarget.id);
+        console.log(currentTarget.hp);
+        this.targetEnemy.name == "Aubrey" ? currentTarget.updateStats() : currentTarget.updateHp(this.name, currentTarget.id);
+        
         this.duration = this.duration - 1;
-        console.log(this.targetEnemy.id + " is bleeding!");
+        console.log(this.name + " on " + this.targetEnemy.name);
       } else if (this.duration <= 0){
-        console.log("test");
         const container = document.querySelector("."+this.targetEnemy.id).parentElement;
         container.querySelector(".enemy-stat-container .enemyStatus ." + this.name).remove();
       }
@@ -492,7 +507,7 @@ $(document).ready(async ()=>{
   
   const playerStats = data.find(character => character.name === "Player");
   const playerCharacter = new Player(
-    "Player",
+    "Aubrey",
     Math.ceil(playerStats["HP"] / 100 * chosenGear[0]["HP"]),
     Math.ceil(playerStats["HP"] / 100 * chosenGear[0]["HP"]),
     Math.ceil(playerStats["ATK"] / 100 * chosenGear[1]["ATK"]),

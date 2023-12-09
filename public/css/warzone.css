@@ -593,7 +593,8 @@ img#enemy-Void {
     /* 75%{box-shadow: inset 0px 0px 150px red;} */
     100%{box-shadow: inset 0px 0px 0px rgba(255, 0, 0, 0.766);}
 }
-div.enemyStatus img {
+div.enemyStatus img,
+.status-effects-player img {
     width: 30px !important;
     position: unset !important;
 }

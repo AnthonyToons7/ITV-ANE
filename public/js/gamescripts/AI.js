@@ -8,7 +8,6 @@ function runEnemyAi(enemy, player, lastMoves){
       for (const move of lastUsed) {
         moveCounts[move] = moveCounts[move] ? moveCounts[move] + 1 : 1;
       }
-      console.log(moveCounts);
     }
     
     const attackPercentage = moveCounts["attack"] / 100 || 0;
@@ -33,8 +32,8 @@ function runEnemyAi(enemy, player, lastMoves){
 
     const randomValue = Math.random();
 
+    // Lower defending chance even more
     if (randomValue < defendChance / 2) {
-        console.log(randomValue);
         console.log("Enemy defends");
         enemyChar.enemyDefend();
     } else if (randomValue >= defendChance && randomValue < (defendChance + attackChance)) {
@@ -45,13 +44,18 @@ function runEnemyAi(enemy, player, lastMoves){
         
         switch(enemyChar.name){
         case "Slime":
-          // do thing
+          if (defending == true){
+            console.log("Acid fling");
+            enemyChar.attack(playerChar, '', '', 'magic', 1, 'poison', enemyChar);
+          }
           break;
         case "Fallen-Rose-knight":
           // do thing
           break;
         case "Void":
-          // do thing
+          if (defending == true){
+            enemyChar.attack(playerChar, '', '', 'magic', 2, '', enemyChar);
+          }
           break;
         case "Fallen-Void":
           // do thing
