@@ -174,5 +174,6 @@
 <script src="../public/js/gamescripts/damagesprites.js"></script>
 <script src="../public/js/gamescripts/AI.js"></script>
 <script src="../public/js/gamescripts/spritesheets.js"></script>
+<script src="../public/js/gamescripts/cards.js"></script>
 </body>
 </html> 

@@ -1,10 +1,32 @@
 [
     {
         "cardname": "Scatterburst",
-        "carddesc": "Hit ALL enemies with a LIGHT hit and BURN them."
+        "carddesc": "Hit ALL enemies with a LIGHT hit and BURN them.",
+        "ID": "1"
     },
     {
         "cardname": "Ardent rest",
-        "carddesc": "Discard 1 card, regenerate 10 mana."
+        "carddesc": "DISCARD 1 card, RESTORE 10 mana.",
+        "ID": "2"
+    },
+    {
+        "cardname": "Regenerate",
+        "carddesc": "RESTORE 10 HEALTH.",
+        "ID": "3"
+    },
+    {
+        "cardname": "Fresh herbs",
+        "carddesc": "DESTROY all STATUS EFFECT instances on you.",
+        "ID": "4"
+    },
+    {
+        "cardname": "Ardent sacrifice",
+        "carddesc": "PAY half your HEALTH; reduce the HEALTH of one ENEMY by 75% of their currrent HEALTH.",
+        "ID": "5"
+    },
+    {
+        "cardname": "Final blow",
+        "carddesc": "DISCARD 4 cards; DESTROY all creatures on the field.",
+        "ID": "6"
     }
 ]

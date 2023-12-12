@@ -48,13 +48,9 @@ function runEnemyAi(enemy, player, lastMoves){
         case "Slime":
           if (defending === true) {
             console.log("Acid fling");
+            // Randomly decide if the enemy will be poisoned or not
             const randomChance = Math.random();
-            if (randomChance <= 0.1) {
-                enemyChar.attack(playerChar, '', '', 'magic', 1, 'poison', enemyChar);
-                console.log("Poison applied!");
-            } else {
-                enemyChar.attack(playerChar, '', '', 'magic', 1, '', enemyChar);
-            }
+            randomChance <= 0.5 ? enemyChar.attack(playerChar, '', '', 'magic', 1, 'poison', enemyChar) : enemyChar.attack(playerChar, '', '', 'magic', 1, '', enemyChar);
         }
         
           break;

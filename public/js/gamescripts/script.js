@@ -69,6 +69,14 @@ const gearStats = async ()=>{
     return console.log(error);
   }
 }
+const cardData = async ()=>{
+  try {
+    const response = await fetch('../public/js/data/cards.json');
+    return await response.json();
+  } catch (error) {
+    return console.log(error);
+  }
+}
 
 let gameModeStrength;
 if (localStorage.getItem("difficulty") == "hard" || localStorage.getItem("difficulty") == "story"){
@@ -161,7 +169,7 @@ class Game {
                 enemyImg.classList.add("targeted");
               });
             });
-        }, 50);
+        }, 500);
 
         console.log(newEnemy);
         id++;
@@ -370,7 +378,7 @@ class Player extends Character {
   }
   gainmana(amt) {
     // Gain mana each turn. Max is 40
-    this.mana = Math.min(Number(this.mana) + Number(amt), 40);
+    this.mana = Math.min(Number(this.mana) + Number(amt), this.maxMana);
   }
   updateMulti() {
     if (pturnCount % 10 === 0) {
@@ -531,6 +539,34 @@ $(document).ready(async ()=>{
   
   const lastMoves = [];
 
+  // Use delays in order to play the animations correctly
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async function playTurn() {
+    const enemyTurn = game.processTurn();
+  
+    const delayMultiplier = localStorage.getItem("skip-battle-animations") ? 0.2 : 1;
+  
+    await delay(1000 * delayMultiplier);
+  
+    for (const enemy of enemyTurn) {
+
+      runEnemyAi(enemy, playerCharacter, lastMoves);
+  
+      await delay(1200 * delayMultiplier);
+      $(".attack-anim-overlay").addClass("hideAnim");
+  
+      await delay(400 * delayMultiplier);
+      playerCharacter.updateStats();
+  
+      game.checkEnemies();
+    }  
+    if (defending) {
+      playerCharacter.reduceDefense();
+    }
+  }
+
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
       // Check what attack option you chose
@@ -586,36 +622,7 @@ $(document).ready(async ()=>{
           lastMoves.push("pass");
           break;
       }
-
-      // Use delays in order to play the animations correctly
-      function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      async function playTurn() {
-        const enemyTurn = game.processTurn();
-      
-        const delayMultiplier = localStorage.getItem("skip-battle-animations") ? 0.2 : 1;
-      
-        await delay(1000 * delayMultiplier);
-      
-        for (const enemy of enemyTurn) {
-
-          runEnemyAi(enemy, playerCharacter, lastMoves);
-      
-          await delay(1200 * delayMultiplier);
-          $(".attack-anim-overlay").addClass("hideAnim");
-      
-          await delay(400 * delayMultiplier);
-          playerCharacter.updateStats();
-      
-          game.checkEnemies();
-        }  
-        if (defending) {
-          playerCharacter.reduceDefense();
-        }
-      }
-      
-      setTimeout(() => {
+     setTimeout(() => {
         playTurn();
       }, 1200);
     });
@@ -623,50 +630,77 @@ $(document).ready(async ()=>{
 
   // ---------NON BATTLE RELATED FUNCTION ONLOAD----------------
 
-  // READY UP SPRITES
+  // Is the gamemode story? Play dialog!
+  localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide(); $(".dialog-background").hide();
 
-    // retrieveSprites("Player");
-  
-    // Is the gamemode story? Play dialog!
-    localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide(); $(".dialog-background").hide();
-  
-    // Fetch all base stats and show it in the player data
-    fetch('../public/js/data/base-stats.json')
-      .then(response => response.json())
-      .then(data => {
-        document.querySelectorAll("div.overview p span").forEach(span => {
-          const playerData = data.find(entry => entry.name === "Player");
-          if (playerData) {
-            const propertyName = span.parentElement.textContent.trim().split(':')[0];
-            span.textContent = playerData[propertyName];
-          }
-        });
-      })
-      .catch(error => console.error('Error loading JSON:', error));
+  // Fetch all base stats and show it in the player data
+  fetch('../public/js/data/base-stats.json')
+    .then(response => response.json())
+    .then(data => {
+      document.querySelectorAll("div.overview p span").forEach(span => {
+        const playerData = data.find(entry => entry.name === "Player");
+        if (playerData) {
+          const propertyName = span.parentElement.textContent.trim().split(':')[0];
+          span.textContent = playerData[propertyName];
+        }
+      });
+    })
+    .catch(error => console.error('Error loading JSON:', error));
 
-    // Cards
-    let cardsFront = document.querySelector('.cards');
-    let cardWidth = cardsFront.offsetWidth;
-    let totalarc = 200;
-    let numcards = 5; // Reset amount and draw 5 each turn
-    let angles = Array(numcards).fill('').map((a, i) => (totalarc / numcards * (i + 1)) - (totalarc/2 + (totalarc / numcards) / 2));
-    let margins = angles.map((a, i) => cardWidth / numcards * (i + 1));
+  // Cards
+  let cardsFront = document.querySelector('.cards');
+  let cardWidth = cardsFront.offsetWidth;
+  let totalarc = 200;
+  let numcards = 5; // Reset amount and draw 5 each turn
+  let angles = Array(numcards).fill('').map((a, i) => (totalarc / numcards * (i + 1)) - (totalarc/2 + (totalarc / numcards) / 2));
+  let margins = angles.map((a, i) => cardWidth / numcards * (i + 1));
+  
+  // Set the cards in the right angle
+  const cardDatas = await cardData();
+  angles.forEach(async (a, i) => {
+    let s = `transform:rotate(${angles[i]}deg);margin-left:${margins[i]}px;`
+    const c = document.createElement("div");
+
+    const cardName = document.createElement("div");
+    const cardDesc = document.createElement("div");
+    cardName.textContent = cardDatas[i]["cardname"];
+    cardDesc.textContent = cardDatas[i]["carddesc"];
+    cardName.classList.add("cardTitle");
+    cardDesc.classList.add("cardDesc");
+    c.dataset.cardId = cardDatas[i]["ID"];
+
+    c.append(cardName, cardDesc);
+
+    c.style = s;
+    c.classList.add("cardd");
+    cardsFront.appendChild(c);
+  });
     
-    // Set the cards in the right angle
-    angles.forEach((a, i) => {
-      let s = `transform:rotate(${angles[i]}deg);margin-left:${margins[i]}px;`
-      let c = `<div class='cardd' style='${s}'></div>`;
-      cardsFront.innerHTML += c;
-    });
-    
-    let currentlyClickedCard = null;
-    cardsFront.addEventListener('click', function(event) {
-      if (event.target.classList.contains('cardd')) {
-        if (currentlyClickedCard) currentlyClickedCard.classList.remove('clicked');
-        event.target.classList.toggle('clicked');
-        currentlyClickedCard = event.target;
+  cardsFront.addEventListener('click', function(event) {
+    if (event.target.classList.contains('cardd') || event.target.classList.contains('cardTitle') || event.target.classList.contains('cardDesc')) {
+
+      if (event.target.classList.contains('clicked')) {
+        applyCardEffect(event.target.dataset, game, playerCharacter);
+        event.target.remove();
+        setTimeout(() => {
+          playTurn();
+        }, 1200);
       }
-    });
+      
+      if (!event.target.classList.contains('clicked')) {
+        const isCardTitle = event.target.classList.contains('cardTitle');
+        const isCardDesc = event.target.classList.contains('cardDesc');
+        if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
+          applyCardEffect(event.target.parentElement.dataset, game, playerCharacter);
+          event.target.parentElement.remove();
+          setTimeout(() => {
+            playTurn();
+          }, 1200);
+        }
+        event.target.classList.toggle('clicked');
+      }
+    }
+  });
 });
 
 const toggleStatsPage = (showOverview) => {
