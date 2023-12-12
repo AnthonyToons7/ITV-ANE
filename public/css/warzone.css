@@ -385,11 +385,11 @@ section#battle-zone {
 .enemy:hover {
     filter: drop-shadow(rgb(19, 84, 150) 0 0 10px);
 }
-div.Aubrey {
+div.player {
     width: 300px;
     height: 300px;
 }
-.Aubrey img {
+.player img {
     height: 100%;
     width: 100%;
 }
@@ -553,7 +553,7 @@ div.enemy-box.attacking {
     .enemy-positions{
         transform: scale(0.7) translateY(30px) translateX(20rem);
     }
-    div.Aubrey{
+    div.player{
         width: 400px;
         height: 400px;
     }

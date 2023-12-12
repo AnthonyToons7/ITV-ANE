@@ -628,7 +628,7 @@ $(document).ready(async ()=>{
     // retrieveSprites("Player");
   
     // Is the gamemode story? Play dialog!
-    localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide();
+    localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide(); $(".dialog-background").hide();
   
     // Fetch all base stats and show it in the player data
     fetch('../public/js/data/base-stats.json')
