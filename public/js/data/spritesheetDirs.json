@@ -1,6 +1,9 @@
 [
     {
-        "Void":"http://localhost/public/img/spritesheets/TESTSHEET.png"
+        "Void":"http://localhost/public/img/spritesheets/Void-sheet.png"
+    },
+    {
+        "Slime":"http://localhost/public/img/spritesheets/Slime-sheet.png"
     },
     {
         "Player":"http://localhost/public/img/spritesheets/amognus.png",

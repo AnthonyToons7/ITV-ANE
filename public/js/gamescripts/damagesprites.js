@@ -1,4 +1,4 @@
-function sheetAnimator(){
+function battleSheetAnimator(){
     const canvas = document.createElement("canvas");
     canvas.classList.add("damagecanvas");
     let playerState = 'idle';
@@ -49,7 +49,7 @@ function sheetAnimator(){
         }
         requestAnimationFrame(animateDamageSheet);
     }
-    document.querySelector(".enemy img.targeted").parentElement.appendChild(canvas);
+    document.querySelector(".enemy canvas.targeted").parentElement.appendChild(canvas);
     animateDamageSheet();
     
   }

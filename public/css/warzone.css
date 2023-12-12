@@ -62,7 +62,7 @@ main {
     height: 50px;
     padding: 10px;
     font-size: 16px;
-    display: none;
+    /* display: none; */
 }
 #dialog-box {
     padding: 20px;
@@ -71,17 +71,34 @@ main {
     border-top-left-radius: 0;
     height: 100%;
     width: 100%;
-    display: none;
+    /* display: none; */
 }
 #dialog-box-characters{
     position: relative;
     display: flex;
     justify-content: space-between;
     transform: translateY(50px);
+    opacity: 1;
+    transition: all .4s;
+}
+.talking{
+    transform: scale(1.1) translateY(0px) !important;
+    opacity: 1 !important;
+    transition: all .4s;
+}
+.dialog-background{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #000000fc;
 }
 .dialog-character {
     height: 0;
     width: 0;
+    opacity: 0.5;
     padding: 13%;
     background-size: contain !important;
     background-repeat: no-repeat;
@@ -102,12 +119,17 @@ section#player-ui {
     border: 3px groove #fff;
     border-radius: 5px;
 }
+.UI-MOVES.defending{
+    background-color: #424242e8;
+}
+.UI-MOVES.attacking{
+    background-color: #6e2521e8;
+}
 .buttons-cards {
     width: 30%;
     justify-content: space-evenly;
 }
 div.deck,
-div.used-pile,
 div.hand {
     /* border: 3px solid #fff; */
     height: 100%;
@@ -127,11 +149,7 @@ div.deck:hover,
 div.hand:hover {
     filter: drop-shadow(0 0 1px #00ff7b);
 }
-div.used-pile:hover {
-    filter: drop-shadow(0 0 1px #000000);
-}
 div.deck::before,
-div.used-pile::before,
 div.hand::before {
     content: "\25B6";
     font-family: joystix;
@@ -143,10 +161,8 @@ div.hand::before {
     opacity: 0;
 }
 div.deck:hover::before,
-div.used-pile:hover::before,
 div.hand:hover::before,
 div.deck:focus::before,
-div.used-pile:focus::before,
 div.hand:focus::before{
     opacity: 1;
 }
@@ -356,12 +372,10 @@ section#battle-zone {
     opacity: 0;
     pointer-events: none;
 }
-
-.enemy .spritecanvas {
+.enemy canvas {
     position: absolute;
-    top: -350px;
+    top: -270px;
     left: -110px;
-    transform: rotateY(180deg);
 }
 .enemy .damagecanvas{
     position: absolute;
@@ -371,11 +385,11 @@ section#battle-zone {
 .enemy:hover {
     filter: drop-shadow(rgb(19, 84, 150) 0 0 10px);
 }
-div.player {
+div.Aubrey {
     width: 300px;
     height: 300px;
 }
-.player img {
+.Aubrey img {
     height: 100%;
     width: 100%;
 }
@@ -522,7 +536,7 @@ div.enemy-box.attacking {
         max-height: 110px;
         padding: 5px 0 5px 20px;
     }
-    div.deck, div.used-pile, div.hand {
+    div.deck, div.hand {
         width: 70px;
     }
     .enemy-positions{
@@ -539,7 +553,7 @@ div.enemy-box.attacking {
     .enemy-positions{
         transform: scale(0.7) translateY(30px) translateX(20rem);
     }
-    div.player{
+    div.Aubrey{
         width: 400px;
         height: 400px;
     }
@@ -600,7 +614,9 @@ div.enemyStatus img,
 }
 /* JUNK: TEST */
 #test {
-    display: none;
+    /* display: none; */
+    z-index: 99;
+    position: absolute;
 }
 /* 
 .enemy-data-stats{

@@ -16,11 +16,11 @@
 <body>
     <button id="test">Test</button>
     <main>
-        <div class=""></div>
+        <div class="dialog-background"></div>
         <div id="dialog-box-container">
             <div id="dialog-box-characters">
                 <div id="dialog-Eva" class="dialog-character"></div>
-                <div id="dialog-Player" class="dialog-character"></div>
+                <div id="dialog-Aubrey" class="dialog-character"></div>
                 <div id="dialog-Void" class="dialog-character"></div>
             </div>
             <div id="dialog-box-name" class="dialog-box"></div>
@@ -116,7 +116,7 @@
                     <div class="button move-option">Pass</div>
                 </div>
                 <div class="buttons-magic col-3 flex">
-                    <div class="button move-option magic-option" id="option-magic-1">Shattered illusion</div>
+                    <div class="button move-option magic-option" id="option-magic-1">Ignis</div>
                     <div class="button move-option magic-option" id="option-magic-2">Celeste</div>
                     <div class="button move-option magic-option" id="option-magic-3">Fired up</div>
                     <!-- Load script in that makes all btns -->
@@ -146,10 +146,6 @@
                 <div class="deck">
                     <img src="../public/img/icons/card-stack.png" alt="" class="card">
                 </div>
-                <div class="used-pile">
-                    <div class="hole"></div>
-                    <!-- <img src="../public/img/icons/card.png" alt="" class="card"> -->
-                </div>
             <!-- Load script that creates all cards -->
         </div>
     </section>
@@ -177,6 +173,6 @@
 <script src="../public/js/gamescripts/battleAnimator.js"></script>
 <script src="../public/js/gamescripts/damagesprites.js"></script>
 <script src="../public/js/gamescripts/AI.js"></script>
-<!-- <script src="../public/js/gamescripts/spritesheets.js"></script> -->
+<script src="../public/js/gamescripts/spritesheets.js"></script>
 </body>
 </html> 

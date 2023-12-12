@@ -4,6 +4,8 @@ function runEnemyAi(enemy, player, lastMoves){
     const playerChar = player;
     const moveCounts = {};
 
+    lastMoves.length = 10;
+
     if (lastUsed){
       for (const move of lastUsed) {
         moveCounts[move] = moveCounts[move] ? moveCounts[move] + 1 : 1;
@@ -38,16 +40,23 @@ function runEnemyAi(enemy, player, lastMoves){
         enemyChar.enemyDefend();
     } else if (randomValue >= defendChance && randomValue < (defendChance + attackChance)) {
         console.log("Enemy attacks");
-        enemyChar.attack(playerChar);
+        enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
     } else if (randomValue < (defendChance + attackChance + magicChance)) {
         console.log("Enemy uses magic");
         
         switch(enemyChar.name){
         case "Slime":
-          if (defending == true){
+          if (defending === true) {
             console.log("Acid fling");
-            enemyChar.attack(playerChar, '', '', 'magic', 1, 'poison', enemyChar);
-          }
+            const randomChance = Math.random();
+            if (randomChance <= 0.1) {
+                enemyChar.attack(playerChar, '', '', 'magic', 1, 'poison', enemyChar);
+                console.log("Poison applied!");
+            } else {
+                enemyChar.attack(playerChar, '', '', 'magic', 1, '', enemyChar);
+            }
+        }
+        
           break;
         case "Fallen-Rose-knight":
           // do thing
@@ -68,8 +77,9 @@ function runEnemyAi(enemy, player, lastMoves){
           break;
         }
 
-        enemyChar.attack(playerChar);
+        enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
     } else {
-        enemyChar.attack(playerChar)
+      enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
     }
+    playerChar.gainmana(3);
 }

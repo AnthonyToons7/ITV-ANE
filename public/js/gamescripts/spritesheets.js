@@ -1,6 +1,6 @@
 
 // Retrieve the spritesheets
-function retrieveSprites(characterName) {
+function retrieveSprites(characterName, characterId, container) {
     fetch('../public/js/data/spritesheetDirs.json')
       .then(response => response.json())
       .then(data => {
@@ -9,7 +9,7 @@ function retrieveSprites(characterName) {
         if (characterSources) {
           const source = characterSources[characterName];
           const characterTrue = characterSources.playertrue === "true"; // Check if playertrue is "true"
-          sheetAnimator(source, characterTrue);
+          sheetAnimator(source, characterTrue, characterId, container);
         } else {
           console.log("Character not found in the data.");
         }
@@ -17,24 +17,23 @@ function retrieveSprites(characterName) {
       .catch(error => console.log(error));
   }
   // Animate the sheets
-  function sheetAnimator(src, playerTrue){
+  function sheetAnimator(src, playerTrue, characterId, container){
     const canvas = document.createElement("canvas");
-    canvas.classList.add("spritecanvas");
     let playerState = 'idle';
     const ctx = canvas.getContext('2d');
-    const CANVAS_WIDTH = canvas.width = 400;
-    const CANVAS_HEIGHT = canvas.height = 400;
+    const CANVAS_WIDTH = canvas.width = 375;
+    const CANVAS_HEIGHT = canvas.height = 375;
     const spriteIMAGE = new Image();
     spriteIMAGE.src = src;
-    const spriteWidth = 1000;
-    const spriteHeight = 1000;
+    const spriteWidth = 1280;
+    const spriteHeight = 1280;
     let gameFrame = 0;
-    const staggerFrames = 9;
+    const staggerFrames = 20;
     const spriteAnimations = [];
     const animationState = [
         {
             name: "idle",
-            frames: 4,
+            frames: 8,
         }
     ];
     animationState.forEach((state, index) => {
@@ -62,12 +61,13 @@ function retrieveSprites(characterName) {
     if (playerTrue === true) $("div.player-container div.player").append(canvas);
     else{
        document.querySelectorAll("div.enemy").forEach(enemy=>{
-        if (!enemy.hasChildNodes()) {
-          enemy.appendChild(canvas);
-        }
+        canvas.classList.add(characterId);
+          if (!enemy.firstChild) {
+            enemy.append(container, canvas);
+            animateSheet();
+          }
       });
     }
   
-    // animateSheet();
   }
   

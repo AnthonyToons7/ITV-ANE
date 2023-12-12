@@ -149,24 +149,20 @@ class Game {
         hpbar.classList.add("enemyHP");
         statusEffects.classList.add("enemyStatus");
 
-        const img = document.createElement("img");
-        img.src = "/public/img/spritesheets/" + newEnemy.name + ".png";
-        img.classList.add("enemy-" + id);
-        img.id = "enemy-" + newEnemy.name;
-        document.querySelectorAll(".enemy").forEach(enemy => {
-          if (!enemy.firstChild) {
-            enemy.append(container, img);
-          }
-        });
-        document.querySelectorAll(".enemy img").forEach(enemyImg => {
-          enemyImg.addEventListener("click", () => {
-            if (targetId && !document.querySelector(".targeted")) {
-              targetId = false;
-            } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
-            targetId = enemyImg.className;
-            enemyImg.classList.add("targeted");
-          });
-        });
+        retrieveSprites(newEnemy.name, newEnemy.id, container);
+               
+        setTimeout(() => {
+          document.querySelectorAll("div.enemy canvas").forEach(enemyImg => {
+              enemyImg.addEventListener("click", () => {
+                if (targetId && !document.querySelector(".targeted")) {
+                  targetId = false;
+                } else if (document.querySelector(".targeted")) document.querySelector(".targeted").classList.remove("targeted");
+                targetId = enemyImg.className;
+                enemyImg.classList.add("targeted");
+              });
+            });
+        }, 50);
+
         console.log(newEnemy);
         id++;
       }
@@ -197,7 +193,7 @@ class Game {
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
       if (enemy.hp <= 0) {
-        const targetImg = document.querySelector(`img.${enemy.id}`);
+        const targetImg = document.querySelector(`canvas.${enemy.id}`);
         if (enemy.name.includes("Void")) {
             this.bossesKilled = this.bossesKilled += 1;
             if (localStorage.getItem("difficulty") == "story") {
@@ -253,7 +249,7 @@ class Character {
         durationTimer = 4;
       }
       else{
-        damage = 8;
+        damage = 1;
         durationTimer = 8;
       }
       const statusEff = new StatusEffect(statusEffect, durationTimer, damage, target);
@@ -262,6 +258,7 @@ class Character {
       statusEffImg.src = `/public/img/effects/${statusEff.name}.gif`;
       statusEffImg.classList.add(statusEff.name);
       if(target.name == "Aubrey"){
+        document.querySelector(".UI-MOVES").classList.add(statusEffect);
         document.querySelector('.status-effects-player').appendChild(statusEffImg);
       } else {
         const targetEl = document.querySelector('.'+target.id);
@@ -270,15 +267,19 @@ class Character {
     }
     
     this.checkStatus();
-
     // finish calculating
-    target.hp = Math.max(0, target.hp - calculatedDamage);
+    target.hp = Math.floor(Math.max(0, target.hp - calculatedDamage));
     if (playerAttacking){
+      document.querySelector(".UI-MOVES").classList.add("attacking");
+      setTimeout(()=>document.querySelector(".UI-MOVES").classList.remove("attacking"), 1800);
       battleAnimator("player");
-      sheetAnimator();
+
+      // Slash effect
+      battleSheetAnimator();
+
       target.updateHp();
     } else {
-      battleAnimator("enemy");
+      battleAnimator(attacker.name);
     }
     if (target.enemyDefending){
       target.enemyReduceDefense();
@@ -313,6 +314,7 @@ class Character {
     this.res = Math.ceil((this.res / 150) * 100);
     defending = false;
     this.updateStats();
+    document.querySelector(".UI-MOVES").classList.remove("defending");
   }
 
   healSelf(target, amount){
@@ -434,11 +436,11 @@ class Boss extends Character {
   }
   updateHp(statusEffect, correctId){
     if(statusEffect){
-      console.log(correctId);
       const enemy = document.querySelector(`.${correctId}`).parentElement;
       const $hpBar = enemy.querySelector(".enemyHP");
       this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
     } else {
+      console.log("test");
       const enemy = document.querySelector(`.${targetId}`).parentElement;
       const $hpBar = enemy.querySelector(".enemyHP");
       this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
@@ -481,16 +483,19 @@ class StatusEffect{
     setTimeout(() => {
       if (this.targetEnemy && this.duration > 0) {
         const currentTarget = this.targetEnemy;
-        console.log(currentTarget.hp);
-        currentTarget.hp = Math.max(0, currentTarget.hp - this.damage);
-        console.log(currentTarget.hp);
+        currentTarget.hp = Math.floor(Math.max(0, currentTarget.hp - this.damage));
         this.targetEnemy.name == "Aubrey" ? currentTarget.updateStats() : currentTarget.updateHp(this.name, currentTarget.id);
         
         this.duration = this.duration - 1;
         console.log(this.name + " on " + this.targetEnemy.name);
       } else if (this.duration <= 0){
-        const container = document.querySelector("."+this.targetEnemy.id).parentElement;
-        container.querySelector(".enemy-stat-container .enemyStatus ." + this.name).remove();
+        if (this.targetEnemy.name != "Aubrey"){
+          const container = document.querySelector("."+this.targetEnemy.id).parentElement;
+          container.querySelector(".enemy-stat-container .enemyStatus ." + this.name).remove();
+        } else {
+          document.querySelector(".UI-MOVES").classList.remove(this.name);
+          document.querySelector(".status-effects-player ." + this.name).remove();
+        }
       }
     }, 100);
   }
@@ -542,6 +547,7 @@ $(document).ready(async ()=>{
           // Increase defense by 50% and end your turn
           playerCharacter.defend("50%");
           lastMoves.push("defend");
+          document.querySelector(".UI-MOVES").classList.add("defending");
           break;
         case "option-magic-1":
           // Return if player does not have enough mana
@@ -595,8 +601,6 @@ $(document).ready(async ()=>{
         for (const enemy of enemyTurn) {
 
           runEnemyAi(enemy, playerCharacter, lastMoves);
-
-          // enemy.attack(playerCharacter, '', '', '', '', '', enemy);
       
           await delay(1200 * delayMultiplier);
           $(".attack-anim-overlay").addClass("hideAnim");
@@ -605,10 +609,7 @@ $(document).ready(async ()=>{
           playerCharacter.updateStats();
       
           game.checkEnemies();
-        }
-      
-        playerCharacter.gainmana(3);
-      
+        }  
         if (defending) {
           playerCharacter.reduceDefense();
         }
@@ -623,7 +624,7 @@ $(document).ready(async ()=>{
   // ---------NON BATTLE RELATED FUNCTION ONLOAD----------------
 
   // READY UP SPRITES
-    // retrieveSprites("Void");
+
     // retrieveSprites("Player");
   
     // Is the gamemode story? Play dialog!

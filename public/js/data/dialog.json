@@ -77,7 +77,7 @@
   },
   {
     "name": "Eva",
-    "expression": "scared",
+    "expression": "worried",
     "text": "P-please, he's trying to kill me."
   },
   {
@@ -87,7 +87,7 @@
   },
   {
     "name": "Eva",
-    "expression": "scared",
+    "expression": "worried",
     "text": "L-Let's teleport away!"
   },
   {
@@ -103,12 +103,12 @@
   },
   {
     "name": "Eva",
-    "expression": "scared",
+    "expression": "worried",
     "text": "I'm sorry! I had to!"
   },
   {
     "name": "Eva",
-    "expression": "scared",
+    "expression": "worried",
     "text": "He'll find us soon... Can you help me out?!"
   },
   {
@@ -118,7 +118,7 @@
   },
   {
     "name": "Eva",
-    "expression": "scared",
+    "expression": "worried",
     "text": "I can't do this alone, pleaaaaase?"
   },
   {
@@ -198,7 +198,7 @@
   },
   {
     "name": "Eva",
-    "expression": "scared",
+    "expression": "worried",
     "text": "Time for your first test!"
   },
   {
@@ -208,7 +208,7 @@
   },
   {
     "name": "Eva",
-    "expression": "smile",
+    "expression": "happy",
     "text": "See? Wasn't so hard right?"
   },
   {
@@ -243,12 +243,12 @@
   },
   {
     "name": "Void",
-    "expression": "angry",
+    "expression": "pissed",
     "text": "..."
   },
   {
     "name": "Void",
-    "expression": "angry",
+    "expression": "pissed",
     "text": "Are you siding with a liar?"
   },
   {
@@ -269,7 +269,7 @@
   },
   {
     "name": "Void",
-    "expression": "angry",
+    "expression": "pissed",
     "text": "You promised me something Eva. It's been long enough."
   },
   {
@@ -564,7 +564,7 @@
   },
   {
     "name": "Void",
-    "expression": "trueForm-grin",
+    "expression": "trueForm-pain",
     "text": "Ḣ̷̝̙̑̎͆-̷͓͎͗͝h̴͈̙͎̥̍̈́͛ě̴̡̚͝l̶͔͎̝̍̈́̎ṗ̸̨̤̜̟̇̋"
   },
   {
@@ -582,5 +582,95 @@
     "name": "BREAKPOINT",
     "expression": "BREAKPOINT",
     "text": "BREAKPOINT"
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "Eva grins and giggles."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "Despite all the broken crystals, Void tries his best to get up."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "The red shade in his eyes, slowly fading."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "A tear shedding."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "A heart as pure as a crystal right in front of him."
+  },
+  {
+    "name": "Eva",
+    "expression": "evil",
+    "text": "Let's finish this up."
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-pain",
+    "text": "S-Starry.. I'm sorry I failed you..."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "You feel a sense of guilt and wrongdoing."
+  },
+  {
+    "name": "Aubrey",
+    "expression": "worried",
+    "text": "What am I fighting for again?"
+  },
+  {
+    "name": "Eva",
+    "expression": "evil",
+    "text": "For my protection, miss Aubrey."
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-pain",
+    "text": "Don't... listen to her."
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-pain",
+    "text": "She's using you for power... she promised me to return my s-sist-"
+  },
+  {
+    "name": "Eva",
+    "expression": "evil",
+    "text": "Silence maggot."
+  },
+  {
+    "name": " ",
+    "expression": " ",
+    "text": "Your sense of guilt increases."
+  },
+  {
+    "name": "Eva",
+    "expression": "evil",
+    "text": "Let's finish him, shall we?"
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-pain",
+    "text": "..."
+  },
+  {
+    "name": "Void",
+    "expression": "trueForm-pain",
+    "text": "D-Do what's right..."
+  },
+  {
+    "name": "SELECTION",
+    "expression": "SELECTION",
+    "text": " "
   }
 ]
