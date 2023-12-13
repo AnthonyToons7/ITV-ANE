@@ -96,7 +96,7 @@ class Game {
     this.enemyPool = [];
     this.killCount = 0;
     this.enemies = ["Slime", 
-      // "Fallen-Rose-knight"
+      "Fallen-Rose-knight"
     ];
     this.bosses = ["Void", "Fallen-Void", "Corrupted-Void", "Brave-Void"]
     this.bossesKilled = 0;
@@ -236,7 +236,7 @@ class Character {
     this.status = [];
   }
 
-  attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect, attacker) {
+  attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect, attacker, cardName) {
     // Perform attack logic
     let trueDamageMult;
     let calculatedDamage;
@@ -276,7 +276,8 @@ class Character {
     
     this.checkStatus();
     // finish calculating
-    target.hp = Math.floor(Math.max(0, target.hp - calculatedDamage));
+    cardName ? target.hp = target.hp / 4 : target.hp = Math.floor(Math.max(0, target.hp - calculatedDamage));
+
     if (playerAttacking){
       document.querySelector(".UI-MOVES").classList.add("attacking");
       setTimeout(()=>document.querySelector(".UI-MOVES").classList.remove("attacking"), 1800);
@@ -448,7 +449,6 @@ class Boss extends Character {
       const $hpBar = enemy.querySelector(".enemyHP");
       this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
     } else {
-      console.log("test");
       const enemy = document.querySelector(`.${targetId}`).parentElement;
       const $hpBar = enemy.querySelector(".enemyHP");
       this.hp <= 0 ? $($hpBar).remove() : $($hpBar).css("width", (this.hp / this.maxHp) * 100 + "%" );
@@ -631,7 +631,13 @@ $(document).ready(async ()=>{
   // ---------NON BATTLE RELATED FUNCTION ONLOAD----------------
 
   // Is the gamemode story? Play dialog!
-  localStorage.getItem("difficulty") == "story" ? getNextDialog() : $("#dialog-box-container").hide(); $(".dialog-background").hide();
+  if(localStorage.getItem("difficulty") == "story"){
+    getNextDialog();
+    $(".dialog-background").show();
+  } else {
+    $("#dialog-box-container").hide();
+    $(".dialog-background").hide();
+  }
 
   // Fetch all base stats and show it in the player data
   fetch('../public/js/data/base-stats.json')

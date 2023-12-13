@@ -8,11 +8,23 @@ function applyCardEffect(id, game, player) {
                     enemy.updateHp('card', enemy.id);
                 });
                 break;
-            // Add more cases if needed
+            case 3:
+                player.hp = player.hp + 10;
+                player.updateStats();
+                break;
+            case 5:
+                console.log(player);
+                player.hp = player.hp / 2;
+                player.updateStats();
+                game.retrieveEnemies().forEach(enemy => {
+                    player.attack(enemy, 'player', targetId, '', 1, '', '', 'ardent');
+                    enemy.updateHp('card', enemy.id);
+                });
+                break;
             default:
-                console.log("Unknown caseId. Do something sensible, you imbecile!");
+                console.log("Unknown caseId.");
         }
     } else {
-        console.log("No cardId found in the DOMStringMap. You're a special kind of dumb, aren't you?");
+        console.log("No cardId found.");
     }
 }

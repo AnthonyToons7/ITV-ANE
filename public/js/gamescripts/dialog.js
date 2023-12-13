@@ -7,6 +7,7 @@ function createDiag(dialog) {
     $(`#dialog-Void`).css("background-image", `url()`);
     $(`#dialog-Eva`).css("background-image", `url()`);
     $('#dialog-box-container').hide();
+    $('.dialog-background').hide();
     return;
   }
   let individual = dialog.text.split('');
@@ -33,6 +34,7 @@ $("#test").on("click",()=>{
   $('#dialog-box-container').show();
   $('#dialog-box').show();
   $('#dialog-box-name').show();
+  $('.dialog-background').show();
   getNextDialog();
 });
 

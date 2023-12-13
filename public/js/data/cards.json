@@ -11,7 +11,7 @@
     },
     {
         "cardname": "Regenerate",
-        "carddesc": "RESTORE 10 HEALTH.",
+        "carddesc": "RESTORE 10 HEALTH. (this boost can go above max. HEALTH)",
         "ID": "3"
     },
     {

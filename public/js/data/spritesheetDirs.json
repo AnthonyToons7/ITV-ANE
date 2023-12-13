@@ -6,6 +6,9 @@
         "Slime":"http://localhost/public/img/spritesheets/Slime-sheet.png"
     },
     {
+        "Fallen-Rose-knight":"http://localhost/public/img/spritesheets/Slime-sheet.png"
+    },
+    {
         "Player":"http://localhost/public/img/spritesheets/amognus.png",
         "playertrue":"true"
     }
