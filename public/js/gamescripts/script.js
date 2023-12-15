@@ -697,13 +697,18 @@ $(document).ready(async ()=>{
         const isCardTitle = event.target.classList.contains('cardTitle');
         const isCardDesc = event.target.classList.contains('cardDesc');
         if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
+          console.log("asdd");
           applyCardEffect(event.target.parentElement.dataset, game, playerCharacter);
           event.target.parentElement.remove();
           setTimeout(() => {
             playTurn();
           }, 1200);
         }
-        event.target.classList.toggle('clicked');
+        if ((isCardTitle || isCardDesc)){
+          event.target.parentElement.classList.toggle('clicked');
+        } else {
+          event.target.classList.toggle('clicked');
+        }
       }
     }
   });
