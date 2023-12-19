@@ -18,11 +18,14 @@ function applyCardEffect(id, game, player) {
                 player.updateStats();
                 break;
             case 4:
-                console.log(player.status);
-                for (let i=0;i<player.status.length;i++) {
-                    player.status.splice(i,1);
-                    document.querySelectorAll(".status-effects-player img")[i].remove();
-                }
+                // for (let i = player.status.length - 1; i >= 0; i--) {
+                //     player.status.splice(i, 1);
+                //     document.querySelectorAll(".status-effects-player img").forEach(img=>img.remove());
+                // }
+                player.status = [];
+
+                const statusImages = document.querySelectorAll(".status-effects-player img");
+                statusImages.forEach(img => img.remove());
                 break;
             case 5:
                 console.log(player);

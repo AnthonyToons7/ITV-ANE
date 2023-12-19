@@ -46,9 +46,6 @@ volSlider.forEach(slider=>{
 // Volume sliders
 volSliderM.addEventListener("input", ()=>bgm.volume = volSliderM.value / 100);
 volSliderS.addEventListener("input", ()=>sfx.volume = volSliderS.value / 100);
-disclaimer.addEventListener("click",()=>{
-    document.querySelector(".disclaimer-text").style.display="block";
-});
 saveSettingsBtn.addEventListener("click",()=>{
     localStorage.setItem("backgroundvolume", volSliderM.value);
     localStorage.setItem("sfxvolume", volSliderS.value);
@@ -62,11 +59,7 @@ volumeButtonM.addEventListener("click", () => {
     bgm.muted = isMuted;
     isMuted ? volSliderM.classList.add("empty") : volSliderM.classList.remove("empty");
 });
-let toggleBattleAnims = false;
-battleAnimsBtn.addEventListener("click", () => {
-    toggleBattleAnims = !toggleBattleAnims;
-    localStorage.setItem("skip-battle-animations", toggleBattleAnims);
-});
+
 continueButton.addEventListener("click", ()=>{
     var ele = document.querySelectorAll('input[name="difficulty-selection"]');
     for (i = 0; i < ele.length; i++) {
@@ -126,6 +119,19 @@ $(document).ready(function() {
         $('label').removeClass('checked');
         $(`label[for="${$(this).attr('id')}"]`).addClass('checked');
       }
+    });
+    let toggleBattleAnims = false;
+    const storedToggleBattleAnims = localStorage.getItem("skip-battle-animations");
+    if (storedToggleBattleAnims !== null) {
+        const toggleBattleAnims = JSON.parse(storedToggleBattleAnims);
+
+        battleAnimsBtn.checked = toggleBattleAnims;
+    }
+
+    battleAnimsBtn.addEventListener("click", () => {
+        toggleBattleAnims = !toggleBattleAnims;
+        console.log(toggleBattleAnims);
+        localStorage.setItem("skip-battle-animations", toggleBattleAnims);
     });
 });
 document.addEventListener('click', function() {

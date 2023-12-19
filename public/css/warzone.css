@@ -518,7 +518,6 @@ div.enemy-box {
     background-repeat: no-repeat;
     transition: all 1.2s cubic-bezier(.12,.99,.99,.15);
     background-color: rgba(0, 0, 255, 0.415);
-    background-image: url(../img/Void-attack-render.png);
 }
 div.player-box{
     background-image: url(../img/Player-attack-render.png);
@@ -643,13 +642,13 @@ div.enemy img {
     top: -280%;
 }
 canvas#Void {
-    transform: scale(1.2);
+    transform: scale(1.1);
     top: -21rem !important;
     left: -80px;
 }
 canvas#Fallen-Rose-knight {
-    transform: scale(1.2);
-    top: -21rem !important;
+    transform: scale(0.9);
+    top: -18rem !important;
     left: -90px;
 }
 #bossWarning.bossWarning {

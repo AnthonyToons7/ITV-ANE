@@ -9,7 +9,7 @@
         "Fallen-Rose-knight":"../public/img/spritesheets/Fallen-rose-knight-sheet.png"
     },
     {
-        "Player":"../public/img/spritesheets/amognus.png",
+        "Player":"",
         "playertrue":"true"
     }
 ]

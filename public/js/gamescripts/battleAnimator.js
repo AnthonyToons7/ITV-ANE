@@ -6,7 +6,14 @@ function battleAnimator(attacking){
         document.querySelector(".attack-anim-overlay").classList.remove("hideAnim");
 
         // Get the correct enemy
-        document.querySelector("div.enemy-box").style.backgroundImage=`url(../public/img/${attacking}-attack-render.png)`;
+        console.log(attacking);
+        if (attacking != "player"){
+            if (attacking != "Fallen-Rose-knight"){
+                document.querySelector("div.enemy-box").style.backgroundImage=`url('../public/img/${attacking}-attack-render.png')`;
+            } else {
+                document.querySelector("div.enemy-box").style.backgroundImage=`url('../public/img/Void-attack-render.png')`;
+            }
+        }
 
         if(attacking == "player"){
             document.querySelector("div.player-box").classList.add("attacking");

@@ -324,7 +324,9 @@ class Character {
   }
   
   registerEffect(status){
+    console.log(status);
     this.status.push(status);
+    console.log(this.status);
   }
 
   checkStatus(){
@@ -363,8 +365,8 @@ class Character {
     target[stat] = Math.ceil((target[stat] / 100) * (100+amt));
   }
 
-  useDebuff(target) {
-    // Perform debuff logic
+  useDebuff(target, amt, stat) {
+    target[stat] = Math.ceil((target[stat] / 100) * (100-amt));
   }
 }
 
@@ -411,11 +413,11 @@ class Player extends Character {
   }
   updateMulti() {
     if (pturnCount % 10 === 0) {
-      console.log("Playerstats multiplied x " + 1.01);
+      console.log("Playerstats multiplied x " + 1.075);
       const properties = ["hp", "maxHp", "atk", "def", "res", "mana", "maxMana"];
   
       properties.forEach(property => {
-        this[property] = Math.ceil((this[property] / 100) * (100 + strengthMultiplier * 1.05));
+        this[property] = Math.ceil((this[property] / 100) * (100 + strengthMultiplier * 1.075));
       });
     }
   }
@@ -579,7 +581,8 @@ $(document).ready(async ()=>{
     const delayMultiplier = localStorage.getItem("skip-battle-animations") ? 0.2 : 1;
   
     await delay(1000 * delayMultiplier);
-  
+    document.querySelectorAll(".button.move-option").forEach(button=>{button.classList.remove("turnProcess")});
+
     for (const enemy of enemyTurn) {
 
       runEnemyAi(enemy, playerCharacter, lastMoves);
@@ -589,7 +592,6 @@ $(document).ready(async ()=>{
   
       await delay(400 * delayMultiplier);
       playerCharacter.updateStats();
-      document.querySelectorAll(".button.move-option").forEach(button=>{button.classList.remove("turnProcess")});
   
       game.checkEnemies();
     }  
