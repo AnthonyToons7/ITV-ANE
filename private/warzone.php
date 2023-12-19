@@ -95,8 +95,8 @@
                             <div class="stat-cost-mana"></div>
                         </div>
                     </div>
-                    <div class="prev-page">Stat bars</div>
-                    <div class="next-page">All stats</div>
+                    <div class="prev-page">&uarr; Stat bars &uarr;</div>
+                    <div class="next-page">&darr; All stats &darr;</div>
                     <div class="overview">
                         <p>HP: <span></span></p>
                         <p>ATK: <span></span></p>

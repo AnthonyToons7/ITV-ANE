@@ -6,12 +6,12 @@
     },
     {
         "cardname": "Ardent rest",
-        "carddesc": "DISCARD 1 card, RESTORE 10 mana.",
+        "carddesc": "DISCARD 1 (random) card, RESTORE 10 mana (this boost can NOT go above max. MANA. You will lose this card).",
         "ID": "2"
     },
     {
         "cardname": "Regenerate",
-        "carddesc": "RESTORE 10 HEALTH. (this boost can go above max. HEALTH)",
+        "carddesc": "RESTORE 10 HEALTH. (this boost can go above max. HEALTH).",
         "ID": "3"
     },
     {

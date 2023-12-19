@@ -518,7 +518,6 @@ class StatusEffect{
     setTimeout(() => {
       if (this.targetEnemy && this.duration > 0) {
         const currentTarget = this.targetEnemy;
-        console.log(this);
         currentTarget.hp = Math.floor(Math.max(0, currentTarget.hp - this.damage));
         if (this.targetEnemy.name == "Aubrey") {
           currentTarget.updateStats();
@@ -715,18 +714,15 @@ $(document).ready(async ()=>{
     cardsFront.appendChild(c);
   });
     
-  cardsFront.addEventListener('click', function(event) {
-    if (event.target.classList.contains('cardd') || event.target.classList.contains('cardTitle') || event.target.classList.contains('cardDesc')) {
-
+cardsFront.addEventListener('click', function(event) {
+  if (event.target.classList.contains('cardd') || event.target.classList.contains('cardTitle') || event.target.classList.contains('cardDesc')) {
       if (event.target.classList.contains('clicked')) {
         applyCardEffect(event.target.dataset, game, playerCharacter);
         event.target.remove();
         setTimeout(() => {
           playTurn();
         }, 1200);
-      }
-      
-      if (!event.target.classList.contains('clicked')) {
+      } else if (!event.target.classList.contains('clicked')) {
         const isCardTitle = event.target.classList.contains('cardTitle');
         const isCardDesc = event.target.classList.contains('cardDesc');
         if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
@@ -735,6 +731,11 @@ $(document).ready(async ()=>{
           setTimeout(() => {
             playTurn();
           }, 1200);
+        }
+
+        const previousClicked = document.querySelector(`.clicked`);
+        if (previousClicked) {
+          previousClicked.classList.remove("clicked");
         }
         if ((isCardTitle || isCardDesc)){
           event.target.parentElement.classList.toggle('clicked');

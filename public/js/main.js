@@ -11,7 +11,6 @@ const saveSettingsBtn = document.querySelector(".save-settings");
 const volumeButtonM = document.getElementById("volume-btn");
 const battleAnimsBtn = document.getElementById("battleAnims");
 const overlay = document.querySelector(".overlay-box-overlay");
-const disclaimer = document.querySelector(".disclaimer");
 let bgm;
 let sfx;
 

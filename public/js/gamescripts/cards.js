@@ -8,6 +8,11 @@ function applyCardEffect(id, game, player) {
                     enemy.updateHp('card', enemy.id);
                 });
                 break;
+            case 2:
+                removeCard();
+                player.mana = player.mana + 10;
+                player.updateStats();
+                break;
             case 3:
                 player.hp = player.hp + 10;
                 player.updateStats();
@@ -33,5 +38,15 @@ function applyCardEffect(id, game, player) {
         }
     } else {
         console.log("No cardId found.");
+    }
+}
+
+function removeCard() {
+    const cardElements = document.querySelectorAll('.cardd'); // Adjust the selector based on your HTML structure
+    const randomIndex = Math.floor(Math.random() * cardElements.length);
+    
+    if (cardElements.length > 0) {
+        const randomCard = cardElements[randomIndex];
+        randomCard ? randomCard.remove(): removeCard();
     }
 }
