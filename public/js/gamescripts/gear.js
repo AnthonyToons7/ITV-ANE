@@ -33,9 +33,11 @@
      .catch(error => console.log(error));
  }
  document.querySelector(".confirm.armor-button").addEventListener("click",()=>{
-     localStorage.setItem("gear", document.querySelector(".selected").id);
-     console.log(localStorage);
-     setTimeout(() => {
-         window.location.replace("http://localhost/private/warzone.php");
-     }, 1500);
+    if(document.querySelector(".selected")){
+        localStorage.setItem("gear", document.querySelector(".selected").id);
+        setTimeout(()=>window.location.replace("../private/warzone.php"), 1500);
+    }else{
+        document.querySelector(".no-gear-popup").classList.add("show");
+        setTimeout(()=>document.querySelector(".no-gear-popup").classList.remove("show"), 3000);
+    }
  });

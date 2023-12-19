@@ -6,16 +6,25 @@ prev.on("click", () => toggleStatsPage(false));
 let pturnCount = 0;
 
 // CARD HAND
-$("div.hand").on("click", ()=>{
-  $("div.container").css("display", "block");
-  $("#player-ui .UI-MOVES div").css("opacity", "0");
-  $("#player-ui .UI-MOVES div").css("pointer-events", "none");
-});
-$("div.deck").on("click", ()=>{
-  $("div.container").css("display", "none");
-  $("#player-ui .UI-MOVES div").css("opacity", "1",);
-  $("#player-ui .UI-MOVES div").css("pointer-events", "unset");
-  $(".clicked").removeClass("clicked");
+$("div.deck").on("click", () => {
+  const $container = $("div.container");
+  const $movesDiv = $("#player-ui .UI-MOVES div");
+  const $deckImage = $("div.deck img");
+
+  $container.toggle();
+  $movesDiv.css({
+    "opacity": $container.is(":visible") ? "0" : "1",
+    "pointer-events": $container.is(":visible") ? "none" : "unset"
+  });
+
+  if (!$container.is(":visible")) {
+    $(".clicked").removeClass("clicked");
+  }
+
+  // Toggle the src attribute of the image within div.deck
+  $deckImage.attr("src", function (_, currentSrc) {
+    return currentSrc.includes("../public/img/icons/card-stack.png") ? "../public/img/icons/back-arrow.png" : "../public/img/icons/card-stack.png";
+  });
 });
 
 const buttons = document.querySelectorAll('.move-option');
@@ -47,12 +56,12 @@ fetch('../public/js/data/descriptions.json')
         popupContainer.style.display = 'none';
     });
 });
-
+// Get descriptions
 function getDescriptionFromData(moveName) {
     const moveData = descriptionsData.find(item => item.movename === moveName);
     return moveData ? moveData.movedesc : 'Description not available.';
 }
-
+// Get the base stats for ALL characters
 const baseStats = async ()=>{
   try {
     const response = await fetch('../public/js/data/base-stats.json');
@@ -61,6 +70,7 @@ const baseStats = async ()=>{
     return console.log(error);
   }
 }
+// Get the stat multipliers for ALL gear pieces
 const gearStats = async ()=>{
   try {
     const response = await fetch('../public/js/data/gear.json');
@@ -69,6 +79,7 @@ const gearStats = async ()=>{
     return console.log(error);
   }
 }
+// Get the titles and descriptions for ALL cards.
 const cardData = async ()=>{
   try {
     const response = await fetch('../public/js/data/cards.json');
@@ -77,7 +88,7 @@ const cardData = async ()=>{
     return console.log(error);
   }
 }
-
+// Set the multiplier higher if the difficulty is higher
 let gameModeStrength;
 if (localStorage.getItem("difficulty") == "hard" || localStorage.getItem("difficulty") == "story"){
   gameModeStrength = 1;
@@ -102,10 +113,12 @@ class Game {
     this.bossesKilled = 0;
     this.enemiesKilled = 0;
   }
+  // Create an enemy
   async spawnEnemy() {
     try {
       const data = await baseStats();
 
+      // Make sure the max. amt of enemies stays at 3
       if (this.enemyPool.length < 3) {
         let newEnemy;
         let chosenEnemyIndex = Math.floor(Math.random() * this.enemies.length);
@@ -237,6 +250,13 @@ class Character {
   }
 
   attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect, attacker, cardName) {
+
+    // Has the player not targeted an enemy? Laugh at them.
+    if(!targetId && playerAttacking){
+      displayPopup("No target selected");
+      return;
+    }
+
     // Perform attack logic
     let trueDamageMult;
     let calculatedDamage;
@@ -252,13 +272,19 @@ class Character {
     if (statusEffect){
       let durationTimer = 0;
       let damage = 0;
-      if (statusEffect == "bleed"){
-        damage = 5;
-        durationTimer = 4;
-      }
-      else{
-        damage = 1;
-        durationTimer = 8;
+      switch(statusEffect){
+        case "bleed":
+          damage = 5;
+          durationTimer = 4;
+          break;
+        case "burn":
+          damage = 1;
+          durationTimer = 8;
+          break;
+        case "poison":
+          damage = 1;
+          durationTimer = 8;
+          break;
       }
       const statusEff = new StatusEffect(statusEffect, durationTimer, damage, target);
       target.registerEffect(statusEff);
@@ -273,8 +299,10 @@ class Character {
         targetEl.parentElement.querySelector('div.enemyStatus').appendChild(statusEffImg);
       }
     }
-    
-    this.checkStatus();
+    setTimeout(() => {
+      this.checkStatus();
+    }, 200);
+
     // finish calculating
     cardName ? target.hp = target.hp / 4 : target.hp = Math.floor(Math.max(0, target.hp - calculatedDamage));
 
@@ -486,14 +514,18 @@ class StatusEffect{
     this.damage = damage;
     this.targetEnemy = targetEnemy;
   }
-
   tick() {
     setTimeout(() => {
       if (this.targetEnemy && this.duration > 0) {
         const currentTarget = this.targetEnemy;
+        console.log(this);
         currentTarget.hp = Math.floor(Math.max(0, currentTarget.hp - this.damage));
-        this.targetEnemy.name == "Aubrey" ? currentTarget.updateStats() : currentTarget.updateHp(this.name, currentTarget.id);
-        
+        if (this.targetEnemy.name == "Aubrey") {
+          currentTarget.updateStats();
+          displayPopup("You have " + this.name + "!!");
+        } else {
+          currentTarget.updateHp(this.name, currentTarget.id)
+        }
         this.duration = this.duration - 1;
         console.log(this.name + " on " + this.targetEnemy.name);
       } else if (this.duration <= 0){
@@ -507,7 +539,6 @@ class StatusEffect{
       }
     }, 100);
   }
-  
 }
 
 $(document).ready(async ()=>{
@@ -559,6 +590,7 @@ $(document).ready(async ()=>{
   
       await delay(400 * delayMultiplier);
       playerCharacter.updateStats();
+      document.querySelectorAll(".button.move-option").forEach(button=>{button.classList.remove("turnProcess")});
   
       game.checkEnemies();
     }  
@@ -622,9 +654,10 @@ $(document).ready(async ()=>{
           lastMoves.push("pass");
           break;
       }
-     setTimeout(() => {
-        playTurn();
-      }, 1200);
+    document.querySelectorAll(".button.move-option").forEach(button=>{button.classList.add("turnProcess")});
+    setTimeout(() => {
+      playTurn();
+    }, 1200);
     });
   });
 
@@ -697,7 +730,6 @@ $(document).ready(async ()=>{
         const isCardTitle = event.target.classList.contains('cardTitle');
         const isCardDesc = event.target.classList.contains('cardDesc');
         if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
-          console.log("asdd");
           applyCardEffect(event.target.parentElement.dataset, game, playerCharacter);
           event.target.parentElement.remove();
           setTimeout(() => {
@@ -724,9 +756,15 @@ const toggleStatsPage = (showOverview) => {
   prev.css("display", showOverview ? "block" : "none");
 };
 
+// Show the game over screen and send the player back to the menu
 function displayGameOver(){
-  $("#defeat-screen").addClass("show");
+  setTimeout(()=>$("#defeat-screen").addClass("show"),500);
   setTimeout(() => {
-    window.location.replace("http://localhost/menu.php");
-  }, 3000);
+    window.location.replace("../menu.php");
+  }, 5000);
+}
+function displayPopup(text){
+  document.querySelector(".battle-popup").classList.add("show"); 
+  document.querySelector(".battle-popup h1").textContent = text; 
+  setTimeout(()=>document.querySelector(".battle-popup").classList.remove("show"), 3000);
 }

@@ -62,7 +62,7 @@ main {
     height: 50px;
     padding: 10px;
     font-size: 16px;
-    /* display: none; */
+    display: none;
 }
 #dialog-box {
     padding: 20px;
@@ -71,7 +71,7 @@ main {
     border-top-left-radius: 0;
     height: 100%;
     width: 100%;
-    /* display: none; */
+    display: none;
 }
 #dialog-box-characters{
     position: relative;
@@ -113,7 +113,7 @@ section#player-ui {
     width: 100vw;
 }
 .UI-MOVES{
-    width: 70%;
+    width: 80%;
     padding: 20px;
     background-color: #0a0a39e8;
     border: 3px groove #fff;
@@ -126,11 +126,11 @@ section#player-ui {
     background-color: #6e2521e8;
 }
 .buttons-cards {
-    width: 30%;
+    width: 20%;
     justify-content: space-evenly;
 }
-div.deck,
-div.hand {
+
+div.deck {
     height: 100%;
     width: 100px;
     cursor: pointer;
@@ -143,12 +143,10 @@ div.hand {
     align-items: center;
     font-family: joystix;
 }
-div.deck:hover,
-div.hand:hover {
+div.deck:hover{
     filter: drop-shadow(0 0 1px #00ff7b);
 }
-div.deck::before,
-div.hand::before {
+div.deck::before {
     content: "\25B6";
     font-family: joystix;
     position: absolute;
@@ -159,13 +157,9 @@ div.hand::before {
     opacity: 0;
 }
 div.deck:hover::before,
-div.hand:hover::before,
-div.deck:focus::before,
-div.hand:focus::before{
+div.deck:focus::before{
     opacity: 1;
 }
-  
-
 div#stats {
     border-radius: 5px;
     color: #fff;
@@ -235,6 +229,7 @@ div#stats .flex {
     padding: 2px;
     border: 2px solid #fff;
     border-radius: 10px;
+    font-family: joystix;
 }
 .prev-page {
     display: none;
@@ -425,6 +420,7 @@ div.player {
     text-align: center;
     padding: 5px;
     color: #00ff7b;
+    font-size: 10px;
 }
 .cardDesc{
     text-align: center;
@@ -436,12 +432,16 @@ div.player {
     text-align: center;
     padding: 5px;
     color: #00ff7b;
+    font-size: 10px;
 }
 .cardd.clicked .cardDesc{
     text-align: center;
     padding: 5px;
-    font-size: 16px;
+    font-size: 11px;
     color: #ddff00;
+}
+.turnProcess{
+    pointer-events: none;
 }
 .cards {
     width: 150px;
@@ -458,6 +458,7 @@ div.player {
     border-radius: 3px;
     transition: all 1s;
     cursor: pointer;
+    font-family: joystix;
 }
 .cardd.clicked{
     top: 50%;
@@ -540,6 +541,49 @@ div.enemy-box.attacking {
     transition: all .8s;
 }
 
+#defeat-screen {
+    opacity: 0;
+    background-color: #000c;
+    color: #b70000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    transition: all 2s ease;
+    pointer-events: none;
+    font-size: 50px;
+    z-index: 999;
+}
+#defeat-screen.show{
+    opacity: 1;
+    pointer-events: all;
+    text-shadow: #b70000 0px 0px 20px;
+    background-color: #000000;
+    transition: all 2s ease;
+}
+.battle-popup{
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #fff;
+    background-color: #4f4f4f;
+    transition: all .5s;
+}
+.battle-popup h1 {
+    color: #fff;
+    font-family: joystix;
+}
+.battle-popup.show{
+    opacity: 1;
+    transition: all .5s;
+}
 @media screen and (max-width: 996px) {
     #dialog-box-container {
         height: 35vh;
@@ -598,9 +642,15 @@ div.enemy img {
     position: absolute;
     top: -280%;
 }
-img#enemy-Void {
-    transform: scale(2);
-    top: -500% !important;
+canvas#Void {
+    transform: scale(1.2);
+    top: -21rem !important;
+    left: -80px;
+}
+canvas#Fallen-Rose-knight {
+    transform: scale(1.2);
+    top: -21rem !important;
+    left: -90px;
 }
 #bossWarning.bossWarning {
     display: flex;
@@ -632,7 +682,7 @@ div.enemyStatus img,
 }
 /* JUNK: TEST */
 #test {
-    /* display: none; */
+    display: none;
     z-index: 99;
     position: absolute;
 }

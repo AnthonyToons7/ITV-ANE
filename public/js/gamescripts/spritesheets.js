@@ -9,7 +9,7 @@ function retrieveSprites(characterName, characterId, container) {
         if (characterSources) {
           const source = characterSources[characterName];
           const characterTrue = characterSources.playertrue === "true"; // Check if playertrue is "true"
-          sheetAnimator(source, characterTrue, characterId, container);
+          sheetAnimator(source, characterTrue, characterId, container, characterName);
         } else {
           console.log("Character not found in the data.");
         }
@@ -17,8 +17,9 @@ function retrieveSprites(characterName, characterId, container) {
       .catch(error => console.log(error));
   }
   // Animate the sheets
-  function sheetAnimator(src, playerTrue, characterId, container){
+  function sheetAnimator(src, playerTrue, characterId, container, name){
     const canvas = document.createElement("canvas");
+    canvas.id = name;
     let playerState = 'idle';
     const ctx = canvas.getContext('2d');
     const CANVAS_WIDTH = canvas.width = 375;

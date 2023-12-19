@@ -59,7 +59,7 @@ saveSettingsBtn.addEventListener("click",()=>{
 
 let isMuted = false;
 volumeButtonM.addEventListener("click", () => {
-    isMuted = !isMuted; // Toggle the value of isMuted
+    isMuted = !isMuted;
     bgm.muted = isMuted;
     isMuted ? volSliderM.classList.add("empty") : volSliderM.classList.remove("empty");
 });

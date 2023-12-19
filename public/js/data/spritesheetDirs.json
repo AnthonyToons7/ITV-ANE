@@ -1,15 +1,15 @@
 [
     {
-        "Void":"http://localhost/public/img/spritesheets/Void-sheet.png"
+        "Void":"../public/img/spritesheets/Void-sheet.png"
     },
     {
-        "Slime":"http://localhost/public/img/spritesheets/Slime-sheet.png"
+        "Slime":"../public/img/spritesheets/Slime-sheet.png"
     },
     {
-        "Fallen-Rose-knight":"http://localhost/public/img/spritesheets/Slime-sheet.png"
+        "Fallen-Rose-knight":"../public/img/spritesheets/Fallen-rose-knight-sheet.png"
     },
     {
-        "Player":"http://localhost/public/img/spritesheets/amognus.png",
+        "Player":"../public/img/spritesheets/amognus.png",
         "playertrue":"true"
     }
 ]

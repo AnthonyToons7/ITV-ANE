@@ -6,6 +6,7 @@ function runEnemyAi(enemy, player, lastMoves){
 
     lastMoves.length = 10;
 
+    // Check the last moves used by you and sort them in an obj
     if (lastUsed){
       for (const move of lastUsed) {
         moveCounts[move] = moveCounts[move] ? moveCounts[move] + 1 : 1;
@@ -40,7 +41,12 @@ function runEnemyAi(enemy, player, lastMoves){
         enemyChar.enemyDefend();
     } else if (randomValue >= defendChance && randomValue < (defendChance + attackChance)) {
         console.log("Enemy attacks");
-        enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
+        if(enemyChar.name=="Fallen-Rose-knight"){
+          const randomChance = Math.random();
+          randomChance <= 0.5 ? enemyChar.attack(playerChar, '', '', '', 1, 'bleed', enemyChar) : enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
+        } else{
+          enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
+        }
     } else if (randomValue < (defendChance + attackChance + magicChance)) {
         console.log("Enemy uses magic");
         
@@ -55,7 +61,8 @@ function runEnemyAi(enemy, player, lastMoves){
         
           break;
         case "Fallen-Rose-knight":
-          // do thing
+          const randomChance = Math.random();
+          randomChance <= 0.1 ? enemyChar.attack(playerChar, '', '', 'magic', 1, 'bleed', enemyChar) : enemyChar.attack(playerChar, '', '', 'magic', 1, '', enemyChar);
           break;
         case "Void":
           if (defending == true){
@@ -75,7 +82,12 @@ function runEnemyAi(enemy, player, lastMoves){
 
         enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
     } else {
-      enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
+      if(enemyChar.name=="Fallen-Rose-knight"){
+        const randomChance = Math.random();
+        randomChance <= 1 ? enemyChar.attack(playerChar, '', '', '', 1, 'bleed', enemyChar) : enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
+      } else {
+        enemyChar.attack(playerChar, '', '', '', 1, '', enemyChar);
+      }
     }
     playerChar.gainmana(3);
 }

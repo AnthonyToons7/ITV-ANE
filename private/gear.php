@@ -56,6 +56,9 @@
                 </div>
             </div>
             <div class="confirm armor-button">Confirm &check;</div>
+            <div class="no-gear-popup">
+                <p>Please select your gear first</p>
+            </div>
         </div>
     </main>
     <script src="../public/js/gamescripts/gear.js"></script>
