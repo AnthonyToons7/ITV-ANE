@@ -1,3 +1,44 @@
+async function createCards() {
+    const cardsFront = document.querySelector('.cards');
+    let cardWidth = cardsFront.offsetWidth;
+    const numCards = 5;
+  
+    let cardDatas = await cardData();
+
+    
+    for (let i = 0; i < numCards; i++) {
+        if (cardDatas.length === 0) {
+            console.warn('Not enough unique cards available.');
+            break;
+        }	
+        const randIndex = Math.floor(Math.random() * cardDatas.length);
+        const selectedCard = cardDatas[randIndex];
+    
+        const card = document.createElement("div");
+        const cardName = document.createElement("div");
+        const cardDesc = document.createElement("div");
+    
+        cardName.textContent = selectedCard["cardname"];
+        cardDesc.textContent = selectedCard["carddesc"];
+    
+        cardName.classList.add("cardTitle");
+        cardDesc.classList.add("cardDesc");
+        card.dataset.cardId = selectedCard["ID"];
+
+        card.append(cardName, cardDesc);
+
+        const marginLeft = (cardWidth / numCards) * (i + 1);
+        card.style.marginLeft = `${marginLeft}px`;
+
+        card.classList.add("cardd");
+        cardsFront.appendChild(card);
+        cardDatas = cardDatas.filter((_, index) => index !== randIndex);
+    }
+  }
+  
+  createCards();
+    
+
 function applyCardEffect(id, game, player) {
     if (id.hasOwnProperty('cardId')) {
         const caseId = parseInt(id.cardId, 10);

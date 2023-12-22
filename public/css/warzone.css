@@ -414,7 +414,8 @@ div.player {
 
 .container {
     display: none;
-    transform: translate(25%, -20rem);
+    transform: translate(5%, -15rem);
+    width: 80%;
 }
 .cardTitle{
     text-align: center;
@@ -444,7 +445,9 @@ div.player {
     pointer-events: none;
 }
 .cards {
-    width: 150px;
+    justify-content: space-between;
+    display: flex;
+    width: 90%;
 }
 .cardd {
     padding: 5px;
@@ -452,7 +455,6 @@ div.player {
     height: 200px;
     background: #4d4d4d;
     border: 1px solid #000;
-    position: absolute;
     opacity: .9;
     transform-origin: bottom center;
     border-radius: 3px;
@@ -463,8 +465,9 @@ div.player {
 .cardd.clicked{
     top: 50%;
     left: 50%;
-    transform: scale(2) translate(-50%,-25%) !important;
+    transform: scale(2) translate(0%,-25%) !important;
     background: rgb(66, 50, 42);
+    z-index: 2;
     box-shadow: 0 0 5px 0px #fff;
     opacity: 1;
     transition: all 1s;
@@ -516,11 +519,12 @@ div.enemy-box {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    transition: all 1.2s cubic-bezier(.12,.99,.99,.15);
     background-color: rgba(0, 0, 255, 0.415);
+    transition: right 1.2s cubic-bezier(.12,.99,.99,.15);
 }
 div.player-box{
     background-image: url(../img/Player-attack-render.png);
+    transition: left 1.2s cubic-bezier(.12,.99,.99,.15);
 }
 div.enemy-box {
     background-color: rgba(255, 0, 0, 0.41);

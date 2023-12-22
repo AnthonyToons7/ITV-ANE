@@ -1,3 +1,7 @@
+function rewardPlayer(bossDeaths){
+    
+}
+
 // function getData(playermana) {
 //     fetch('../public/js/data/descriptions.json')
 //     .then(response => response.json())

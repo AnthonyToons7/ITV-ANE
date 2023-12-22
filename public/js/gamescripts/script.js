@@ -217,6 +217,9 @@ class Game {
         const targetImg = document.querySelector(`canvas.${enemy.id}`);
         if (enemy.name.includes("Void")) {
             this.bossesKilled = this.bossesKilled += 1;
+
+            rewardPlayer(this.bossesKilled);
+
             if (localStorage.getItem("difficulty") == "story") {
                 getNextDialog();
             }
@@ -252,7 +255,7 @@ class Character {
   attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect, attacker, cardName) {
 
     // Has the player not targeted an enemy? Laugh at them.
-    if(!targetId && playerAttacking){
+    if ((!targetId || !document.querySelector("." + targetId)) && playerAttacking) {
       displayPopup("No target selected");
       return;
     }
@@ -289,7 +292,7 @@ class Character {
       const statusEff = new StatusEffect(statusEffect, durationTimer, damage, target);
       target.registerEffect(statusEff);
       const statusEffImg = document.createElement("img");
-      statusEffImg.src = `/public/img/effects/${statusEff.name}.gif`;
+      statusEffImg.src = `../public/img/effects/${statusEff.name}.gif`;
       statusEffImg.classList.add(statusEff.name);
       if(target.name == "Aubrey"){
         document.querySelector(".UI-MOVES").classList.add(statusEffect);
@@ -687,65 +690,37 @@ $(document).ready(async ()=>{
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-  // Cards
-  let cardsFront = document.querySelector('.cards');
-  let cardWidth = cardsFront.offsetWidth;
-  let totalarc = 200;
-  let numcards = 5; // Reset amount and draw 5 each turn
-  let angles = Array(numcards).fill('').map((a, i) => (totalarc / numcards * (i + 1)) - (totalarc/2 + (totalarc / numcards) / 2));
-  let margins = angles.map((a, i) => cardWidth / numcards * (i + 1));
-  
-  // Set the cards in the right angle
-  const cardDatas = await cardData();
-  angles.forEach(async (a, i) => {
-    let s = `transform:rotate(${angles[i]}deg);margin-left:${margins[i]}px;`
-    const c = document.createElement("div");
-
-    const cardName = document.createElement("div");
-    const cardDesc = document.createElement("div");
-    cardName.textContent = cardDatas[i]["cardname"];
-    cardDesc.textContent = cardDatas[i]["carddesc"];
-    cardName.classList.add("cardTitle");
-    cardDesc.classList.add("cardDesc");
-    c.dataset.cardId = cardDatas[i]["ID"];
-
-    c.append(cardName, cardDesc);
-
-    c.style = s;
-    c.classList.add("cardd");
-    cardsFront.appendChild(c);
-  });
-    
-cardsFront.addEventListener('click', function(event) {
-  if (event.target.classList.contains('cardd') || event.target.classList.contains('cardTitle') || event.target.classList.contains('cardDesc')) {
-      if (event.target.classList.contains('clicked')) {
-        applyCardEffect(event.target.dataset, game, playerCharacter);
-        event.target.remove();
-        setTimeout(() => {
-          playTurn();
-        }, 1200);
-      } else if (!event.target.classList.contains('clicked')) {
-        const isCardTitle = event.target.classList.contains('cardTitle');
-        const isCardDesc = event.target.classList.contains('cardDesc');
-        if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
-          applyCardEffect(event.target.parentElement.dataset, game, playerCharacter);
-          event.target.parentElement.remove();
+    const cardsFront = document.querySelector('.cards');
+    cardsFront.addEventListener('click', function(event) {
+      if (event.target.classList.contains('cardd') || event.target.classList.contains('cardTitle') || event.target.classList.contains('cardDesc')) {
+          if (event.target.classList.contains('clicked')) {
+          applyCardEffect(event.target.dataset, game, playerCharacter);
+          event.target.remove();
           setTimeout(() => {
-            playTurn();
+              playTurn();
           }, 1200);
-        }
+          } else if (!event.target.classList.contains('clicked')) {
+          const isCardTitle = event.target.classList.contains('cardTitle');
+          const isCardDesc = event.target.classList.contains('cardDesc');
+          if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
+              applyCardEffect(event.target.parentElement.dataset, game, playerCharacter);
+              event.target.parentElement.remove();
+              setTimeout(() => {
+              playTurn();
+              }, 1200);
+          }
 
-        const previousClicked = document.querySelector(`.clicked`);
-        if (previousClicked) {
-          previousClicked.classList.remove("clicked");
-        }
-        if ((isCardTitle || isCardDesc)){
-          event.target.parentElement.classList.toggle('clicked');
-        } else {
-          event.target.classList.toggle('clicked');
-        }
+          const previousClicked = document.querySelector(`.clicked`);
+          if (previousClicked) {
+              previousClicked.classList.remove("clicked");
+          }
+          if ((isCardTitle || isCardDesc)){
+              event.target.parentElement.classList.toggle('clicked');
+          } else {
+              event.target.classList.toggle('clicked');
+          }
       }
-    }
+      }
   });
 });
 

@@ -6,7 +6,7 @@
     },
     {
         "cardname": "Ardent rest",
-        "carddesc": "DISCARD 1 (random) card, RESTORE 10 mana (this boost can NOT go above max. MANA. You will lose this card).",
+        "carddesc": "DESTROY 1 (random) card, RESTORE 10 mana (this boost can NOT go above max. MANA.).",
         "ID": "2"
     },
     {
@@ -28,5 +28,10 @@
         "cardname": "Final blow",
         "carddesc": "DISCARD 4 cards; DESTROY all creatures on the field.",
         "ID": "6"
+    },
+    {
+        "cardname": "Relical booster",
+        "carddesc": "RELICS' effects are doubled.",
+        "ID": "7"
     }
 ]

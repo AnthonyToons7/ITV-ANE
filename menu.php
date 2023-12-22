@@ -125,12 +125,12 @@
                         <path d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6" style="fill:none;stroke:#676767;stroke-width:5;stroke-linecap:round"/>
                     </svg>
                 </div>
-                <div class="account-settings setting">
-                    <a href="../private/account.php">Account settings</a>
-                </div>
                 <div class="animation-settings setting">
                     <label for="battleAnims">Turn off battle animations</label>
                     <input type="checkbox" name="battleAnims" id="battleAnims">
+                </div>
+                <div class="account-settings setting">
+                    <a href="../private/account.php">Account settings</a>
                 </div>
                 <div class="account-settings"></div>
                 <div class="saved">Saved!</div>

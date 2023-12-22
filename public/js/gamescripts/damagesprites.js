@@ -6,7 +6,7 @@ function battleSheetAnimator(){
     const CANVAS_WIDTH = canvas.width = 300;
     const CANVAS_HEIGHT = canvas.height = 300;
     const spriteIMAGE = new Image();
-    spriteIMAGE.src = "/public/img/assets/slash4.png";
+    spriteIMAGE.src = "../public/img/assets/slash4.png";
     const spriteWidth = 192;
     const spriteHeight = 200;
     let gameFrame = 0;

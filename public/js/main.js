@@ -15,9 +15,9 @@ let bgm;
 let sfx;
 
 window.addEventListener("DOMContentLoaded",()=>{
-    bgm = new Audio('../public/audio/menu-ambience.mp3');
+    bgm = new Audio('public/audio/menu-ambience.mp3');
     bgm.volume = .5;
-    sfx = new Audio('../public/audio/menu-ambience.mp3');
+    sfx = new Audio('public/audio/menu-ambience.mp3');
     sfx.volume = .5;
     bgm.volume = volSliderM.value / 100;
     sfx.volume = volSliderS.value / 100;
@@ -50,7 +50,10 @@ saveSettingsBtn.addEventListener("click",()=>{
     localStorage.setItem("backgroundvolume", volSliderM.value);
     localStorage.setItem("sfxvolume", volSliderS.value);
     localStorage.setItem("backgroundvolume-muted", bgm.muted);
-    document.querySelector("div.saved").style.display="block";
+    document.querySelector("div.saved").classList.add("show");
+    setTimeout(() => {
+        document.querySelector("div.saved").classList.remove("show");
+    }, 1500);
 });
 
 let isMuted = false;
@@ -75,7 +78,7 @@ continueButton.addEventListener("click", ()=>{
             }
         }
      }
-     window.location.href = `../../private/gear?difficulty=${localStorage.getItem("difficulty")}`;
+     window.location.href = `./private/gear?difficulty=${localStorage.getItem("difficulty")}`;
 });
 function addMenuStage(clickedBtn) {
     switch (clickedBtn.id) {
@@ -123,9 +126,10 @@ $(document).ready(function() {
     let toggleBattleAnims = false;
     const storedToggleBattleAnims = localStorage.getItem("skip-battle-animations");
     if (storedToggleBattleAnims !== null) {
-        const toggleBattleAnims = JSON.parse(storedToggleBattleAnims);
+        const stoggleBattleAnims = JSON.parse(storedToggleBattleAnims);
+        toggleBattleAnims = storedToggleBattleAnims;
 
-        battleAnimsBtn.checked = toggleBattleAnims;
+        battleAnimsBtn.checked = stoggleBattleAnims;
     }
 
     battleAnimsBtn.addEventListener("click", () => {
