@@ -6,7 +6,6 @@ function battleAnimator(attacking){
         document.querySelector(".attack-anim-overlay").classList.remove("hideAnim");
 
         // Get the correct enemy
-        console.log(attacking);
         if (attacking != "player"){
             if (attacking != "Fallen-Rose-knight"){
                 document.querySelector("div.enemy-box").style.backgroundImage=`url('../public/img/${attacking}-attack-render.png')`;

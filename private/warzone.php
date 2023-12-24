@@ -108,12 +108,13 @@
                             <div class="status-effects-player"></div>
                         </div>
                     </div>
+                    <div class="next-page-2">&darr; Inventory &darr;</div>
                 </div>
                 <div class="buttons-basic col-4 flex">
                     <!-- Load these in with JS -->
                     <div class="button move-option" id="option-attack">Attack</div>
                     <div class="button move-option" id="option-defend">Defend</div>
-                    <div class="button move-option">Pass</div>
+                    <div class="button move-option" id="option-flee">Flee</div>
                 </div>
                 <div class="buttons-magic col-3 flex">
                     <div class="button move-option magic-option" id="option-magic-1">Ignis</div>
@@ -127,15 +128,32 @@
                     <img src="../public/img/icons/card-stack.png" alt="" class="card">
                 </div>
             <!-- Load script that creates all cards -->
+            </div>
+        </section>
+        <div class='container'>
+            <div class='cards'></div>
+            <div class='hand'></div>
         </div>
-    </section>
-    <div class='container'>
-        <div class='cards'></div>
-        <div class='hand'></div>
-    </div>
     </main>
-    <!-- <div class="enemy-data-stats">
-    </div> -->
+    <div class="inventory">
+        <div class="top-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 100 100" shape-rendering="crispEdges">
+                <path stroke="#ffffff" d="M30 34h1M64 34h1M28 35h4M63 35h3M28 36h5M62 36h5M29 37h5M61 37h5M30 38h5M60 38h5M31 39h5M59 39h5M32 40h5M58 40h5M33 41h5M57 41h5M34 42h5M56 42h5M35 43h5M55 43h5M36 44h5M54 44h5M37 45h5M53 45h5M38 46h5M52 46h5M39 47h5M51 47h5M40 48h5M50 48h5M41 49h5M49 49h5M42 50h5M48 50h5M43 51h9M44 52h7M45 53h5M44 54h7M43 55h9M42 56h5M48 56h5M41 57h5M49 57h5M40 58h5M50 58h5M39 59h5M51 59h5M38 60h5M52 60h5M37 61h5M53 61h5M36 62h5M54 62h5M35 63h5M55 63h5M34 64h5M56 64h5M33 65h5M57 65h5M32 66h5M58 66h5M31 67h5M59 67h5M30 68h5M60 68h5M29 69h5M61 69h5M30 70h3M62 70h3M31 71h1M63 71h1" />
+            </svg>
+        </div>
+        <div class="relics"></div>
+        <div class="money">
+            <div class="inventory-cash">
+                <img src="../public/img/icons/moner.png" alt="">
+                <div>0</div>
+            </div>
+        </div>
+    </div>
+    <div class="rewardContainer">
+        <h1>Rewards</h1>
+        <div class="flex-wrap"></div>
+        <div class="button confirm">Confirm</div>
+    </div>
     <div class="popup-container">
         <div class="popup-arrow"></div>
         <div class="popup-content">Description will be shown here</div>
@@ -153,6 +171,7 @@
     <div class="battle-popup">
         <h1></h1>
     </div>
+    <div class="transition-background"></div>
 <script src="../public/js/gamescripts/script.js"></script>
 <script src="../public/js/gamescripts/magic.js"></script>
 <script src="../public/js/gamescripts/dialog.js"></script>

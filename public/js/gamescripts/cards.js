@@ -1,18 +1,22 @@
-async function createCards() {
+async function createCards(game) {
     const cardsFront = document.querySelector('.cards');
     let cardWidth = cardsFront.offsetWidth;
     const numCards = 5;
+    let createdCards = 0;
   
     let cardDatas = await cardData();
-
     
-    for (let i = 0; i < numCards; i++) {
+    while (createdCards < numCards && cardDatas.length > 0) {
         if (cardDatas.length === 0) {
             console.warn('Not enough unique cards available.');
             break;
         }	
         const randIndex = Math.floor(Math.random() * cardDatas.length);
         const selectedCard = cardDatas[randIndex];
+
+        if(selectedCard["unlocked-after"] && selectedCard["unlocked-after"] !== game.bossesKilled){
+            continue;
+        };
     
         const card = document.createElement("div");
         const cardName = document.createElement("div");
@@ -27,16 +31,15 @@ async function createCards() {
 
         card.append(cardName, cardDesc);
 
-        const marginLeft = (cardWidth / numCards) * (i + 1);
+        const marginLeft = (cardWidth / numCards) * (createdCards + 1);
         card.style.marginLeft = `${marginLeft}px`;
 
         card.classList.add("cardd");
         cardsFront.appendChild(card);
         cardDatas = cardDatas.filter((_, index) => index !== randIndex);
+        createdCards++;
     }
   }
-  
-  createCards();
     
 
 function applyCardEffect(id, game, player) {

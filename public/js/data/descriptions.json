@@ -8,8 +8,8 @@
         "movedesc": "Brace yourself against the next hit(s), increasing your DEF by 50%."
     },
     {
-        "movename": "Pass",
-        "movedesc": "End your turn."
+        "movename": "Flee",
+        "movedesc": "Leave the battlefield for less rewards."
     },
     {
         "movename": "Ignis",

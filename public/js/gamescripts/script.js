@@ -1,7 +1,9 @@
 
 const prev = $(".prev-page");
 const next = $(".next-page");
+const next2 = $(".next-page-2");
 next.on("click", () => toggleStatsPage(true));
+next2.on("click", () => toggleStatsPage(true, "page-3"));
 prev.on("click", () => toggleStatsPage(false));
 let pturnCount = 0;
 
@@ -109,9 +111,10 @@ class Game {
     this.enemies = ["Slime", 
       "Fallen-Rose-knight"
     ];
-    this.bosses = ["Void", "Fallen-Void", "Corrupted-Void", "Brave-Void"]
+    this.bosses = ["Void", "Void", "Fallen-Void", "Corrupted-Void", "Brave-Void"];
     this.bossesKilled = 0;
     this.enemiesKilled = 0;
+    this.money = 0;
   }
   // Create an enemy
   async spawnEnemy() {
@@ -125,7 +128,7 @@ class Game {
         const enemystats = data.find(character => character.name === this.enemies[chosenEnemyIndex]);
 
         // check if enough time has passed to spawn a boss in
-        if (this.bossesKilled == 0 && this.enemiesKilled >= 10 &&  this.enemyPool.every(enemy => !enemy.name.includes("Void"))) {
+        if (this.enemiesKilled % 10 === 0 && this.enemiesKilled > 0) {
           let chosenBossName = this.bosses[this.bossesKilled];
           const bossStats = data.find(character => character.name === chosenBossName);
           newEnemy = new Boss(
@@ -192,10 +195,10 @@ class Game {
     }
   }
 
-  processTurn() {
+  processTurn(player) {
     $(".attack-anim-overlay").addClass("hideAnim");
 
-    this.checkEnemies();
+    this.checkEnemies(player);
 
     this.turnCount++;
     // Check if it's the third turn and spawn a new enemy if needed
@@ -209,7 +212,7 @@ class Game {
     return this.enemyPool;
   }
 
-  checkEnemies(){
+  checkEnemies(player){
     // If an enemy dies, remove them from the character pool
     for (let i=0;i<this.enemyPool.length;i++) {
       const enemy = this.enemyPool[i];
@@ -217,12 +220,13 @@ class Game {
         const targetImg = document.querySelector(`canvas.${enemy.id}`);
         if (enemy.name.includes("Void")) {
             this.bossesKilled = this.bossesKilled += 1;
-
-            rewardPlayer(this.bossesKilled);
+            rewardPlayer(this.bossesKilled, this, player);
 
             if (localStorage.getItem("difficulty") == "story") {
                 getNextDialog();
             }
+        } else {
+          rewardPlayer('', this, player, "kromer");
         }
         this.enemiesKilled = this.enemiesKilled += 1;
         this.enemyPool.splice(i, 1);
@@ -237,6 +241,16 @@ class Game {
 
   retrieveEnemies(){
     return this.enemyPool;
+  }
+
+  instakill(){
+    this.enemyPool = [];
+    const enemyDivs = document.querySelectorAll(".enemy");
+    enemyDivs.forEach(enemyDiv=> {
+      while (enemyDiv.firstChild) {
+        enemyDiv.removeChild(enemyDiv.firstChild);
+      }
+    });
   }
 }
 
@@ -277,15 +291,15 @@ class Character {
       let damage = 0;
       switch(statusEffect){
         case "bleed":
-          damage = 5;
+          damage = 6;
           durationTimer = 4;
           break;
         case "burn":
-          damage = 1;
-          durationTimer = 8;
+          damage = 10;
+          durationTimer = 2;
           break;
         case "poison":
-          damage = 1;
+          damage = 2;
           durationTimer = 8;
           break;
       }
@@ -327,9 +341,7 @@ class Character {
   }
   
   registerEffect(status){
-    console.log(status);
     this.status.push(status);
-    console.log(this.status);
   }
 
   checkStatus(){
@@ -350,7 +362,6 @@ class Character {
     this.updateStats();
   }
   
-
   reduceDefense(){
     this.def = Math.ceil((this.def / 150) * 100);
     this.res = Math.ceil((this.res / 150) * 100);
@@ -499,14 +510,6 @@ class Boss extends Character {
   }
 }
 
-class Card{
-  constructor(
-    name
-  ){
-    this.name = name;
-  }
-}
-
 class StatusEffect{
   constructor(
     name,
@@ -566,11 +569,10 @@ $(document).ready(async ()=>{
     strengthMultiplier,
   );
   playerCharacter.updateStats();
-  console.log(playerCharacter);
   game.spawnEnemy();
 
   // Starting new turns:
-  game.processTurn();
+  game.processTurn(playerCharacter);
   
   const lastMoves = [];
 
@@ -579,7 +581,7 @@ $(document).ready(async ()=>{
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   async function playTurn() {
-    const enemyTurn = game.processTurn();
+    const enemyTurn = game.processTurn(playerCharacter);
   
     const delayMultiplier = localStorage.getItem("skip-battle-animations") ? 0.2 : 1;
   
@@ -596,7 +598,7 @@ $(document).ready(async ()=>{
       await delay(400 * delayMultiplier);
       playerCharacter.updateStats();
   
-      game.checkEnemies();
+      game.checkEnemies(playerCharacter);
     }  
     if (defending) {
       playerCharacter.reduceDefense();
@@ -654,14 +656,14 @@ $(document).ready(async ()=>{
           playerCharacter.defend();
           playerCharacter.updateStats();
           return;
-        default:
-          lastMoves.push("pass");
-          break;
+        case "option-flee":
+          game.instakill();
+          shopPopup(game.enemiesKilled);
+          return;
       }
+    playerCharacter.gainmana(3);
     document.querySelectorAll(".button.move-option").forEach(button=>{button.classList.add("turnProcess")});
-    setTimeout(() => {
-      playTurn();
-    }, 1200);
+    setTimeout(()=>playTurn(), 1200);
     });
   });
 
@@ -690,24 +692,22 @@ $(document).ready(async ()=>{
     })
     .catch(error => console.error('Error loading JSON:', error));
 
+    createCards(game);
+    
     const cardsFront = document.querySelector('.cards');
     cardsFront.addEventListener('click', function(event) {
       if (event.target.classList.contains('cardd') || event.target.classList.contains('cardTitle') || event.target.classList.contains('cardDesc')) {
           if (event.target.classList.contains('clicked')) {
           applyCardEffect(event.target.dataset, game, playerCharacter);
           event.target.remove();
-          setTimeout(() => {
-              playTurn();
-          }, 1200);
+          setTimeout(()=> playTurn(), 1200);
           } else if (!event.target.classList.contains('clicked')) {
           const isCardTitle = event.target.classList.contains('cardTitle');
           const isCardDesc = event.target.classList.contains('cardDesc');
           if ((isCardTitle || isCardDesc) && event.target.parentElement.classList.contains("clicked")) {
               applyCardEffect(event.target.parentElement.dataset, game, playerCharacter);
               event.target.parentElement.remove();
-              setTimeout(() => {
-              playTurn();
-              }, 1200);
+              setTimeout(() => playTurn(), 1200);
           }
 
           const previousClicked = document.querySelector(`.clicked`);
@@ -724,25 +724,42 @@ $(document).ready(async ()=>{
   });
 });
 
-const toggleStatsPage = (showOverview) => {
-  document.querySelectorAll(".stats-bar").forEach(bar => {
-    bar.style.display = showOverview ? "none" : "flex";
-  });
+const toggleStatsPage = (showOverview, page3) => {
+  document.querySelectorAll(".stats-bar").forEach(bar=>bar.style.display = showOverview ? "none" : "flex");
 
   $(".overview").css("display", showOverview ? "block" : "none");
   next.css("display", showOverview ? "none" : "block");
   prev.css("display", showOverview ? "block" : "none");
+  next2.css("display", showOverview ? "block" : "none");
+  
+  if(page3){
+    document.querySelector(".transition-background").classList.add("show");
+    const cross = document.querySelector("div.top-bar svg");
+    cross.addEventListener("click", ()=>{
+      cross.parentNode.parentNode.classList.remove("showInventory");
+      document.querySelector(".transition-background").classList.remove("show");
+  });
+    $(".inventory").addClass("showInventory");
+    next.css("display", "none");
+    prev.css("display", "block");
+  }
 };
 
 // Show the game over screen and send the player back to the menu
 function displayGameOver(){
   setTimeout(()=>$("#defeat-screen").addClass("show"),500);
-  setTimeout(() => {
-    window.location.replace("../menu.php");
-  }, 5000);
+  setTimeout(()=>window.location.replace("../menu.php"), 5000);
 }
 function displayPopup(text){
   document.querySelector(".battle-popup").classList.add("show"); 
   document.querySelector(".battle-popup h1").textContent = text; 
   setTimeout(()=>document.querySelector(".battle-popup").classList.remove("show"), 3000);
+}
+
+function shopPopup(enemiesKilled){
+  const oldShop = document.querySelector(".shopContainer");
+  if(oldShop) oldShop.remove();
+
+  const newShop = document.createElement("div");
+  newShop.classList.add("shop");
 }

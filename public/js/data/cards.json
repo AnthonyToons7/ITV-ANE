@@ -27,11 +27,37 @@
     {
         "cardname": "Final blow",
         "carddesc": "DISCARD 4 cards; DESTROY all creatures on the field.",
+        "unlocked-after": "unused",
         "ID": "6"
     },
     {
         "cardname": "Relical booster",
         "carddesc": "RELICS' effects are doubled.",
+        "unlocked-after": "1",
         "ID": "7"
+    },
+    {
+        "cardname": "Soul of fire",
+        "carddesc": "DESTROY all STATUS EFFECT instances on you, and strike all opponents with heavy burning.",
+        "unlocked-after": "1",
+        "ID": "8"
+    },
+    {
+        "cardname": "Fairies' touch",
+        "carddesc": "Increase your HEALTH by 50% of your max. health.",
+        "unlocked-after": "1",
+        "ID": "9"
+    },
+    {
+        "cardname": "Bulk up",
+        "carddesc": "Increase your ATTACK by 50% of your max. health.",
+        "unlocked-after": "2",
+        "ID": "10"
+    },
+    {
+        "cardname": "Magmatic rapier",
+        "carddesc": "CRITPIERCE one ENEMY, BURN yourself.",
+        "unlocked-after": "2",
+        "ID": "11"
     }
 ]
