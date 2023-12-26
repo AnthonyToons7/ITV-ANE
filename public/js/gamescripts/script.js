@@ -128,7 +128,7 @@ class Game {
         const enemystats = data.find(character => character.name === this.enemies[chosenEnemyIndex]);
 
         // check if enough time has passed to spawn a boss in
-        if (this.enemiesKilled % 10 === 0 && this.enemiesKilled > 0) {
+        if ((this.enemiesKilled % 10 === 0 && this.enemiesKilled > 0) && $("#Void").length === 0) {
           let chosenBossName = this.bosses[this.bossesKilled];
           const bossStats = data.find(character => character.name === chosenBossName);
           newEnemy = new Boss(
@@ -658,7 +658,7 @@ $(document).ready(async ()=>{
           return;
         case "option-flee":
           game.instakill();
-          shopPopup(game.enemiesKilled, game.money);
+          shopPopup(game.enemiesKilled, game.money, playerCharacter);
           return;
       }
     playerCharacter.gainmana(3);

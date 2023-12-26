@@ -17,7 +17,7 @@ const prices = [
     180,
     230
 ];
-function shopPopup(enemiesKilled, cash){
+function shopPopup(enemiesKilled, cash, player){
     const oldShop = document.querySelector(".shopContainer");
     if(oldShop) oldShop.remove();
   
@@ -58,8 +58,9 @@ function shopPopup(enemiesKilled, cash){
       newShop.classList.add("goToShop");
     }, 100);
     
-
+    // Random shop dialog
     setInterval(()=>getNextShopDialog(), 10000);
+    setTimeout(()=>death(player),60000);
     getNextShopDialog();
 }
 function shopSheetAnimator(){
@@ -122,12 +123,12 @@ function createShopDiag(dialog) {
     }
 }
 let shopdialogIndex = 0;
-function getNextShopDialog() {
+function getNextShopDialog(death) {
     fetch('../public/js/data/shopdialog.json')
     .then(response => response.json())
     .then(data => {
         if (shopdialogIndex < data.length) {
-            let dialog = data[shopdialogIndex];
+            let dialog = death ? data[5] : data[shopdialogIndex];
             shopdialogIndex++;
             createShopDiag(dialog);
         } else {
@@ -135,4 +136,11 @@ function getNextShopDialog() {
         }
     })
     .catch(error => console.log(error));
+}
+
+function death(player){
+    getNextShopDialog("death");
+    document.querySelector(".shopContainer").classList.add("hurt");
+    player.hp = 0;
+    player.updateStats();
 }
