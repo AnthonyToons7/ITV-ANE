@@ -45,7 +45,7 @@ function getNextDialog() {
     .then(response => response.json())
     .then(data => {
       if (dialogIndex < data.length) {
-        var dialog = data[dialogIndex];
+        let dialog = data[dialogIndex];
         dialogIndex++;
         createDiag(dialog);
       }

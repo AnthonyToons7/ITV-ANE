@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     let containerWidth = container.clientWidth;
     let containerHeight = container.clientHeight;
     let numDivs = 36;
-    var width = $(window).width();
+    let width = $(window).width();
 
     for (let i = 0; i < numDivs; i++) {
         let glitchParticle = document.createElement('div');

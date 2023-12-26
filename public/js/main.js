@@ -64,7 +64,7 @@ volumeButtonM.addEventListener("click", () => {
 });
 
 continueButton.addEventListener("click", ()=>{
-    var ele = document.querySelectorAll('input[name="difficulty-selection"]');
+    const ele = document.querySelectorAll('input[name="difficulty-selection"]');
     for (i = 0; i < ele.length; i++) {
         if (ele[i].checked){
             console.log(`${ele[i].value}`);

@@ -658,7 +658,7 @@ $(document).ready(async ()=>{
           return;
         case "option-flee":
           game.instakill();
-          shopPopup(game.enemiesKilled);
+          shopPopup(game.enemiesKilled, game.money);
           return;
       }
     playerCharacter.gainmana(3);
@@ -754,12 +754,4 @@ function displayPopup(text){
   document.querySelector(".battle-popup").classList.add("show"); 
   document.querySelector(".battle-popup h1").textContent = text; 
   setTimeout(()=>document.querySelector(".battle-popup").classList.remove("show"), 3000);
-}
-
-function shopPopup(enemiesKilled){
-  const oldShop = document.querySelector(".shopContainer");
-  if(oldShop) oldShop.remove();
-
-  const newShop = document.createElement("div");
-  newShop.classList.add("shop");
 }

@@ -174,6 +174,7 @@
     <div class="transition-background"></div>
 <script src="../public/js/gamescripts/script.js"></script>
 <script src="../public/js/gamescripts/magic.js"></script>
+<script src="../public/js/gamescripts/shop.js"></script>
 <script src="../public/js/gamescripts/dialog.js"></script>
 <script src="../public/js/gamescripts/battleAnimator.js"></script>
 <script src="../public/js/gamescripts/damagesprites.js"></script>
