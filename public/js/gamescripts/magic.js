@@ -1,7 +1,8 @@
 let statIncreaseCounter = 0;
 function rewardPlayer(bossDeaths, game, playerCharacter, moner){
     if(moner){
-        game.money += 10;
+        game.money = game.money + 10;
+        document.querySelector(".inventory-cash div").textContent = game.money;
         return;
     }
     let rewardMoney = localStorage.getItem("difficulty") == "hard" ? 100 : 80;
@@ -22,7 +23,7 @@ function rewardPlayer(bossDeaths, game, playerCharacter, moner){
     //         break;
     // }
 
-    game.money += rewardMoney;
+    game.money = game.money + rewardMoney;
     createRelic(bossDeaths, playerCharacter);
    
     document.querySelector(".transition-background").classList.add("show");
@@ -40,6 +41,7 @@ function rewardPlayer(bossDeaths, game, playerCharacter, moner){
     monerContainer.append(monerImg, monerAmt);
     document.querySelector(".rewardContainer div").appendChild(monerContainer);
     document.querySelector(".rewardContainer").classList.add("showRewards");
+
     document.querySelector(".inventory-cash div").textContent = game.money;
 }
 

@@ -624,7 +624,9 @@ div.player {
 .enemy-stat-container{
     transform: translateY(70px);
 }
-
+.e-defending {
+    background-color: #797979;
+}
 /* attack animation */
 .hurt {
     box-shadow: inset 0 0 50px 50px red;
@@ -708,7 +710,8 @@ div.enemy-box.attacking {
     background-color: #000000;
     transition: all 2s ease;
 }
-.battle-popup{
+.battle-popup,
+.help-popup{
     opacity: 0;
     position: absolute;
     top: 10px;
@@ -719,11 +722,23 @@ div.enemy-box.attacking {
     background-color: #4f4f4f;
     transition: all .5s;
 }
-.battle-popup h1 {
+a{
+    text-decoration: none;
+    color: #072b24;
+}
+.help-popup , .help-popup p {
+    left: 10px;
+    width: fit-content;
+    font-size: 18px;
+    font-family: danger;
+}
+.battle-popup h1,
+.help-popup p {
     color: #fff;
     font-family: joystix;
 }
-.battle-popup.show{
+.battle-popup.show,
+.help-popup.show{
     opacity: 1;
     transition: all .5s;
 }
@@ -802,12 +817,24 @@ div.enemy-box.attacking {
 .broke {
     color: #ff0000;
 }
-.afforable {
+.afforable,.playerCash, .leaveShop {
     color: #fff;
+    font-family: joystix;
 }
 .goToShop{
     left: 0;
     transition: all 1s;
+}
+.leaveShop {
+    font-size: 7px;
+    border: 1px solid white;
+    background-color: #1f1f1f;
+    padding: 10px;
+    width: fit-content;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
 }
 @media screen and (max-width: 996px) {
     #dialog-box-container {

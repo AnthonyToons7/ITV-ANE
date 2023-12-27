@@ -92,6 +92,7 @@ const cardData = async ()=>{
 }
 // Set the multiplier higher if the difficulty is higher
 let gameModeStrength;
+let punishMultiplier = 0;
 if (localStorage.getItem("difficulty") == "hard" || localStorage.getItem("difficulty") == "story"){
   gameModeStrength = 1;
 } else {
@@ -204,7 +205,7 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
 
     if (this.turnCount % 6 === 0) {
-      strengthMultiplier = strengthMultiplier * 1.1;
+      strengthMultiplier = (strengthMultiplier + punishMultiplier) * 1.1;
       console.log("Stats increased x ", strengthMultiplier);
       this.spawnEnemy();
     } 
@@ -244,13 +245,13 @@ class Game {
   }
 
   instakill(){
-    this.enemyPool = [];
     const enemyDivs = document.querySelectorAll(".enemy");
     enemyDivs.forEach(enemyDiv=> {
       while (enemyDiv.firstChild) {
         enemyDiv.removeChild(enemyDiv.firstChild);
       }
     });
+    this.enemyPool.splice(0, this.enemyPool.length);
   }
 }
 
@@ -391,6 +392,9 @@ class Player extends Character {
     this.mana = mana;
     this.maxMana = maxMana;
     this.multiplier = multiplier || 1;
+    this.critChance = 0;
+    this.willpower = 0;
+    this.activeItems = [];
   }
   updateStats(){
     this.updateMulti();
@@ -435,6 +439,13 @@ class Player extends Character {
       });
     }
   }
+  registerItem(item, stat){
+    console.log(item);
+    this.activeItems.push(item);
+    this[stat] = Math.ceil(this[stat] / 100 * 110);
+    console.log(stat + "'s power increased!");
+    this.updateStats();
+  }
 }
 
 class Enemy extends Character {
@@ -463,11 +474,15 @@ class Enemy extends Character {
     this.def = Math.floor((this.def / 100) * 150);
     this.res = Math.floor((this.res / 100) * 150);
     this.enemyDefending = true;
+    const enemy = document.querySelector(`.${this.id}`).parentElement;
+    enemy.querySelector(".enemy-stat-container .enemyHP").classList.add("e-defending");
   }
   enemyReduceDefense(){
     this.def = Math.ceil((this.def / 150) * 100);
     this.res = Math.ceil((this.res / 150) * 100);
     this.enemyDefending = false;
+    const enemy = document.querySelector(`.${this.id}`).parentElement;
+    enemy.querySelector(".enemy-stat-container .enemyHP").classList.remove("e-defending");
   }
 }
 
@@ -658,7 +673,7 @@ $(document).ready(async ()=>{
           return;
         case "option-flee":
           game.instakill();
-          shopPopup(game.enemiesKilled, game.money, playerCharacter);
+          shopPopup(game.enemiesKilled, game, playerCharacter);
           return;
       }
     playerCharacter.gainmana(3);
@@ -755,3 +770,8 @@ function displayPopup(text){
   document.querySelector(".battle-popup h1").textContent = text; 
   setTimeout(()=>document.querySelector(".battle-popup").classList.remove("show"), 3000);
 }
+
+setInterval(() => {
+  document.querySelector(".help-popup").classList.add("show"); 
+  setTimeout(()=>document.querySelector(".help-popup").classList.remove("show"), 5000);
+}, 30000);

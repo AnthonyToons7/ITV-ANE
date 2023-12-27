@@ -56,8 +56,14 @@
     },
     {
         "cardname": "Magmatic rapier",
-        "carddesc": "CRITPIERCE one ENEMY, BURN yourself.",
+        "carddesc": "CRITPIERCE one ENEMY, BURN YOURSELF.",
         "unlocked-after": "2",
         "ID": "11"
+    },
+    {
+        "cardname": "Thorned lance",
+        "carddesc": "CRITPIERCE all ENEMIES, BLEED all ENEMIES and YOURSELF.",
+        "unlocked-after": "3",
+        "ID": "12"
     }
 ]
