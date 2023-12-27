@@ -482,7 +482,9 @@ class Enemy extends Character {
     this.res = Math.ceil((this.res / 150) * 100);
     this.enemyDefending = false;
     const enemy = document.querySelector(`.${this.id}`).parentElement;
-    enemy.querySelector(".enemy-stat-container .enemyHP").classList.remove("e-defending");
+    if(enemy.querySelector(".enemy-stat-container .enemyHP")){
+      enemy.querySelector(".enemy-stat-container .enemyHP").classList.remove("e-defending");
+    }
   }
 }
 
@@ -620,6 +622,8 @@ $(document).ready(async ()=>{
     }
   }
 
+  let buffed = false;
+
   document.querySelectorAll(".button.move-option").forEach(button=>{
     button.addEventListener("click",()=>{
       // Check what attack option you chose
@@ -670,12 +674,17 @@ $(document).ready(async ()=>{
           playerCharacter.useBuff(playerCharacter, 15, "atk");
           playerCharacter.defend();
           playerCharacter.updateStats();
+          buffed = true;
           return;
         case "option-flee":
           game.instakill();
           shopPopup(game.enemiesKilled, game, playerCharacter);
           return;
       }
+    if(buffed){
+      playerCharacter.useDebuff(playerCharacter, 15, "atk");
+      buffed = !buffed;
+    }
     playerCharacter.gainmana(3);
     document.querySelectorAll(".button.move-option").forEach(button=>{button.classList.add("turnProcess")});
     setTimeout(()=>playTurn(), 1200);
@@ -774,4 +783,4 @@ function displayPopup(text){
 setInterval(() => {
   document.querySelector(".help-popup").classList.add("show"); 
   setTimeout(()=>document.querySelector(".help-popup").classList.remove("show"), 5000);
-}, 30000);
+}, 60000);
