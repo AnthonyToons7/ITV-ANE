@@ -66,7 +66,7 @@ function shopPopup(enemiesKilled, game, player){
     const shopDialog = document.createElement("div");
     const shopKeeper = document.createElement("div");
     const el = document.createElement("div");
-    const playerCash = document.createElement("div");
+    const playerCash = document.createElement("li");
     const shopKeeperContainer = document.createElement("div");
 
     const leaveShop = document.createElement("div");
@@ -124,7 +124,7 @@ function shopPopup(enemiesKilled, game, player){
     // Random shop dialog
     setInterval(()=>getNextShopDialog(), 10000);
     // Be quick.
-    deathTimeout = setTimeout(()=>death(player),60000);
+    // deathTimeout = setTimeout(()=>death(player),60000);
     getNextShopDialog();
 }
 function shopSheetAnimator(){
