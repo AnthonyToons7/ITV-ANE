@@ -65,5 +65,23 @@
         "carddesc": "CRITPIERCE all ENEMIES, BLEED all ENEMIES and YOURSELF.",
         "unlocked-after": "3",
         "ID": "12"
+    },
+    {
+        "cardname": "ICritter",
+        "carddesc": "Next attack has a guaranteed CRIT (2x damage)",
+        "unlocked-after": "shop",
+        "ID": "13"
+    },
+    {
+        "cardname": "Death mist",
+        "carddesc": "Your status effects' DAMAGE double.",
+        "unlocked-after": "shop",
+        "ID": "14"
+    },
+    {
+        "cardname": "Ardent lifesteal",
+        "carddesc": "REGENERATE HP equal to 60% of the next damage you deal. Gain another turn.",
+        "unlocked-after": "shop",
+        "ID": "15"
     }
 ]
