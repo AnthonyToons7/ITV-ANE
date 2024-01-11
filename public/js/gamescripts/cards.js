@@ -58,7 +58,7 @@ function applyCardEffect(id, game, player) {
                 player.updateStats();
                 break;
             case 3:
-                player.hp = player.hp + 10;
+                player.hp = player.hp + 99;
                 player.updateStats();
                 break;
             case 4:

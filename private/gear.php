@@ -18,23 +18,23 @@
             <h1>Select gear</h1>
             <div class="gear-container">
                 <div id="knight-armor" class="gear-piece armor-button">
-                    <img src="" alt="">
+                    <img src="" alt="Knight's armor.png">
                     <p>Knight's armor</p>
                 </div>
                 <div id="wizards-robe" class="gear-piece armor-button">
-                    <img src="" alt="">
+                    <img src="" alt="Wizards robe.png">
                     <p>Wizards robe</p>
                 </div>
                 <div id="dark-cloak" class="gear-piece armor-button">
-                    <img src="" alt="">
+                    <img src="" alt="Dark cloak.png">
                     <p>Dark cloak</p>
                 </div>
                 <div id="consuming-armor" class="gear-piece armor-button">
-                    <img src="" alt="">
+                    <img src="" alt="Consuming armor.png">
                     <p>Consuming armor</p>
                 </div>
                 <div id="no-gear" class="gear-piece armor-button">
-                    <img src="" alt="">
+                    <img src="" alt="No gear (based).png">
                     <p>No gear (based)</p>
                 </div>
             </div>

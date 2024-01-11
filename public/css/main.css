@@ -478,3 +478,12 @@ div.confirm.button {
     bottom: 20px;
     right: 20px;
 }
+.gear-piece {
+    display: flex;
+    flex-direction: column;
+}
+.gear-piece img {
+    height: 120px;
+    width: 120px;
+    margin: 10px;
+}

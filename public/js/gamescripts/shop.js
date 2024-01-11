@@ -78,9 +78,9 @@ function shopPopup(enemiesKilled, game, player){
         clearTimeout(deathTimeout);
         newShop.classList.remove("goToShop");
         setTimeout(() => {
-            punishMultiplier = 0.2;
+            punishMultiplier = 1.105;
             newShop.remove();
-            game.spawnEnemy();
+            game.spawnEnemy(punishMultiplier);
         }, 1000);
     })
 
@@ -113,6 +113,10 @@ function shopPopup(enemiesKilled, game, player){
         item.append(itemImg,itemPrice);
         flexBox.appendChild(item);
         item.addEventListener("click", ()=>registeredItem.buy(game, player));
+        
+        item.addEventListener("mouseover", ()=>{
+            
+        });
     }
     newShop.append(shopKeeperContainer,flexBox, playerCash, leaveShop);
     document.body.appendChild(newShop);
@@ -189,7 +193,7 @@ function getNextShopDialog(death) {
     fetch('../public/js/data/shopdialog.json')
     .then(response => response.json())
     .then(data => {
-        if (shopdialogIndex < data.length) {
+        if (shopdialogIndex < data.length && !data.c) {
             let dialog = death ? data[6] : data[shopdialogIndex];
             shopdialogIndex++;
             createShopDiag(dialog);

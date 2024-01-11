@@ -118,7 +118,7 @@ class Game {
     this.money = 0;
   }
   // Create an enemy
-  async spawnEnemy() {
+  async spawnEnemy(punishMultiplier) {
     try {
       const data = await baseStats();
 
@@ -165,6 +165,18 @@ class Game {
               this.enemyPool.push(newEnemy);
             }
           }
+          
+          if (punishMultiplier) {
+            console.log("Warning, punishmultiplier is active");
+            const statsToModify = ['hp', 'maxHp', 'atk', 'def', 'res'];
+            statsToModify.forEach(stat => {
+              if (newEnemy.hasOwnProperty(stat)) {
+                newEnemy[stat] = Math.ceil(newEnemy[stat] * punishMultiplier);
+              }
+            });
+          }
+          
+          
         const container = document.createElement("div");
         const hpbar = document.createElement("div");
         const statusEffects = document.createElement("div");
@@ -205,7 +217,7 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
 
     if (this.turnCount % 6 === 0) {
-      strengthMultiplier = (strengthMultiplier + punishMultiplier) * 1.1;
+      strengthMultiplier = (strengthMultiplier + punishMultiplier / 2) * 1.1;
       console.log("Stats increased x ", strengthMultiplier);
       this.spawnEnemy();
     } 
@@ -345,12 +357,15 @@ class Character {
     this.status.push(status);
   }
 
-  checkStatus(){
-    if (this.status){
-      this.status.forEach(statusEff=>{
+  checkStatus() {
+    if (this.status) {
+      this.status.forEach((statusEff) => {
         statusEff.tick();
-        if (statusEff.duration <= 0){
-          this.status.splice(statusEff);
+        if (statusEff.duration <= 0) {
+          const i = this.status.indexOf(statusEff);
+          if (i !== -1) {
+            this.status.splice(i, 1);
+          }
         }
       });
     }
@@ -540,6 +555,7 @@ class StatusEffect{
     this.targetEnemy = targetEnemy;
   }
   tick() {
+    console.log('a');
     setTimeout(() => {
       if (this.targetEnemy && this.duration > 0) {
         const currentTarget = this.targetEnemy;
