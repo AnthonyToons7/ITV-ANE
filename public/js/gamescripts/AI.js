@@ -14,7 +14,6 @@ function runEnemyAi(enemy, player, lastMoves){
         moveCounts[move] = moveCounts[move] ? moveCounts[move] + 1 : 1;
       }
     }
-    console.log(moveCounts);
     const attackPercentage = moveCounts["attack"] / 100 || 0;
     const defendPercentage = moveCounts["defend"] / 100 || 0;
     const magicPercentage = moveCounts["magic"] / 100 || 0;

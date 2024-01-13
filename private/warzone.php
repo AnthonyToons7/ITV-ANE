@@ -95,8 +95,7 @@
                             <div class="stat-cost-mana"></div>
                         </div>
                     </div>
-                    <div class="prev-page">&uarr; Stat bars &uarr;</div>
-                    <div class="next-page">&darr; All stats &darr;</div>
+                    <div class="next-page-2">&rarr; Inventory &rarr;</div>
                     <div class="overview">
                         <p>HP: <span></span></p>
                         <p>ATK: <span></span></p>
@@ -108,7 +107,8 @@
                             <div class="status-effects-player"></div>
                         </div>
                     </div>
-                    <div class="next-page-2">&darr; Inventory &darr;</div>
+                    <div class="prev-page">&darr; Stat bars &darr;</div>
+                    <div class="next-page">&darr; All stats &darr;</div>
                 </div>
                 <div class="buttons-basic col-4 flex">
                     <!-- Load these in with JS -->
@@ -119,7 +119,7 @@
                 <div class="buttons-magic col-3 flex">
                     <div class="button move-option magic-option" id="option-magic-1">Ignis</div>
                     <div class="button move-option magic-option" id="option-magic-2">Celeste</div>
-                    <div class="button move-option magic-option" id="option-magic-3">Fired up</div>
+                    <div class="button move-option magic-option" id="option-magic-3">Fire up</div>
                     <!-- Load script in that makes all btns -->
                 </div>
             </div>
@@ -142,6 +142,7 @@
             </svg>
         </div>
         <div class="relics"></div>
+        <div class="items"></div>
         <div class="money">
             <div class="inventory-cash">
                 <img src="../public/img/icons/moner.png" alt="">
@@ -173,7 +174,6 @@
     </div>
     <div class="help-popup">
         <p>Need help? Read the handbook <a href="https://anthonytoons.nl/public/pages/game-info.php#itv-ane" target="_blank">here!</a></p>
-
     </div>
     <div class="transition-background"></div>
 <script src="../public/js/gamescripts/script.js"></script>

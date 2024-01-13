@@ -22,7 +22,7 @@
         "movedesc": "Hit an opponent with a MEDIUM hit, HEAL yourself for 10% of your max HP."
     },
     {
-        "movename": "Fired up",
+        "movename": "Fire up",
         "cost": "10 mana",
         "movedesc": "Buff your ATK, DEF and RES, and gain another turn."
     }

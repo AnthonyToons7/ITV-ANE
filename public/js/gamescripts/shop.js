@@ -6,13 +6,27 @@ class Item{
         this.description = description;
         this.discount = discount;
     }
-    buy(game, player) {
+    buy(game, player, itemName, itemImg, stat) {
         if (game.money >= this.price) {
             game.money = game.money - this.price;
-            console.log(game.money);
-            player.registerItem(this, statIncrease[this.id]);
-            stock.slice(this);
+            const increase = player.registerItem(this, statIncrease[this.id]);
+            stock.splice(this, 1);
             checkPrices(game);
+            displayPopup(`+1 ${itemName}`);
+            document.querySelector("#"+itemName).removeEventListener("click", this.buy, true);
+            $("#"+itemName+' img').remove();
+            $("#"+itemName+' p').remove();
+            document.querySelector(".inventory-cash div").textContent = game.money;
+
+            const container = document.createElement("div");
+            const text = document.createElement("div");
+            text.textContent = `+${increase} ${stat}`;
+            container.classList.add("item");
+            container.append(itemImg, text);
+            document.querySelector(".items").appendChild(container);
+            
+            popupContainer.style.display = 'none';
+            popupContainer.classList.remove("nowrap");
         } else {
             console.log("Broke.");
         }
@@ -23,12 +37,12 @@ class Item{
 
 const items = [
   "gameboy",
-  "lightbulb",
-  "ammo",
-  "book",
-  "cartridge",
   "dagger",
+  "cartridge",
   "flashlight",
+  "book",
+//   "ammo",
+//   "lightbulb",
 ];
 const statIncrease=[
     "maxHp",
@@ -40,18 +54,25 @@ const statIncrease=[
     "willPower",
 ]
 const prices = [
-    170,
-    130,
-    200,
-    60,
-    300,
+    80,
+    100,
+    40,
+    40,
+    90,
     180,
     230
 ];
 let deathTimeout;
-
+function disableFlee(enable){
+    enable ? document.querySelector("#option-flee.button").classList.remove("disabledShop") : document.querySelector("#option-flee.button").classList.add("disabledShop");
+}
 function checkPrices(game){
-    for (let i=0;i<items.length;i++) {
+    console.log(stock);
+    if(!stock || stock.length === 0){
+        disableFlee();
+        return;
+    }
+    for (let i=0;i<stock.length;i++) {
         game.money < prices[i] ? document.querySelectorAll(".product p")[i].classList.add("broke") : document.querySelectorAll(".product p")[i].classList.add("affordable");
     }
     document.querySelector(".playerCash").textContent = game.money;
@@ -77,10 +98,12 @@ function shopPopup(enemiesKilled, game, player){
     leaveShop.addEventListener("click",()=>{
         clearTimeout(deathTimeout);
         newShop.classList.remove("goToShop");
+        disableFlee();
         setTimeout(() => {
             punishMultiplier = 1.105;
             newShop.remove();
             game.spawnEnemy(punishMultiplier);
+            stock.splice(this);
         }, 1000);
     })
 
@@ -107,15 +130,26 @@ function shopPopup(enemiesKilled, game, player){
         const itemPrice = document.createElement("p");
 
         item.classList.add("product");
+        item.id=items[i];
         game.money < prices[i] ? itemPrice.classList.add("broke") : itemPrice.classList.add("affordable");
         itemPrice.textContent = prices[i];
 
         item.append(itemImg,itemPrice);
         flexBox.appendChild(item);
-        item.addEventListener("click", ()=>registeredItem.buy(game, player));
+        item.addEventListener("click", ()=>registeredItem.buy(game, player, items[i], itemImg, statIncrease[i]));
         
-        item.addEventListener("mouseover", ()=>{
-            
+        item.addEventListener("mouseover", ()=>{    
+            popupContent.textContent = `+ 10% ${statIncrease[i]}`;
+            popupContainer.style.display = 'block';
+    
+            const buttonRect = item.getBoundingClientRect();
+            popupContainer.style.left = `${buttonRect.left + buttonRect.width / 2}px`;
+            popupContainer.style.top = `${buttonRect.top - popupContainer.clientHeight}px`;
+            popupContainer.classList.add("nowrap");
+        });
+        item.addEventListener('mouseout', () => {
+            popupContainer.style.display = 'none';
+            popupContainer.classList.remove("nowrap");
         });
     }
     newShop.append(shopKeeperContainer,flexBox, playerCash, leaveShop);

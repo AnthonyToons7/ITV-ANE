@@ -6,6 +6,7 @@ function rewardPlayer(bossDeaths, game, playerCharacter, moner){
         return;
     }
     let rewardMoney = localStorage.getItem("difficulty") == "hard" ? 100 : 80;
+    disableFlee("enable");
 
     // switch(bossDeaths){
     //     case 1:
@@ -48,7 +49,6 @@ function rewardPlayer(bossDeaths, game, playerCharacter, moner){
 document.querySelector(".rewardContainer .button.confirm").addEventListener("click",()=>{
     document.querySelector(".transition-background").classList.remove("show");
     setTimeout(()=>{
-        console.log(document.querySelector(".rewardContainer .relic"));
         document.querySelector(".inventory .relics").appendChild(document.querySelector(".rewardContainer .relic"));
         document.querySelector(".moneyContainer").remove();
     }, 500);
@@ -64,8 +64,6 @@ function createRelic(bossDeaths, playerCharacter){
     const img = document.createElement("img");
     relicWrap.classList.add("relic");
     img.src = `../public/img/relics/${stats[statIncreaseCounter]}-relic.svg`;
-
-    console.log(stats[statIncreaseCounter]);
 
     let increase = Math.ceil((playerCharacter[stats[statIncreaseCounter]] / 100) * (150 * Math.ceil(bossDeaths / 2))) - playerCharacter[stats[statIncreaseCounter]];
     playerCharacter[stats[statIncreaseCounter]] = Math.ceil((playerCharacter[stats[statIncreaseCounter]] / 100) * (150 * Math.ceil(bossDeaths / 2)));

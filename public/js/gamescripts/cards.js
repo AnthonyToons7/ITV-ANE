@@ -58,7 +58,7 @@ function applyCardEffect(id, game, player) {
                 player.updateStats();
                 break;
             case 3:
-                player.hp = player.hp + 99;
+                player.hp = player.hp + 10;
                 player.updateStats();
                 break;
             case 4:
@@ -72,7 +72,6 @@ function applyCardEffect(id, game, player) {
                 statusImages.forEach(img => img.remove());
                 break;
             case 5:
-                console.log(player);
                 player.hp = player.hp / 2;
                 player.updateStats();
                 game.retrieveEnemies().forEach(enemy => {

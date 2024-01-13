@@ -2,8 +2,8 @@
     {
         "name":"Player",
         "HP":"50",
-        "ATK":"24",
-        "DEF":"7",
+        "ATK":"23",
+        "DEF":"10",
         "RES":"15",
         "MANA":"40",
         "STATUS":"Well"
@@ -12,8 +12,8 @@
         "name":"Void",
         "HP":"30",
         "ATK":"15",
-        "DEF":"18",
-        "RES":"18"
+        "DEF":"10",
+        "RES":"10"
     },
     {
         "name":"Fallen-Void",

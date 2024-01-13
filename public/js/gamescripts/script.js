@@ -115,7 +115,7 @@ class Game {
     this.bosses = ["Void", "Void", "Fallen-Void", "Corrupted-Void", "Brave-Void"];
     this.bossesKilled = 0;
     this.enemiesKilled = 0;
-    this.money = 0;
+    this.money = 10;
   }
   // Create an enemy
   async spawnEnemy(punishMultiplier) {
@@ -149,7 +149,7 @@ class Game {
           }, 2000);
           this.enemyPool.push(newEnemy);
         }
-         else {
+        else {
             if (enemystats) {
               newEnemy = new Enemy(
               this.enemies[chosenEnemyIndex],
@@ -199,8 +199,10 @@ class Game {
               });
             });
         }, 500);
-
-        console.log(newEnemy);
+        console.log(
+          `Name: ${newEnemy.name}\nHP: ${newEnemy.hp}\nATK: ${newEnemy.atk}\nDEF: ${newEnemy.def}\nRES: ${newEnemy.res}\nMultiplier: ${newEnemy.multiplier}`
+        );
+        
         id++;
       }
     } catch (error) {
@@ -217,8 +219,8 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
 
     if (this.turnCount % 6 === 0) {
-      strengthMultiplier = (strengthMultiplier + punishMultiplier / 2) * 1.1;
-      console.log("Stats increased x ", strengthMultiplier);
+      strengthMultiplier = (strengthMultiplier + (punishMultiplier ? punishMultiplier / 2 : .001)) * 1.1;
+      // console.log("Stats increased x ", strengthMultiplier);
       this.spawnEnemy();
     } 
     else if (this.turnCount % 3 === 0) this.spawnEnemy();
@@ -455,11 +457,12 @@ class Player extends Character {
     }
   }
   registerItem(item, stat){
-    console.log(item);
     this.activeItems.push(item);
-    this[stat] = Math.ceil(this[stat] / 100 * 110);
+    const increase = Math.ceil(this[stat] / 100 * 10)
+    this[stat] = this[stat]+increase;
     console.log(stat + "'s power increased!");
     this.updateStats();
+    return increase;
   }
 }
 
@@ -555,7 +558,6 @@ class StatusEffect{
     this.targetEnemy = targetEnemy;
   }
   tick() {
-    console.log('a');
     setTimeout(() => {
       if (this.targetEnemy && this.duration > 0) {
         const currentTarget = this.targetEnemy;
@@ -583,6 +585,7 @@ class StatusEffect{
 
 $(document).ready(async ()=>{
   const game = new Game();
+  document.querySelector(".inventory-cash div").textContent = game.money;
 
   // Create your character by using data from the base stats json
   const data = await baseStats();
@@ -684,8 +687,9 @@ $(document).ready(async ()=>{
           lastMoves.push("attack");
           break;
         case "option-magic-3":
-          if(playerCharacter.mana < 25) return;
-          playerCharacter.dropMana(25);
+          if(playerCharacter.mana < 20) return;
+          if(buffed)return;
+          playerCharacter.dropMana(20);
           // Increase your stats
           playerCharacter.useBuff(playerCharacter, 15, "atk");
           playerCharacter.defend();
@@ -778,7 +782,8 @@ const toggleStatsPage = (showOverview, page3) => {
     cross.addEventListener("click", ()=>{
       cross.parentNode.parentNode.classList.remove("showInventory");
       document.querySelector(".transition-background").classList.remove("show");
-  });
+    });
+    // sticky
     $(".inventory").addClass("showInventory");
     next.css("display", "none");
     prev.css("display", "block");
