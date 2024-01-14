@@ -100,9 +100,11 @@ function shopPopup(enemiesKilled, game, player){
         newShop.classList.remove("goToShop");
         disableFlee();
         setTimeout(() => {
-            punishMultiplier = 1.105;
+            punishMultiplier = 1.059;
             newShop.remove();
-            game.spawnEnemy(punishMultiplier);
+            for (let i=0;i<3;i++) {
+                game.spawnEnemy(punishMultiplier);
+            }
             stock.splice(this);
         }, 1000);
     })

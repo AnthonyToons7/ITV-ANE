@@ -219,7 +219,7 @@ class Game {
     // Check if it's the third turn and spawn a new enemy if needed
 
     if (this.turnCount % 6 === 0) {
-      strengthMultiplier = (strengthMultiplier + (punishMultiplier ? punishMultiplier / 2 : .001)) * 1.1;
+      strengthMultiplier = (strengthMultiplier + (punishMultiplier ? punishMultiplier / 2 : .001)) * 1.06;
       // console.log("Stats increased x ", strengthMultiplier);
       this.spawnEnemy();
     } 
@@ -279,10 +279,10 @@ class Character {
     this.def = def;
     this.res = res;
     this.status = [];
+    this.critChance = 0.01;
   }
 
   attack(target, playerAttacking, targetId, magicDamage, damageMult, statusEffect, attacker, cardName) {
-
     // Has the player not targeted an enemy? Laugh at them.
     if ((!targetId || !document.querySelector("." + targetId)) && playerAttacking) {
       displayPopup("No target selected");
@@ -292,12 +292,23 @@ class Character {
     // Perform attack logic
     let trueDamageMult;
     let calculatedDamage;
+    let critPct = Math.random();
     let minDamage = 1;
     if (playerAttacking && targetId != target.id) return;
-    !damageMult ? trueDamageMult = 1 : trueDamageMult = damageMult;
-    magicDamage ? calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.res)) :
-      calculatedDamage = Math.ceil(Math.max(minDamage, (this.atk * trueDamageMult) - target.def));
 
+    // What.
+    !damageMult ? trueDamageMult = 1 : trueDamageMult = damageMult;
+    magicDamage ? 
+      calculatedDamage = Math.floor(Math.max(minDamage, (this.atk * trueDamageMult) - target.res)) 
+      : calculatedDamage = Math.floor(Math.max(minDamage, (
+        (
+          this.atk * (critPct <= this.critChance ? this.critChance * 1.4 : 1)
+        ) * trueDamageMult) - target.def)
+      );
+
+    if (critPct <= this.critChance){
+      console.log("critical hit!");
+    }  
     if(damageMult){
       calculatedDamage = calculatedDamage * damageMult;
     }
@@ -409,7 +420,7 @@ class Player extends Character {
     this.mana = mana;
     this.maxMana = maxMana;
     this.multiplier = multiplier || 1;
-    this.critChance = 0;
+    // this.critChance = 0;
     this.willpower = 0;
     this.activeItems = [];
   }

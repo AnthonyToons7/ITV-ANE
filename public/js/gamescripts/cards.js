@@ -58,16 +58,18 @@ function applyCardEffect(id, game, player) {
                 player.updateStats();
                 break;
             case 3:
-                player.hp = player.hp + 10;
+                player.hp = player.hp + 20;
                 player.updateStats();
                 break;
             case 4:
+                // 1
                 // for (let i = player.status.length - 1; i >= 0; i--) {
                 //     player.status.splice(i, 1);
                 //     document.querySelectorAll(".status-effects-player img").forEach(img=>img.remove());
                 // }
-                player.status = [];
 
+                // 2
+                player.status = [];
                 const statusImages = document.querySelectorAll(".status-effects-player img");
                 statusImages.forEach(img => img.remove());
                 break;
