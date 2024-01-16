@@ -77,10 +77,16 @@ div.button.menu-button{
     display: inline-block;
     padding: 10px 0 0 25px;
     font-family: danger;
-    letter-spacing: 6px;
+    letter-spacing: 3px;
     font-weight: 100;
     font-size: 10px;
     transition: all .5s
+}
+div.leaderboard-place h1,
+div.leaderboard-place p,
+div.leaderboard-place strong{
+    width: 20%;
+    margin: 0 10px;
 }
 div.button.menu-button:hover,
 div.button.menu-button:focus,
@@ -151,6 +157,18 @@ main div.main-container{
     height: 90%;
     width: 50%;
     z-index: 99;
+}
+.leaderboard-container{
+    max-height: 600px;
+    overflow-y: scroll;
+}
+.log{
+    margin: 10px 0 20px;
+}
+.update-log {
+    font-family:Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid gray;
+    padding: 10px 0;
 }
 .top-bar {
     display: flex;

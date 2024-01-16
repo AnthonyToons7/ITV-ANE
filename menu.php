@@ -1,8 +1,9 @@
 <?php 
     session_start();
-    if (!isset($_SESSION["USERS_ID"]) || !$_SESSION["USERS_ID"]){
-        // header("Location:../../private/login.php");
-    }
+    $conn = new mysqli("localhost", "root", "", "site", "3306");
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +43,7 @@
             style="padding-left: 10px;"
             ></canvas>
             <label for="difficulty-story">
-                <div class="button menu-button" id="story"><h1>Story mode</h1></div>
+                <!-- <div class="button menu-button" id="story"><h1>Story mode</h1></div> -->
             </label>
             <label for="difficulty-hard">
                 <div class="button menu-button" id="hard"><h1>Hard</h1></div>
@@ -78,13 +79,25 @@
             </div>
 
             <div class="leaderboard-container">
-                <div class="first-place leaderboard-place"><h1>#1</h1><strong>AnthonyToons</strong><p>999 kills</p></div>
-                <div class="second-place leaderboard-place"><h1>#2</h1><strong>Testname1</strong><p>111 kills</p></div>
-                <div class="third-place leaderboard-place"><h1>#3</h1><strong>testname2</strong><p>22 kills</p></div>
-                <div class="leaderboard-place"><h1>#4</h1><strong>testname3</strong><p>22 kills</p></div>
-                <div class="leaderboard-place"><h1>#5</h1><strong>testname4</strong><p>22 kills</p></div>
-                <div class="leaderboard-place"><h1>#6</h1><strong>testname5</strong><p>22 kills</p></div>
+                <div class="leaderboard-place"><p>Place</p><strong>Player</strong><p>Kills</p><p>Difficulty</p><p>Ver.</p></div>
+                <?php
+                    $result = $conn->query("SELECT PLAYER_USERNAME, PLAYER_KILLS, GAME_DIFFICULTY, GAME_VERSION FROM itv_ane_leaderboard ORDER BY PLAYER_KILLS DESC");
+                    $userinfo = $result->fetch_all(MYSQLI_ASSOC);
+
+                    $place = 1;
+                    foreach ($userinfo as $user) {
+                        echo '<div class="leaderboard-place">';
+                        echo '<h1>#' . $place . '</h1>';
+                        echo '<strong>' . $user["PLAYER_USERNAME"] . '</strong>';
+                        echo '<p>' . $user["PLAYER_KILLS"] . ' kills</p>';
+                        echo '<p>' . $user["GAME_DIFFICULTY"] . ' kills</p>';
+                        echo '<p>' . $user["GAME_VERSION"] . '</p>';
+                        echo '</div>';
+                        $place++;
+                    }
+                ?>  
             </div>
+
         </div>
         <div class="history-box overlay-box">
             <div class="top-bar">
@@ -93,7 +106,22 @@
                 </svg>
             </div>
             <div class="content" style="overflow:hidden;">
-                <h1 style="font-family: danger; letter-spacing: 10px;padding-left: 30px;">No updates yet...</h1>
+                <?php
+                    $result = $conn->query("SELECT PATCH_VERSION, PATCH_TEXT, PATCH_DATE FROM itv_ane_patches ORDER BY PATCH_DATE DESC");
+                    $patchData = $result->fetch_all(MYSQLI_ASSOC);
+                    $conn->close();
+
+                    // Get the most recent version
+                    $mostRecentVersion = reset($patchData)["PATCH_VERSION"];
+
+                    foreach ($patchData as $patch) {
+                        echo '<div class="update-log">';
+                        echo '<h1><strong>' . $patch["PATCH_VERSION"] . '</strong></h1>';
+                        echo '<p class="log">' . $patch["PATCH_TEXT"] . '</p>';
+                        echo '<p><i>Entry added: </i>' . $patch["PATCH_DATE"] . '</p>';
+                        echo '</div>';
+                    }
+                ?>  
             </div>
         </div>
         <div class="settings-box overlay-box">
@@ -127,17 +155,12 @@
                     <label for="battleAnims">Turn off battle animations</label>
                     <input type="checkbox" name="battleAnims" id="battleAnims">
                 </div>
-                <div class="account-settings setting">
-                    <a href="../private/account.php">Account settings</a>
-                </div>
-                <div class="account-settings"></div>
                 <div class="saved">Saved!</div>
                 <button class="save-settings">Save</button>
             </div>
         </div>
         <div class="overlay-box-overlay"></div>
-        <!-- HARDCODED, MUST REMOVE -->
-        <p class="version">Ver. BETA</p>
+        <p class="version">Ver. <?php echo $mostRecentVersion; ?></p>
     </main>
     <div class="background-menu"></div>
     <script src="public/js/glitch.js"></script>

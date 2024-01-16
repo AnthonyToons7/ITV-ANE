@@ -870,6 +870,12 @@ a{
     bottom: 10px;
     cursor: pointer;
 }
+.enemy.defending {
+    background-image: url(../img/icons/Shield.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 @media screen and (max-width: 996px) {
     #dialog-box-container {
         height: 35vh;

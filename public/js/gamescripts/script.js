@@ -504,6 +504,7 @@ class Enemy extends Character {
     this.res = Math.floor((this.res / 100) * 150);
     this.enemyDefending = true;
     const enemy = document.querySelector(`.${this.id}`).parentElement;
+    document.querySelector("."+this.id).parentElement.classList.add("defending");
     enemy.querySelector(".enemy-stat-container .enemyHP").classList.add("e-defending");
   }
   enemyReduceDefense(){
@@ -511,6 +512,7 @@ class Enemy extends Character {
     this.res = Math.ceil((this.res / 150) * 100);
     this.enemyDefending = false;
     const enemy = document.querySelector(`.${this.id}`).parentElement;
+    document.querySelector("."+this.id).parentElement.classList.remove("defending");
     if(enemy.querySelector(".enemy-stat-container .enemyHP")){
       enemy.querySelector(".enemy-stat-container .enemyHP").classList.remove("e-defending");
     }
@@ -547,12 +549,20 @@ class Boss extends Character {
   enemyDefend() {
     this.def = Math.floor((this.def / 100) * 150);
     this.res = Math.floor((this.res / 100) * 150);
-    enemyDefending = true;
+    this.enemyDefending = true;
+    const enemy = document.querySelector(`.${this.id}`).parentElement;
+    document.querySelector("."+this.id).parentElement.classList.add("defending");
+    enemy.querySelector(".enemy-stat-container .enemyHP").classList.add("e-defending");
   }
   enemyReduceDefense(){
     this.def = Math.ceil((this.def / 150) * 100);
     this.res = Math.ceil((this.res / 150) * 100);
-    enemyDefending = false;
+    this.enemyDefending = false;
+    const enemy = document.querySelector(`.${this.id}`).parentElement;
+    document.querySelector("."+this.id).parentElement.classList.remove("defending");
+    if(enemy.querySelector(".enemy-stat-container .enemyHP")){
+      enemy.querySelector(".enemy-stat-container .enemyHP").classList.remove("e-defending");
+    }
   }
 }
 

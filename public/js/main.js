@@ -69,13 +69,13 @@ continueButton.addEventListener("click", ()=>{
         if (ele[i].checked){
             console.log(`${ele[i].value}`);
             localStorage.setItem("difficulty", `${ele[i].value}`);
-            if (ele[i].value === "insanity"){
-                document.body.classList.add("damage");
-                setTimeout(() => {
-                    document.body.classList.remove("damage");
-                }, 1000);
-                return;
-            }
+            // if (ele[i].value === "insanity"){
+            //     document.body.classList.add("damage");
+            //     setTimeout(() => {
+            //         document.body.classList.remove("damage");
+            //     }, 1000);
+            //     return;
+            // }
         }
      }
      window.location.href = `./private/gear?difficulty=${localStorage.getItem("difficulty")}`;

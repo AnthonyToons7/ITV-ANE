@@ -29,7 +29,7 @@ function battleAnimator(attacking){
                 document.body.classList.remove("hurt");
                 document.querySelector(".attack-anim-overlay").classList.remove("hurt");
                 document.querySelector("div.enemy-box").classList.remove("attacking");
-            }, 1500);
+            }, 1600);
         }
     }
 }
