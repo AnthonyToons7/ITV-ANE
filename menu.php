@@ -67,7 +67,7 @@
             </div>
 
             <div class="content">
-                <h1>Story</h1>
+                <h1>Storyy</h1>
                 <p>Void was a young, shut in child. He was not allowed to go outside, live the live that a normal child should live, in comparison to his younger sister, who was allowed to do whatever she wants while her brother was locked in a closet all day. Life was miserable for Void. Constant malnutrition, lack of attention, even lack of sunlight. The young mind could not comprehend what was going on, and shrugged it of as being normal, even the beatings. He was living his life thinking his parents were having the most whole hearted intentions. When Starry, his sister, realized that this was wrong after discussing the home situation, she would consider calling authorities, but couldn't bring herself to call. Arresting their parents means no home. No food. Nothing. Starry would go into the closet every day, taking care of the little Void, making sure he was feeling alive, feeling emotion like a normal human being. But this life couldn't keep up forever...</p>
             </div>
         </div>
