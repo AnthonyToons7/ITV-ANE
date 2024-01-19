@@ -89,7 +89,7 @@
                         echo '<div class="leaderboard-place">';
                         echo '<h1>#' . $place . '</h1>';
                         echo '<strong>' . $user["PLAYER_USERNAME"] . '</strong>';
-                        echo '<p>' . $user["PLAYER_KILLS"] . ' kills</p>';
+                        echo '<p>' . $user["PLAYER_KILLS"] . '</p>';
                         echo '<p>' . $user["GAME_DIFFICULTY"] . ' kills</p>';
                         echo '<p>' . $user["GAME_VERSION"] . '</p>';
                         echo '</div>';

@@ -173,7 +173,7 @@
         <h1></h1>
     </div>
     <div class="help-popup">
-        <p>Need help? Read the handbook <a href="https://anthonytoons.nl/public/pages/game-info.php#itv-ane" target="_blank">here!</a></p>
+        <p><a href="https://anthonytoons.nl/public/pages/game-info.php#itv-ane" target="_blank">Need help? Read the handbook here!</a></p>
     </div>
     <div class="transition-background"></div>
 <script src="../public/js/gamescripts/script.js"></script>
